@@ -1,0 +1,128 @@
+/* ================================
+   NAVBAR
+================================ */
+
+.navbar {
+  height: 82px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5vw;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  position: relative;
+  z-index: 1000;
+}
+
+.navbar-left,
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right {
+  gap: 18px;
+}
+
+.menu-button,
+.search-button,
+.live-button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menu-button,
+.search-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #f1f1ef;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: -2px;
+}
+
+.logo span {
+  color: #d71920;
+}
+
+.live-button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 15px;
+  border-radius: 30px;
+  background: #d71920;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+/* ================================
+   HERO PLACEHOLDER
+================================ */
+
+.hero-placeholder {
+  min-height: calc(100vh - 82px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.hero-placeholder p {
+  color: #d71920;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+}
+
+.hero-placeholder h1 {
+  max-width: 900px;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(48px, 7vw, 100px);
+  line-height: 0.95;
+  letter-spacing: -4px;
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 768px) {
+  .navbar {
+    height: 70px;
+    padding: 0 20px;
+  }
+
+  .logo {
+    font-size: 25px;
+  }
+
+  .live-button {
+    padding: 8px 11px;
+  }
+
+  .hero-placeholder {
+    min-height: calc(100vh - 70px);
+  }
+
+  .hero-placeholder h1 {
+    letter-spacing: -2px;
+  }
+}
