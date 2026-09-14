@@ -11,7 +11,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -47,9 +46,7 @@ function Navbar() {
 
   return (
     <>
-      {/* =========================================
-          TOP NEWS STRIP
-      ========================================= */}
+      {/* TOP NEWS STRIP */}
 
       <div className="top-strip">
         <div className="top-strip-inner">
@@ -72,9 +69,7 @@ function Navbar() {
       </div>
 
 
-      {/* =========================================
-          MAIN NAVBAR
-      ========================================= */}
+      {/* MAIN NAVBAR */}
 
       <motion.header
         className="navbar"
@@ -143,9 +138,11 @@ function Navbar() {
           </motion.button>
 
 
+          {/* SEARCH */}
+
           <motion.button
             className="search-button"
-            onClick={() => setSearchOpen(true)}
+            onClick={() => navigate("/search")}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             aria-label="Search"
@@ -158,9 +155,7 @@ function Navbar() {
       </motion.header>
 
 
-      {/* =========================================
-          CATEGORY NAVIGATION
-      ========================================= */}
+      {/* CATEGORY NAVIGATION */}
 
       <motion.nav
         className="category-nav"
@@ -174,45 +169,37 @@ function Navbar() {
 
         <div className="category-nav-inner">
 
-          {navItems.map((item, index) => {
-
-            return (
-              <motion.div
-                key={item}
-                initial={{
-                  opacity: 0,
-                  y: -8,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                transition={{
-                  delay: 0.5 + index * 0.05,
-                }}
+          {navItems.map((item, index) => (
+            <motion.div
+              key={item}
+              initial={{
+                opacity: 0,
+                y: -8,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                delay: 0.5 + index * 0.05,
+              }}
+            >
+              <Link
+                to={routes[item]}
+                className="category-link"
+                onClick={() => setMenuOpen(false)}
               >
-
-                <Link
-                  to={routes[item]}
-                  className="category-link"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {item}
-                </Link>
-
-              </motion.div>
-            );
-
-          })}
+                {item}
+              </Link>
+            </motion.div>
+          ))}
 
         </div>
 
       </motion.nav>
 
 
-      {/* =========================================
-          BREAKING NEWS BAR
-      ========================================= */}
+      {/* BREAKING NEWS BAR */}
 
       <div className="breaking-bar">
 
@@ -272,14 +259,11 @@ function Navbar() {
       </div>
 
 
-      {/* =========================================
-          SIDE MENU
-      ========================================= */}
+      {/* SIDE MENU */}
 
       <AnimatePresence>
 
         {menuOpen && (
-
           <>
 
             <motion.div
@@ -327,7 +311,6 @@ function Navbar() {
               <div className="side-menu-links">
 
                 {navItems.map((item, index) => (
-
                   <motion.button
                     type="button"
                     key={item}
@@ -355,7 +338,6 @@ function Navbar() {
                     <ChevronRight size={18} />
 
                   </motion.button>
-
                 ))}
 
               </div>
@@ -376,68 +358,6 @@ function Navbar() {
             </motion.aside>
 
           </>
-
-        )}
-
-      </AnimatePresence>
-
-
-      {/* =========================================
-          SEARCH OVERLAY
-      ========================================= */}
-
-      <AnimatePresence>
-
-        {searchOpen && (
-
-          <motion.div
-            className="search-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-
-            <motion.div
-              className="search-container"
-              initial={{
-                y: 30,
-                opacity: 0,
-              }}
-              animate={{
-                y: 0,
-                opacity: 1,
-              }}
-              exit={{
-                y: 30,
-                opacity: 0,
-              }}
-            >
-
-              <button
-                className="search-close"
-                onClick={() => setSearchOpen(false)}
-              >
-                <X size={26} />
-              </button>
-
-              <p>SEARCH NEWS FILE</p>
-
-              <div className="search-input-wrapper">
-
-                <input
-                  autoFocus
-                  type="text"
-                  placeholder="Search stories, topics, locations..."
-                />
-
-                <Search size={25} />
-
-              </div>
-
-            </motion.div>
-
-          </motion.div>
-
         )}
 
       </AnimatePresence>

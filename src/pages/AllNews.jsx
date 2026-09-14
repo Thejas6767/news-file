@@ -213,13 +213,13 @@ function AllNews() {
               </span>
             </div>
 
-            <Link
-              to="/politics"
-              className="all-news-read"
-            >
-              READ STORY
-              <ArrowUpRight size={18} />
-            </Link>
+           <Link
+  to={`/article/${stories[0].id}`}
+  className="all-news-read"
+>
+  READ STORY
+  <ArrowUpRight size={18} />
+</Link>
           </div>
         </motion.article>
       </section>

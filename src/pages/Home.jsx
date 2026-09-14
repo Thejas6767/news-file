@@ -5,19 +5,13 @@ import {
   Radio,
   ChevronDown,
 } from "lucide-react";
-
 import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
 import LatestNews from "../components/LatestNews";
 import LiveTV from "../components/LiveTV";
-import CategorySection from "../components/CategorySection";
 
-import {
-  politicsStories,
-  indiaStories,
-  businessStories,
-  worldStories,
-} from "../data/newsData";
 function Home() {
+  const navigate = useNavigate();
   return (
     <div className="app">
 
@@ -137,8 +131,10 @@ function Home() {
                 duration: 0.7,
               }}
             >
-
-              <button className="hero-primary-button">
+<button
+  className="hero-primary-button"
+  onClick={() => navigate("/live")}
+>
 
                 <span>
                   Watch Live TV
@@ -150,8 +146,10 @@ function Home() {
 
               </button>
 
-
-              <button className="hero-secondary-button">
+<button
+  className="hero-secondary-button"
+  onClick={() => navigate("/news")}
+>
 
                 Explore News
 
@@ -262,60 +260,6 @@ function Home() {
 
 <LatestNews />
 <LiveTV />
-<CategorySection
-  number="04"
-  category="Politics"
-  description="Political developments, decisions and voices from across the country."
-  stories={politicsStories}
-  layout="politics"
-/>
-<CategorySection
-  number="05"
-  category="India"
-  description="National stories with context, reporting and perspective."
-  stories={indiaStories}
-  layout="india"
-/>
-
-
-<CategorySection
-  number="06"
-  category="Business"
-  description="Markets, technology, companies and the economy."
-  stories={businessStories}
-  layout="business"
-/>
-
-
-<CategorySection
-  number="07"
-  category="World"
-  description="Global developments and the stories connecting India to the world."
-  stories={worldStories}
-  layout="world"
-/>
-        {/* =========================================
-            INTRO STRIP
-        ========================================= */}
-
-        <section className="intro-strip">
-
-          <div className="intro-label">
-            NEWS FILE
-          </div>
-
-          <div className="intro-text">
-
-            Journalism that starts on the ground,
-            not inside a studio.
-
-          </div>
-
-          <div className="intro-number">
-            01
-          </div>
-
-        </section>
 
       </main>
 
