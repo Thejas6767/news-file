@@ -1,0 +1,1042 @@
+/* =========================================================
+   BUSINESS PAGE
+========================================================= */
+
+.business-page {
+  background: #f3f3ef;
+  color: #111;
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.business-hero {
+  min-height: 700px;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  padding: 100px 7vw;
+
+  background: #0d0f0e;
+
+  color: #fff;
+
+  overflow: hidden;
+}
+
+.business-grid {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.035) 1px,
+      transparent 1px
+    );
+
+  background-size: 90px 90px;
+}
+
+.business-glow {
+  position: absolute;
+
+  width: 550px;
+  height: 550px;
+
+  right: -180px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 0 0 90px rgba(255,255,255,0.018),
+    0 0 0 180px rgba(255,255,255,0.012);
+}
+
+.business-hero-content {
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 900px;
+}
+
+.business-eyebrow {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 35px;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.16em;
+
+  color: rgba(255,255,255,0.65);
+}
+
+.business-eyebrow svg {
+  color: #e21d2b;
+}
+
+.business-hero h1 {
+  font-family: "Playfair Display", serif;
+
+  font-size: clamp(65px, 9vw, 135px);
+
+  line-height: 0.85;
+
+  letter-spacing: -0.06em;
+}
+
+.business-hero h1 span {
+  color: rgba(255,255,255,0.35);
+
+  font-style: italic;
+}
+
+.business-hero p {
+  max-width: 540px;
+
+  margin-top: 45px;
+
+  color: rgba(255,255,255,0.6);
+
+  line-height: 1.8;
+
+  font-size: 15px;
+}
+
+.business-scroll {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-top: 60px;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.15em;
+}
+
+.business-scroll span {
+  width: 55px;
+  height: 1px;
+
+  background: rgba(255,255,255,0.45);
+}
+
+.business-hero-index {
+  position: absolute;
+
+  right: 7vw;
+  bottom: 55px;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.15em;
+
+  color: rgba(255,255,255,0.4);
+}
+
+.business-hero-index span {
+  font-family: "Playfair Display", serif;
+
+  font-size: 120px;
+
+  color: rgba(255,255,255,0.035);
+}
+
+
+/* =========================================================
+   MARKET SNAPSHOT
+========================================================= */
+
+.market-section {
+  padding: 100px 7vw;
+
+  border-bottom: 1px solid #d5d5d0;
+}
+
+.market-top {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.desk-label {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.15em;
+}
+
+.desk-label span {
+  color: #e21d2b;
+}
+
+.market-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.12em;
+
+  color: #777;
+}
+
+.market-status span {
+  width: 6px;
+  height: 6px;
+
+  background: #198754;
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 5px rgba(25,135,84,0.1);
+}
+
+.market-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  margin-top: 45px;
+
+  border-top: 1px solid #d5d5d0;
+
+  border-bottom: 1px solid #d5d5d0;
+}
+
+.market-card {
+  padding: 35px 30px;
+
+  min-height: 190px;
+
+  border-right: 1px solid #d5d5d0;
+
+  transition:
+    background 0.3s ease;
+}
+
+.market-card:last-child {
+  border-right: none;
+}
+
+.market-card:hover {
+  background: #fff;
+}
+
+.market-card-name {
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.12em;
+
+  color: #888;
+}
+
+.market-card-value {
+  margin-top: 18px;
+
+  font-size: 28px;
+
+  font-weight: 800;
+
+  letter-spacing: -0.04em;
+}
+
+.market-card-bottom {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-end;
+
+  margin-top: 30px;
+}
+
+.market-up {
+  color: #198754;
+
+  font-size: 11px;
+
+  font-weight: 900;
+}
+
+.market-bars {
+  height: 35px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  gap: 3px;
+}
+
+.market-bars i {
+  display: block;
+
+  width: 4px;
+
+  background: #111;
+}
+
+
+/* =========================================================
+   BUSINESS LEAD
+========================================================= */
+
+.business-lead {
+  padding: 130px 7vw;
+}
+
+.business-lead-grid {
+  display: grid;
+
+  grid-template-columns: 1.05fr 0.95fr;
+
+  gap: 90px;
+
+  margin-top: 60px;
+}
+
+.business-lead-visual {
+  min-height: 560px;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background: #171918;
+
+  color: #fff;
+}
+
+.visual-grid {
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.05) 1px,
+      transparent 1px
+    );
+
+  background-size: 50px 50px;
+}
+
+.visual-circle {
+  position: absolute;
+
+  width: 430px;
+  height: 430px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255,255,255,0.14);
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+.visual-circle::before,
+.visual-circle::after {
+  content: "";
+
+  position: absolute;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  inset: 45px;
+}
+
+.visual-circle::after {
+  inset: 100px;
+}
+
+.visual-label {
+  position: absolute;
+
+  left: 40px;
+  top: 40px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  font-size: 9px;
+
+  letter-spacing: 0.12em;
+}
+
+.visual-label strong {
+  margin-top: 5px;
+
+  font-size: 22px;
+}
+
+.visual-data {
+  position: absolute;
+
+  right: 35px;
+  bottom: 35px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  text-align: right;
+}
+
+.visual-data span {
+  font-size: 8px;
+
+  letter-spacing: 0.12em;
+
+  color: rgba(255,255,255,0.45);
+}
+
+.visual-data strong {
+  margin-top: 5px;
+
+  font-size: 36px;
+
+  color: #d9ffdf;
+}
+
+.business-lead-story {
+  align-self: center;
+}
+
+.story-meta {
+  display: flex;
+
+  gap: 18px;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.1em;
+
+  color: #999;
+}
+
+.story-meta span:first-child {
+  color: #e21d2b;
+}
+
+.business-lead-story h2 {
+  margin-top: 35px;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: clamp(40px, 4.5vw, 68px);
+
+  line-height: 0.95;
+
+  letter-spacing: -0.045em;
+}
+
+.business-lead-story h2 em {
+  color: #999;
+}
+
+.business-lead-story p {
+  max-width: 520px;
+
+  margin-top: 25px;
+
+  color: #666;
+
+  font-size: 14px;
+
+  line-height: 1.8;
+}
+
+.business-read {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 40px;
+
+  padding: 15px 20px;
+
+  background: #111;
+
+  color: #fff;
+
+  border: none;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.1em;
+
+  cursor: pointer;
+
+  transition: transform 0.3s ease;
+}
+
+.business-read:hover {
+  transform: translateY(-4px);
+}
+
+
+/* =========================================================
+   LATEST BUSINESS
+========================================================= */
+
+.business-stories {
+  padding: 130px 7vw;
+
+  background: #fff;
+}
+
+.business-stories-heading {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-end;
+}
+
+.business-stories-heading h2 {
+  margin-top: 30px;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: clamp(60px, 7vw, 105px);
+
+  line-height: 0.85;
+
+  letter-spacing: -0.055em;
+}
+
+.business-stories-heading h2 em {
+  color: #aaa;
+}
+
+.business-stories-heading > p {
+  max-width: 330px;
+
+  color: #666;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+.business-story-list {
+  margin-top: 80px;
+
+  border-top: 1px solid #d5d5d0;
+}
+
+.business-story {
+  display: grid;
+
+  grid-template-columns: 70px 1fr 80px;
+
+  gap: 30px;
+
+  padding: 50px 0;
+
+  border-bottom: 1px solid #d5d5d0;
+
+  transition: background 0.3s ease;
+}
+
+.business-story:hover {
+  background: #fafaf7;
+}
+
+.business-story-number {
+  font-size: 11px;
+
+  color: #aaa;
+
+  font-weight: 900;
+}
+
+.business-story-content h3 {
+  max-width: 800px;
+
+  margin-top: 18px;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: clamp(25px, 3vw, 40px);
+
+  line-height: 1.05;
+
+  letter-spacing: -0.025em;
+}
+
+.business-story-content p {
+  max-width: 620px;
+
+  margin-top: 14px;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+
+  color: #666;
+}
+
+.business-story-content button {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 25px;
+
+  background: none;
+
+  border: none;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.1em;
+
+  cursor: pointer;
+}
+
+.story-arrow {
+  align-self: center;
+
+  width: 55px;
+  height: 55px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 1px solid #ddd;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.business-story:hover .story-arrow {
+  background: #111;
+
+  color: #fff;
+}
+
+
+/* =========================================================
+   BUSINESS SECTORS
+========================================================= */
+
+.business-sectors {
+  padding: 130px 7vw;
+}
+
+.business-sectors > h2 {
+  margin-top: 30px;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: clamp(60px, 7vw, 105px);
+
+  line-height: 0.85;
+
+  letter-spacing: -0.055em;
+}
+
+.business-sectors > h2 em {
+  color: #999;
+}
+
+.sector-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  margin-top: 80px;
+
+  border-top: 1px solid #d5d5d0;
+
+  border-bottom: 1px solid #d5d5d0;
+}
+
+.sector-card {
+  position: relative;
+
+  min-height: 300px;
+
+  padding: 40px 30px;
+
+  border-right: 1px solid #d5d5d0;
+
+  transition:
+    background 0.3s ease;
+}
+
+.sector-card:last-child {
+  border-right: none;
+}
+
+.sector-card:hover {
+  background: #fff;
+}
+
+.sector-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #d5d5d0;
+}
+
+.sector-card h3 {
+  margin-top: 45px;
+
+  font-size: 14px;
+
+  letter-spacing: 0.06em;
+}
+
+.sector-card p {
+  max-width: 190px;
+
+  margin-top: 12px;
+
+  font-size: 12px;
+
+  line-height: 1.7;
+
+  color: #777;
+}
+
+.sector-arrow {
+  position: absolute;
+
+  right: 25px;
+  bottom: 25px;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.business-cta {
+  padding: 0 7vw 130px;
+}
+
+.business-cta-inner {
+  position: relative;
+
+  overflow: hidden;
+
+  padding: 90px;
+
+  background: #111;
+
+  color: #fff;
+}
+
+.business-cta-inner::after {
+  content: "₹";
+
+  position: absolute;
+
+  right: 20px;
+  bottom: -150px;
+
+  font-size: 450px;
+
+  font-weight: 900;
+
+  color: rgba(255,255,255,0.025);
+
+  line-height: 1;
+}
+
+.business-cta-inner > span {
+  position: relative;
+
+  z-index: 2;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.15em;
+
+  color: rgba(255,255,255,0.5);
+}
+
+.business-cta-inner h2 {
+  position: relative;
+
+  z-index: 2;
+
+  margin-top: 25px;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: clamp(60px, 8vw, 115px);
+
+  line-height: 0.85;
+
+  letter-spacing: -0.055em;
+}
+
+.business-cta-inner button {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 50px;
+
+  padding: 16px 22px;
+
+  background: #fff;
+
+  color: #111;
+
+  border: none;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.1em;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.business-cta-inner button:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .business-hero {
+    min-height: 650px;
+
+    padding: 90px 6vw;
+  }
+
+  .market-section,
+  .business-lead,
+  .business-stories,
+  .business-sectors {
+    padding: 90px 6vw;
+  }
+
+  .market-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .market-card:nth-child(2) {
+    border-right: none;
+  }
+
+  .market-card:nth-child(-n + 2) {
+    border-bottom: 1px solid #d5d5d0;
+  }
+
+  .business-lead-grid {
+    grid-template-columns: 1fr;
+
+    gap: 60px;
+  }
+
+  .business-lead-visual {
+    min-height: 450px;
+  }
+
+  .business-stories-heading {
+    display: block;
+  }
+
+  .business-stories-heading > p {
+    margin-top: 30px;
+  }
+
+  .sector-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sector-card:nth-child(2) {
+    border-right: none;
+  }
+
+  .sector-card:nth-child(-n + 2) {
+    border-bottom: 1px solid #d5d5d0;
+  }
+
+  .business-cta {
+    padding: 0 6vw 90px;
+  }
+
+  .business-cta-inner {
+    padding: 60px 40px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .business-hero h1 {
+    font-size: 65px;
+  }
+
+  .business-hero p {
+    font-size: 14px;
+  }
+
+  .market-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .market-card,
+  .market-card:nth-child(2) {
+    border-right: none;
+
+    border-bottom: 1px solid #d5d5d0;
+  }
+
+  .market-card:last-child {
+    border-bottom: none;
+  }
+
+  .business-lead-visual {
+    min-height: 360px;
+  }
+
+  .visual-circle {
+    width: 280px;
+    height: 280px;
+  }
+
+  .business-story {
+    grid-template-columns: 1fr;
+
+    gap: 15px;
+  }
+
+  .business-story-number {
+    display: none;
+  }
+
+  .story-arrow {
+    display: none;
+  }
+
+  .sector-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sector-card,
+  .sector-card:nth-child(2) {
+    border-right: none;
+
+    border-bottom: 1px solid #d5d5d0;
+  }
+
+  .sector-card:last-child {
+    border-bottom: none;
+  }
+
+  .business-cta-inner {
+    padding: 50px 25px;
+  }
+}
