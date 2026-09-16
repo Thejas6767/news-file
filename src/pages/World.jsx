@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const worldStories = [
   {
@@ -332,7 +333,9 @@ function World() {
           </Link>
         </div>
       </section>
+      <Footer />
     </div>
+    
   );
 }
 

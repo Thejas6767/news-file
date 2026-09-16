@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 import Navbar from "../components/Navbar";
-
+import Footer from "../components/Footer";
 const factChecks = [
   {
     id: "01",
@@ -361,6 +361,7 @@ function FactCheck() {
           </motion.div>
         </section>
       </main>
+      <Footer />
     </>
   );
 }

@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const articles = {
   1: {
@@ -428,7 +429,7 @@ function Article() {
         </div>
 
       </section>
-
+<Footer />
     </div>
   );
 }

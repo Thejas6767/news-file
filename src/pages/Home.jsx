@@ -9,7 +9,7 @@ import Navbar from "../components/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import LatestNews from "../components/LatestNews";
 import LiveTV from "../components/LiveTV";
-
+import Footer from "../components/Footer";
 function Home() {
   const navigate = useNavigate();
 
@@ -353,105 +353,7 @@ function Home() {
           </div>
 
         </section>
-
-
-        {/* =========================================
-            FOOTER
-        ========================================= */}
-
-        <footer className="news-footer">
-
-          <div className="news-footer-inner">
-
-            <div className="news-footer-brand">
-
-              <h2>
-                News File
-              </h2>
-
-              <p>
-                Verified ground reporting.
-                <br />
-                Independent journalism from across India.
-              </p>
-
-            </div>
-
-
-            <div className="news-footer-links">
-
-              <div className="news-footer-column">
-
-                <span>
-                  SECTIONS
-                </span>
-
-                <Link to="/news">
-                  All News
-                </Link>
-
-                <Link to="/live">
-                  Live TV
-                </Link>
-
-                <Link to="/politics">
-                  Politics
-                </Link>
-
-                <Link to="/business">
-                  Business
-                </Link>
-
-                <Link to="/india">
-                  India
-                </Link>
-
-                <Link to="/world">
-                  World
-                </Link>
-
-                <Link to="/fact-check">
-                  Fact Check
-                </Link>
-
-              </div>
-
-
-              <div className="news-footer-column">
-
-                <span>
-                  NEWSROOM
-                </span>
-
-                <a href="mailto:newsroom@newsfileindia.com">
-                  newsroom@newsfileindia.com
-                </a>
-
-                <p>
-                  New Delhi, India
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div className="news-footer-bottom">
-
-            <span>
-              © 2026 News File. All rights reserved.
-            </span>
-
-            <span>
-              Verified. Independent. Grounded.
-            </span>
-
-          </div>
-
-        </footer>
-
+             <Footer />
       </main>
 
     </div>

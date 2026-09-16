@@ -14,26 +14,24 @@ function Navbar() {
 
   const navigate = useNavigate();
 
+  /* =========================================
+     MAIN NAVIGATION
+  ========================================= */
+
   const navItems = [
     "Home",
     "All News",
-    "Live TV",
-    "Politics",
-    "Business",
-    "India",
-    "World",
-    "Fact Check",
+    "Live TV & Video",
+    "About Us",
+    "Contact & Submissions",
   ];
 
   const routes = {
     Home: "/",
     "All News": "/news",
-    "Live TV": "/live",
-    Politics: "/politics",
-    Business: "/business",
-    India: "/india",
-    World: "/world",
-    "Fact Check": "/fact-check",
+    "Live TV & Video": "/live",
+    "About Us": "/about",
+    "Contact & Submissions": "/contact",
   };
 
   const handleMenuNavigation = (item) => {
@@ -46,7 +44,9 @@ function Navbar() {
 
   return (
     <>
-      {/* TOP NEWS STRIP */}
+      {/* =========================================
+          TOP NEWS STRIP
+      ========================================= */}
 
       <div className="top-strip">
         <div className="top-strip-inner">
@@ -69,7 +69,9 @@ function Navbar() {
       </div>
 
 
-      {/* MAIN NAVBAR */}
+      {/* =========================================
+          MAIN NAVBAR
+      ========================================= */}
 
       <motion.header
         className="navbar"
@@ -103,6 +105,7 @@ function Navbar() {
             color: "inherit",
           }}
         >
+
           <motion.div
             className="logo"
             initial={{ opacity: 0, scale: 0.8 }}
@@ -114,6 +117,7 @@ function Navbar() {
           >
             NEWS<span>FILE</span>
           </motion.div>
+
         </Link>
 
 
@@ -126,15 +130,18 @@ function Navbar() {
             onClick={() => navigate("/live")}
             whileHover={{
               scale: 1.05,
-              boxShadow: "0 10px 30px rgba(215,25,32,0.25)",
+              boxShadow:
+                "0 10px 30px rgba(215,25,32,0.25)",
             }}
             whileTap={{ scale: 0.95 }}
           >
+
             <span className="live-pulse">
               <Radio size={15} />
             </span>
 
             LIVE TV
+
           </motion.button>
 
 
@@ -155,12 +162,20 @@ function Navbar() {
       </motion.header>
 
 
-      {/* CATEGORY NAVIGATION */}
+      {/* =========================================
+          CATEGORY / MAIN NAVIGATION
+      ========================================= */}
 
       <motion.nav
         className="category-nav"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{
+          opacity: 0,
+          y: -10,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
         transition={{
           delay: 0.45,
           duration: 0.5,
@@ -170,6 +185,7 @@ function Navbar() {
         <div className="category-nav-inner">
 
           {navItems.map((item, index) => (
+
             <motion.div
               key={item}
               initial={{
@@ -184,6 +200,7 @@ function Navbar() {
                 delay: 0.5 + index * 0.05,
               }}
             >
+
               <Link
                 to={routes[item]}
                 className="category-link"
@@ -191,7 +208,9 @@ function Navbar() {
               >
                 {item}
               </Link>
+
             </motion.div>
+
           ))}
 
         </div>
@@ -199,7 +218,9 @@ function Navbar() {
       </motion.nav>
 
 
-      {/* BREAKING NEWS BAR */}
+      {/* =========================================
+          BREAKING NEWS BAR
+      ========================================= */}
 
       <div className="breaking-bar">
 
@@ -259,21 +280,33 @@ function Navbar() {
       </div>
 
 
-      {/* SIDE MENU */}
+      {/* =========================================
+          SIDE MENU
+      ========================================= */}
 
       <AnimatePresence>
 
         {menuOpen && (
           <>
 
+            {/* OVERLAY */}
+
             <motion.div
               className="menu-overlay"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+              }}
               onClick={() => setMenuOpen(false)}
             />
 
+
+            {/* SIDE MENU */}
 
             <motion.aside
               className="side-menu"
@@ -311,6 +344,7 @@ function Navbar() {
               <div className="side-menu-links">
 
                 {navItems.map((item, index) => (
+
                   <motion.button
                     type="button"
                     key={item}
@@ -326,7 +360,9 @@ function Navbar() {
                     transition={{
                       delay: 0.1 + index * 0.05,
                     }}
-                    onClick={() => handleMenuNavigation(item)}
+                    onClick={() =>
+                      handleMenuNavigation(item)
+                    }
                   >
 
                     <span>
@@ -338,6 +374,7 @@ function Navbar() {
                     <ChevronRight size={18} />
 
                   </motion.button>
+
                 ))}
 
               </div>

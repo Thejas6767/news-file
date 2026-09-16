@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 import Navbar from "../components/Navbar";
-
+import Footer from "../components/Footer";
 const marketData = [
   { name: "NIFTY 50", value: "25,458.40", change: "+0.82%" },
   { name: "SENSEX", value: "83,216.14", change: "+0.74%" },
@@ -407,6 +407,7 @@ function Business() {
         </section>
 
       </main>
+      <Footer />
     </>
   );
 }

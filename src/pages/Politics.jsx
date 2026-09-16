@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { politicsStories } from "../data/newsData";
 
 function Politics() {
@@ -330,7 +331,7 @@ function Politics() {
         </section>
 
       </main>
-
+<Footer />
     </div>
   );
 }
