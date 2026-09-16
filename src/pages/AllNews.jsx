@@ -18,81 +18,38 @@ const categories = [
   "WORLD",
   "FACT CHECK",
 ];
-
 const stories = [
   {
     id: 1,
-    category: "POLITICS",
-    title:
-      "Political developments continue to shape the national conversation",
+    category: "KARNATAKA",
+    title: "Stories from the ground, where every development begins",
     description:
-      "The latest decisions, statements and developments from India's political landscape.",
-    time: "8 min ago",
-    featured: true,
+      "Get the latest verified developments, reports and voices from across Karnataka.",
+    time: "12 MIN AGO",
   },
   {
     id: 2,
     category: "INDIA",
-    title: "Major developments emerge from across the country",
+    title: "The stories shaping India's next chapter",
     description:
-      "A look at the stories making an impact across India's cities and states.",
-    time: "16 min ago",
+      "National developments, politics and public affairs from across the country.",
+    time: "28 MIN AGO",
   },
   {
     id: 3,
     category: "BUSINESS",
-    title: "Markets watch fresh signals as economic activity shifts",
+    title: "Markets, money and the forces changing business",
     description:
-      "Businesses and investors assess the latest movement across the economy.",
-    time: "24 min ago",
+      "Business intelligence and economic developments that matter.",
+    time: "41 MIN AGO",
   },
   {
     id: 4,
-    category: "WORLD",
-    title: "Global developments put international markets on alert",
-    description:
-      "International events continue to influence markets, governments and communities.",
-    time: "31 min ago",
-  },
-  {
-    id: 5,
-    category: "INDIA",
-    title: "Cities prepare for a new wave of infrastructure projects",
-    description:
-      "New plans focus on connectivity, urban development and public infrastructure.",
-    time: "43 min ago",
-  },
-  {
-    id: 6,
     category: "POLITICS",
-    title: "Opposition and government face new questions",
+    title: "Inside the decisions shaping the country",
     description:
-      "Political parties respond to the latest developments and public concerns.",
-    time: "52 min ago",
-  },
-  {
-    id: 7,
-    category: "FACT CHECK",
-    title: "Viral claim circulating online gets a closer examination",
-    description:
-      "News File's verification desk examines the evidence behind a widely shared claim.",
-    time: "1 hr ago",
-  },
-  {
-    id: 8,
-    category: "BUSINESS",
-    title: "Technology companies prepare for another competitive phase",
-    description:
-      "The technology sector continues to evolve as companies rethink strategy and growth.",
-    time: "1 hr ago",
-  },
-  {
-    id: 9,
-    category: "WORLD",
-    title: "Diplomatic discussions continue across major regions",
-    description:
-      "Leaders and officials continue talks on issues affecting global stability.",
-    time: "2 hrs ago",
+      "Political developments with context from the ground.",
+    time: "1 HR AGO",
   },
 ];
 

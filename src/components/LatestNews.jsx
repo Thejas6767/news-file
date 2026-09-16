@@ -35,26 +35,25 @@ function LatestNews() {
 
         <div>
 
- <span className="section-eyebrow">
-  TOP STORIES TODAY
-</span>
+          <span className="section-eyebrow">
+            TOP STORIES TODAY
+          </span>
 
-<h2>
-  The stories
-  <br />
-  that matter.
-</h2>
+          <h2>
+            The stories
+            <br />
+            that matter.
+          </h2>
 
         </div>
 
-
-      <Link
-  to="/news"
-  className="view-all-button"
->
-  View all news
-  <ArrowUpRight size={17} />
-</Link>
+        <Link
+          to="/news"
+          className="view-all-button"
+        >
+          View all news
+          <ArrowUpRight size={17} />
+        </Link>
 
       </motion.div>
 
@@ -107,16 +106,6 @@ function LatestNews() {
                 {story.category}
               </span>
 
-              <motion.div
-                className="card-arrow"
-                whileHover={{
-                  scale: 1.1,
-                  rotate: 10,
-                }}
-              >
-                <ArrowUpRight size={19} />
-              </motion.div>
-
             </div>
 
 
@@ -138,20 +127,18 @@ function LatestNews() {
               </h3>
 
               {story.description && (
-
                 <p>
                   {story.description}
                 </p>
-
               )}
 
-             <Link
-  to={`/article/${story.id}`}
-  className="read-story"
->
-  Read story
-  <ArrowUpRight size={14} />
-</Link>
+              <Link
+                to={`/article/${story.id}`}
+                className="read-story"
+              >
+                Read story
+                <ArrowUpRight size={14} />
+              </Link>
 
             </div>
 
@@ -160,7 +147,8 @@ function LatestNews() {
         ))}
 
       </div>
- </section>
+
+    </section>
   );
 }
 

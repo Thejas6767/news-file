@@ -10352,3 +10352,249 @@ a {
   }
 
 }
+/* =========================================
+   METHODOLOGY SECTION
+========================================= */
+
+.methodology-section {
+  position: relative;
+  padding: 140px 8%;
+  background: #f5f3ee;
+  overflow: hidden;
+}
+
+.methodology-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+
+.methodology-heading {
+  position: relative;
+}
+
+.methodology-heading .section-eyebrow {
+  display: inline-block;
+  margin-bottom: 24px;
+}
+
+.methodology-heading h2 {
+  margin: 0;
+  font-size: clamp(42px, 5vw, 76px);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+}
+
+.methodology-heading h2 strong {
+  font-weight: 700;
+}
+
+.methodology-content {
+  max-width: 580px;
+}
+
+.methodology-content p {
+  margin: 0 0 28px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #555;
+}
+
+.methodology-content p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================================
+   METHODOLOGY DECORATION
+========================================= */
+
+.methodology-section::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 50%;
+  right: -120px;
+  top: -120px;
+}
+
+.methodology-section::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 50%;
+  left: -80px;
+  bottom: -80px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+  .methodology-section {
+    padding: 100px 7%;
+  }
+
+  .methodology-inner {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .methodology-content {
+    max-width: 100%;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .methodology-section {
+    padding: 80px 6%;
+  }
+
+  .methodology-heading h2 {
+    font-size: 44px;
+  }
+
+  .methodology-content p {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+}
+/* =========================================
+   NEWS FILE FOOTER
+========================================= */
+
+.news-footer {
+  background: #111;
+  color: #fff;
+  padding: 90px 8% 30px;
+}
+
+.news-footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 80px;
+}
+
+.news-footer-brand h2 {
+  margin: 0 0 18px;
+  font-size: 42px;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+}
+
+.news-footer-brand p {
+  margin: 0;
+  color: #aaa;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.news-footer-links {
+  display: flex;
+  gap: 110px;
+}
+
+.news-footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 150px;
+}
+
+.news-footer-column span {
+  margin-bottom: 12px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: #888;
+}
+
+.news-footer-column a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: opacity 0.25s ease;
+}
+
+.news-footer-column a:hover {
+  opacity: 0.55;
+}
+
+.news-footer-column p {
+  margin: 0;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.news-footer-bottom {
+  max-width: 1280px;
+  margin: 80px auto 0;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+
+  color: #777;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+
+/* =========================================
+   FOOTER RESPONSIVE
+========================================= */
+
+@media (max-width: 800px) {
+
+  .news-footer {
+    padding: 70px 7% 25px;
+  }
+
+  .news-footer-inner {
+    flex-direction: column;
+    gap: 55px;
+  }
+
+  .news-footer-links {
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+
+  .news-footer-bottom {
+    margin-top: 55px;
+    flex-direction: column;
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .news-footer-brand h2 {
+    font-size: 34px;
+  }
+
+  .news-footer-links {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+}

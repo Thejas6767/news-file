@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -11,111 +12,74 @@ import Navbar from "../components/Navbar";
 
 const articles = {
   1: {
-    category: "POLITICS",
-    title:
-      "Political developments continue to shape the national conversation",
+    category: "KARNATAKA",
+    title: "Stories from the ground, where every development begins",
     description:
-      "The latest decisions, statements and developments from India's political landscape.",
-    time: "8 min ago",
+      "Get the latest verified developments, reports and voices from across Karnataka.",
+    time: "12 min ago",
     author: "NEWS FILE DESK",
-    location: "NEW DELHI",
+    location: "KARNATAKA",
     image:
-      "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1800&q=85",
+      "https://images.unsplash.com/photo-1532375810709-75b1da00537c?auto=format&fit=crop&w=1800&q=85",
     paragraphs: [
-      "Political developments continue to influence the national conversation as policymakers, political parties and citizens closely follow the latest developments.",
-      "Across the country, new statements and decisions are shaping discussions around governance, public policy and the direction of India's political landscape.",
-      "News File's reporting desk continues to follow developments as they emerge, focusing on verified information and clearly separating confirmed developments from claims and speculation.",
-      "The coming days are expected to bring further developments as political stakeholders respond to the changing national environment.",
+      "Stories from the ground provide a closer look at the developments, reports and voices emerging from Karnataka.",
+      "Local developments continue to shape conversations across cities, towns and communities as events unfold.",
+      "News File focuses on verified information and field reporting while clearly separating confirmed developments from claims and speculation.",
+      "Further updates will follow as more information becomes available from the ground.",
     ],
   },
 
   2: {
     category: "INDIA",
-    title: "Major developments emerge from across the country",
+    title: "The stories shaping India's next chapter",
     description:
-      "A look at the stories making an impact across India's cities and states.",
-    time: "16 min ago",
+      "National developments, politics and public affairs from across the country.",
+    time: "28 min ago",
     author: "NEWS FILE INDIA DESK",
     location: "INDIA",
     image:
       "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1800&q=85",
     paragraphs: [
-      "Important developments are emerging from cities and communities across India, with local events increasingly shaping the national news cycle.",
-      "Authorities, residents and institutions are responding to developments across multiple regions while officials continue to release information.",
-      "News File's India desk is tracking confirmed updates and working to provide context around the developments that matter most to readers.",
-      "As more information becomes available, this report will continue to focus on verified details and direct developments.",
+      "Developments from across India continue to shape the national conversation, with stories emerging from cities, states and communities.",
+      "Politics, public affairs and developments across the country remain closely connected to the issues affecting everyday life.",
+      "News File's India desk follows verified developments and provides context around the stories that matter to readers.",
+      "Further details will be added as confirmed information becomes available.",
     ],
   },
 
   3: {
     category: "BUSINESS",
-    title: "Markets watch fresh signals as economic activity shifts",
+    title: "Markets, money and the forces changing business",
     description:
-      "Businesses and investors assess the latest movement across the economy.",
-    time: "24 min ago",
+      "Business intelligence and economic developments that matter.",
+    time: "41 min ago",
     author: "NEWS FILE BUSINESS DESK",
     location: "MUMBAI",
     image:
       "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1800&q=85",
     paragraphs: [
-      "Businesses and investors are assessing fresh signals from across the economy as markets respond to changing expectations and new developments.",
-      "Market participants are watching a range of indicators while companies and institutions assess how current conditions could influence economic activity.",
-      "The News File business desk is tracking the developments while focusing on the underlying information behind market movements.",
-      "Further updates will depend on incoming data, corporate developments and decisions from economic institutions.",
+      "Markets and businesses continue to respond to changing economic conditions and developments across the country.",
+      "Companies, investors and institutions are watching developments that could influence business activity and the wider economy.",
+      "News File's business desk focuses on the information behind economic developments and provides context for readers.",
+      "Further updates will depend on incoming information, market developments and confirmed announcements.",
     ],
   },
 
   4: {
-    category: "WORLD",
-    title: "Global developments put international markets on alert",
+    category: "POLITICS",
+    title: "Inside the decisions shaping the country",
     description:
-      "International events continue to influence markets, governments and communities.",
-    time: "31 min ago",
-    author: "NEWS FILE WORLD DESK",
-    location: "WORLD",
+      "Political developments with context from the ground.",
+    time: "1 hr ago",
+    author: "NEWS FILE POLITICS DESK",
+    location: "NEW DELHI",
     image:
-      "https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1800&q=85",
+      "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1800&q=85",
     paragraphs: [
-      "International developments are drawing attention from governments, businesses and communities as events across regions continue to influence the global conversation.",
-      "Markets are assessing the potential impact of geopolitical and economic developments while governments monitor the changing international environment.",
-      "News File's World desk is following confirmed developments and providing context as information becomes available.",
-      "The situation remains subject to change as officials and institutions release further information.",
-    ],
-  },
-
-  5: {
-    category: "FACT CHECK",
-    title: "Viral claim circulating online gets a closer examination",
-    description:
-      "News File's verification desk examines the evidence behind a widely shared claim.",
-    time: "43 min ago",
-    author: "NEWS FILE VERIFICATION DESK",
-    location: "NEWS FILE DESK",
-    image:
-      "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=1800&q=85",
-    paragraphs: [
-      "A widely circulated claim online has prompted questions about what is accurate, what is misleading and what can actually be verified.",
-      "News File's verification desk examined the available evidence, including the context surrounding the claim and the information used to support it.",
-      "Verification requires checking the original context rather than relying only on screenshots, captions or posts that may have been separated from their source.",
-      "Readers are encouraged to check the evidence behind viral claims before sharing information further.",
-    ],
-  },
-
-  6: {
-    category: "INDIA",
-    title: "Cities prepare for a new wave of infrastructure projects",
-    description:
-      "New plans focus on connectivity, urban development and public infrastructure.",
-    time: "52 min ago",
-    author: "NEWS FILE INDIA DESK",
-    location: "INDIA",
-    image:
-      "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1800&q=85",
-    paragraphs: [
-      "Cities are preparing for new infrastructure initiatives focused on connectivity, urban development and public facilities.",
-      "The projects are expected to address changing requirements as urban populations and transportation needs continue to evolve.",
-      "Officials and local institutions are examining implementation plans while communities assess how the projects could affect daily life.",
-      "Further details are expected as individual projects move through planning and implementation stages.",
+      "Political decisions and developments continue to influence public discussions across India.",
+      "Government decisions, political responses and developments from the ground remain important parts of the national conversation.",
+      "News File's politics desk follows confirmed developments and provides context without presenting unverified claims as established facts.",
+      "Further developments will be reported as verified information becomes available.",
     ],
   },
 };
@@ -123,23 +87,27 @@ const articles = {
 const relatedStories = [
   {
     category: "INDIA",
-    title: "Major developments emerge from across the country",
+    title: "The stories shaping India's next chapter",
     id: 2,
   },
   {
     category: "BUSINESS",
-    title: "Markets watch fresh signals as economic activity shifts",
+    title: "Markets, money and the forces changing business",
     id: 3,
   },
   {
-    category: "WORLD",
-    title: "Global developments put international markets on alert",
+    category: "POLITICS",
+    title: "Inside the decisions shaping the country",
     id: 4,
   },
 ];
 
 function Article() {
   const { id } = useParams();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
   const article = articles[id] || articles[1];
 

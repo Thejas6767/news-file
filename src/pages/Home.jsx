@@ -12,6 +12,7 @@ import LiveTV from "../components/LiveTV";
 
 function Home() {
   const navigate = useNavigate();
+
   return (
     <div className="app">
 
@@ -64,7 +65,7 @@ function Home() {
 
               <span className="hero-live-dot" />
 
-              VERIFIED GROUND REPORTING
+              BREAKING: Ground dispatches updated
 
             </motion.div>
 
@@ -131,10 +132,11 @@ function Home() {
                 duration: 0.7,
               }}
             >
-<button
-  className="hero-primary-button"
-  onClick={() => navigate("/live")}
->
+
+              <button
+                className="hero-primary-button"
+                onClick={() => navigate("/live")}
+              >
 
                 <span>
                   Watch Live TV
@@ -146,13 +148,14 @@ function Home() {
 
               </button>
 
-<Link
-  to="/news"
-  className="hero-secondary-button"
->
-  Explore News
-  <ArrowUpRight size={17} />
-</Link>
+
+              <Link
+                to="/news"
+                className="hero-secondary-button"
+              >
+                Explore News
+                <ArrowUpRight size={17} />
+              </Link>
 
             </motion.div>
 
@@ -162,10 +165,11 @@ function Home() {
           {/* =========================================
               LIVE STATUS CARD
           ========================================= */}
-<motion.div
-  className="hero-live-card"
-  onClick={() => navigate("/live")}
-  style={{ cursor: "pointer" }}
+
+          <motion.div
+            className="hero-live-card"
+            onClick={() => navigate("/live")}
+            style={{ cursor: "pointer" }}
             initial={{
               opacity: 0,
               x: 50,
@@ -256,8 +260,197 @@ function Home() {
 
         </section>
 
-<LatestNews />
-<LiveTV />
+
+        {/* =========================================
+            LATEST NEWS
+        ========================================= */}
+
+        <LatestNews />
+
+
+        {/* =========================================
+            LIVE TV
+        ========================================= */}
+
+        <LiveTV />
+
+
+        {/* =========================================
+            OUR METHODOLOGY
+        ========================================= */}
+
+        <section className="methodology-section">
+
+          <div className="methodology-inner">
+
+            <motion.div
+              className="methodology-heading"
+              initial={{
+                opacity: 0,
+                y: 40,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+                amount: 0.25,
+              }}
+              transition={{
+                duration: 0.8,
+              }}
+            >
+
+              <span className="section-eyebrow">
+                OUR METHODOLOGY
+              </span>
+
+              <h2>
+                Unbiased regional
+                <br />
+                <strong>dispatches.</strong>
+              </h2>
+
+            </motion.div>
+
+
+            <motion.div
+              className="methodology-content"
+              initial={{
+                opacity: 0,
+                y: 40,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+                amount: 0.25,
+              }}
+              transition={{
+                duration: 0.8,
+                delay: 0.15,
+              }}
+            >
+
+              <p>
+                News File focuses on verified ground reporting,
+                bringing regional developments and independent
+                fact-checks together with context from the field.
+              </p>
+
+              <p>
+                Our reporting process is built around verification,
+                responsible journalism and clear sourcing, helping
+                readers understand what is happening beyond the
+                headlines.
+              </p>
+
+            </motion.div>
+
+          </div>
+
+        </section>
+
+
+        {/* =========================================
+            FOOTER
+        ========================================= */}
+
+        <footer className="news-footer">
+
+          <div className="news-footer-inner">
+
+            <div className="news-footer-brand">
+
+              <h2>
+                News File
+              </h2>
+
+              <p>
+                Verified ground reporting.
+                <br />
+                Independent journalism from across India.
+              </p>
+
+            </div>
+
+
+            <div className="news-footer-links">
+
+              <div className="news-footer-column">
+
+                <span>
+                  SECTIONS
+                </span>
+
+                <Link to="/news">
+                  All News
+                </Link>
+
+                <Link to="/live">
+                  Live TV
+                </Link>
+
+                <Link to="/politics">
+                  Politics
+                </Link>
+
+                <Link to="/business">
+                  Business
+                </Link>
+
+                <Link to="/india">
+                  India
+                </Link>
+
+                <Link to="/world">
+                  World
+                </Link>
+
+                <Link to="/fact-check">
+                  Fact Check
+                </Link>
+
+              </div>
+
+
+              <div className="news-footer-column">
+
+                <span>
+                  NEWSROOM
+                </span>
+
+                <a href="mailto:newsroom@newsfileindia.com">
+                  newsroom@newsfileindia.com
+                </a>
+
+                <p>
+                  New Delhi, India
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div className="news-footer-bottom">
+
+            <span>
+              © 2026 News File. All rights reserved.
+            </span>
+
+            <span>
+              Verified. Independent. Grounded.
+            </span>
+
+          </div>
+
+        </footer>
 
       </main>
 
