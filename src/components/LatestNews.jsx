@@ -3,11 +3,8 @@ import {
   ArrowUpRight,
   Clock3,
 } from "lucide-react";
-
-import {
-  featuredNews,
-  latestNews,
-} from "../data/newsData";
+import { Link } from "react-router-dom";
+import { featuredNews } from "../data/newsData";
 
 function LatestNews() {
   return (
@@ -38,26 +35,26 @@ function LatestNews() {
 
         <div>
 
-          <span className="section-eyebrow">
-            02 — LATEST REPORTS
-          </span>
+ <span className="section-eyebrow">
+  TOP STORIES TODAY
+</span>
 
-          <h2>
-            What's
-            <br />
-            happening now.
-          </h2>
+<h2>
+  The stories
+  <br />
+  that matter.
+</h2>
 
         </div>
 
 
-        <button className="view-all-button">
-
-          View all news
-
-          <ArrowUpRight size={17} />
-
-        </button>
+      <Link
+  to="/news"
+  className="view-all-button"
+>
+  View all news
+  <ArrowUpRight size={17} />
+</Link>
 
       </motion.div>
 
@@ -148,13 +145,13 @@ function LatestNews() {
 
               )}
 
-              <div className="read-story">
-
-                Read story
-
-                <ArrowUpRight size={14} />
-
-              </div>
+             <Link
+  to={`/article/${story.id}`}
+  className="read-story"
+>
+  Read story
+  <ArrowUpRight size={14} />
+</Link>
 
             </div>
 
@@ -163,69 +160,7 @@ function LatestNews() {
         ))}
 
       </div>
-
-
-      {/* =====================================
-          LATEST LIST
-      ===================================== */}
-
-      <motion.div
-        className="latest-list"
-        initial={{
-          opacity: 0,
-          y: 30,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        viewport={{
-          once: true,
-        }}
-      >
-
-        <div className="latest-list-header">
-          Latest updates
-        </div>
-
-        {latestNews.map((story, index) => (
-
-          <motion.article
-            className="latest-row"
-            key={story.id}
-            whileHover={{
-              x: 8,
-            }}
-          >
-
-            <span className="latest-number">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-
-            <span className="latest-category">
-              {story.category}
-            </span>
-
-            <h3>
-              {story.title}
-            </h3>
-
-            <span className="latest-time">
-              {story.time}
-            </span>
-
-            <ArrowUpRight
-              className="latest-arrow"
-              size={18}
-            />
-
-          </motion.article>
-
-        ))}
-
-      </motion.div>
-
-    </section>
+ </section>
   );
 }
 

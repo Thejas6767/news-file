@@ -6,12 +6,14 @@ import {
   Maximize2,
   ArrowUpRight,
 } from "lucide-react";
-
+import { Link } from "react-router-dom";
 function LiveTV() {
   return (
     <section className="live-section">
 
-      {/* SECTION HEADER */}
+      {/* =====================================
+          SECTION HEADER
+      ===================================== */}
 
       <motion.div
         className="live-section-header"
@@ -22,7 +24,7 @@ function LiveTV() {
       >
         <div>
           <span className="section-eyebrow light">
-            03 — NEWS FILE LIVE
+            24/7 BROADCAST
           </span>
 
           <h2>
@@ -39,7 +41,9 @@ function LiveTV() {
       </motion.div>
 
 
-      {/* VIDEO AREA */}
+      {/* =====================================
+          VIDEO AREA
+      ===================================== */}
 
       <motion.div
         className="live-player"
@@ -51,7 +55,6 @@ function LiveTV() {
           ease: [0.22, 1, 0.36, 1],
         }}
       >
-
         <div className="live-player-background" />
 
         <div className="live-player-overlay" />
@@ -60,7 +63,6 @@ function LiveTV() {
         {/* TOP BAR */}
 
         <div className="player-top">
-
           <div className="player-live">
             <span />
             LIVE
@@ -69,34 +71,26 @@ function LiveTV() {
           <span className="player-channel">
             NEWS FILE
           </span>
-
         </div>
 
 
         {/* CENTER PLAY */}
-
-        <motion.button
-          className="big-play"
-          whileHover={{
-            scale: 1.1,
-          }}
-          whileTap={{
-            scale: 0.95,
-          }}
-        >
-          <Play
-            size={30}
-            fill="currentColor"
-          />
-        </motion.button>
+<Link
+  to="/live"
+  className="big-play"
+  aria-label="Open Live TV"
+>
+  <Play
+    size={30}
+    fill="currentColor"
+  />
+</Link>
 
 
         {/* PLAYER INFORMATION */}
 
         <div className="player-info">
-
           <div>
-
             <span className="player-eyebrow">
               NOW STREAMING
             </span>
@@ -106,7 +100,6 @@ function LiveTV() {
               <br />
               Dispatch
             </h3>
-
           </div>
 
           <div className="player-meta">
@@ -119,20 +112,17 @@ function LiveTV() {
               HD
             </span>
           </div>
-
         </div>
 
 
         {/* PLAYER CONTROLS */}
 
         <div className="player-controls">
-
           <div className="player-progress">
             <div className="player-progress-fill" />
           </div>
 
           <div className="player-control-row">
-
             <div>
               <button>
                 <Play
@@ -149,41 +139,35 @@ function LiveTV() {
             <button>
               <Maximize2 size={17} />
             </button>
-
           </div>
-
         </div>
 
       </motion.div>
 
 
-      {/* BELOW PLAYER */}
+      {/* =====================================
+          BELOW PLAYER
+      ===================================== */}
 
       <div className="live-bottom">
 
         <div className="live-description">
-
           <span>ON AIR</span>
 
           <p>
             Follow verified reports, field interviews
             and the latest developments from across India.
           </p>
-
         </div>
 
 
-        <motion.button
-          className="live-watch-button"
-          whileHover={{
-            x: 5,
-          }}
-        >
-          Watch full broadcast
-
-          <ArrowUpRight size={18} />
-
-        </motion.button>
+       <Link
+  to="/live"
+  className="live-watch-button"
+>
+  Watch full broadcast
+  <ArrowUpRight size={18} />
+</Link>
 
       </div>
 

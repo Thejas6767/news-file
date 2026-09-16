@@ -8,55 +8,39 @@ import {
   Signal,
   Volume2,
 } from "lucide-react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import Navbar from "../components/Navbar";
 
-const schedule = [
-  {
-    time: "04:00 PM",
-    title: "News File Live",
-    description: "Top stories and breaking developments from across India.",
-    live: true,
-  },
-  {
-    time: "05:00 PM",
-    title: "India Desk",
-    description: "The latest reports, developments and ground updates.",
-  },
-  {
-    time: "06:00 PM",
-    title: "World Tonight",
-    description: "International developments shaping the global conversation.",
-  },
-  {
-    time: "07:00 PM",
-    title: "Prime News",
-    description: "The day's biggest stories brought together in one broadcast.",
-  },
-];
+
 
 const liveStories = [
   {
     number: "01",
-    category: "BREAKING",
-    title: "Ground reports continue to develop across India",
-    time: "LIVE NOW",
+    category: "POLITICS",
+    title: "Karnataka assembly updates",
+    time: "TOP STORY",
   },
   {
     number: "02",
-    category: "POLITICS",
-    title: "Political developments remain in focus",
-    time: "UPDATED 4 MIN AGO",
+    category: "BUSINESS",
+    title: "Regional energy transition",
+    time: "TOP STORY",
   },
   {
     number: "03",
-    category: "BUSINESS",
-    title: "Markets respond to fresh economic signals",
-    time: "UPDATED 11 MIN AGO",
+    category: "FACT CHECK",
+    title: "Verifying viral claims",
+    time: "TOP STORY",
   },
 ];
 
 function LiveTV() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="live-tv-page">
       <Navbar />
@@ -178,67 +162,56 @@ function LiveTV() {
       ========================================= */}
 
       <section className="live-tv-schedule">
-        <div className="live-tv-schedule-header">
-          <div>
-            <div className="live-tv-section-label">
-              <span>02</span>
-              BROADCAST SCHEDULE
-            </div>
+  <div className="live-tv-schedule-header">
+    <div>
+      <div className="live-tv-section-label">
+        <span>02</span>
+        NEWS FILE LIVE
+      </div>
 
-            <h2>
-              WHAT'S
-              <br />
-              <strong>ON AIR.</strong>
-            </h2>
-          </div>
+      <h2>
+        LIVE
+        <br />
+        <strong>FROM THE FIELD.</strong>
+      </h2>
+    </div>
 
-          <div className="live-tv-date">
-            <CalendarDays size={18} />
-            TODAY
-          </div>
-        </div>
+    <div className="live-tv-date">
+      <Radio size={18} />
+      24/7 BROADCAST
+    </div>
+  </div>
 
-        <div className="live-tv-schedule-list">
-          {schedule.map((item, index) => (
-            <motion.div
-              key={item.title}
-              className={`live-tv-schedule-row ${
-                item.live ? "active" : ""
-              }`}
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.08,
-              }}
-            >
-              <div className="live-tv-time">
-                {item.live && <span />}
-                {item.time}
-              </div>
+  <div className="live-tv-schedule-list">
+    <motion.div
+      className="live-tv-schedule-row active"
+      initial={{ opacity: 0, x: -30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className="live-tv-time">
+        <span />
+        LIVE
+      </div>
 
-              <div className="live-tv-program">
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </div>
+      <div className="live-tv-program">
+        <h3>National Evening Dispatch</h3>
+        <p>
+          Continuous live broadcast with regional updates,
+          state bureaus and prime-time debates.
+        </p>
+      </div>
 
-              <div className="live-tv-program-status">
-                {item.live ? (
-                  <>
-                    <Radio size={15} />
-                    LIVE
-                  </>
-                ) : (
-                  "UP NEXT"
-                )}
-              </div>
+      <div className="live-tv-program-status">
+        <Radio size={15} />
+        LIVE
+      </div>
 
-              <ArrowUpRight size={19} />
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      <ArrowUpRight size={19} />
+    </motion.div>
+  </div>
+</section>
 
       {/* =========================================
           LIVE DESK
@@ -248,12 +221,12 @@ function LiveTV() {
         <div className="live-tv-desk-header">
           <div className="live-tv-section-label">
             <span>03</span>
-            LIVE DESK
+TOP STORIES TODAY
           </div>
 
           <div className="live-tv-desk-status">
             <span />
-            REPORTERS IN THE FIELD
+           NEWS FILE
           </div>
         </div>
 

@@ -6,7 +6,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LatestNews from "../components/LatestNews";
 import LiveTV from "../components/LiveTV";
 
@@ -146,16 +146,13 @@ function Home() {
 
               </button>
 
-<button
+<Link
+  to="/news"
   className="hero-secondary-button"
-  onClick={() => navigate("/news")}
 >
-
-                Explore News
-
-                <ArrowUpRight size={17} />
-
-              </button>
+  Explore News
+  <ArrowUpRight size={17} />
+</Link>
 
             </motion.div>
 
@@ -165,9 +162,10 @@ function Home() {
           {/* =========================================
               LIVE STATUS CARD
           ========================================= */}
-
-          <motion.div
-            className="hero-live-card"
+<motion.div
+  className="hero-live-card"
+  onClick={() => navigate("/live")}
+  style={{ cursor: "pointer" }}
             initial={{
               opacity: 0,
               x: 50,
