@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import {
   ArrowUpRight,
   Clock3,
@@ -19,10 +20,11 @@ const categories = [
   "WORLD",
   "FACT CHECK",
 ];
+
 const stories = [
   {
     id: 1,
-    category: "KARNATAKA",
+    category: "INDIA",
     title: "Stories from the ground, where every development begins",
     description:
       "Get the latest verified developments, reports and voices from across Karnataka.",
@@ -55,6 +57,12 @@ const stories = [
 ];
 
 function AllNews() {
+  const [activeCategory, setActiveCategory] = useState("ALL");
+
+const filteredStories =
+  activeCategory === "ALL"
+    ? stories
+    : stories.filter((story) => story.category === activeCategory);
   return (
     <div className="all-news-page">
       <Navbar />
@@ -113,14 +121,15 @@ function AllNews() {
         </div>
 
         <div className="all-news-filters">
-          {categories.map((category, index) => (
-            <button
-              key={category}
-              className={index === 0 ? "active" : ""}
-            >
-              {category}
-            </button>
-          ))}
+          {categories.map((category) => (
+  <button
+    key={category}
+    className={activeCategory === category ? "active" : ""}
+    onClick={() => setActiveCategory(category)}
+  >
+    {category}
+  </button>
+))}
 
           <button className="filter-button">
             <Filter size={15} />
@@ -157,27 +166,27 @@ function AllNews() {
 
           <div className="all-news-featured-copy">
             <div className="all-news-category">
-              {stories[0].category}
+             {filteredStories[0]?.category}
             </div>
 
-            <h2>{stories[0].title}</h2>
+            <h2>{filteredStories[0]?.title}</h2>
 
-            <p>{stories[0].description}</p>
+            <p>{filteredStories[0]?.description}</p>
 
             <div className="all-news-story-meta">
               <span>
                 <Clock3 size={14} />
-                {stories[0].time}
+                {filteredStories[0]?.time}
               </span>
             </div>
 
-           <Link
-  to={`/article/${stories[0].id}`}
-  className="all-news-read"
->
-  READ STORY
-  <ArrowUpRight size={18} />
-</Link>
+            <Link
+              to={`/article/${filteredStories[0]?.id}`}
+              className="all-news-read"
+            >
+              READ STORY
+              <ArrowUpRight size={18} />
+            </Link>
           </div>
         </motion.article>
       </section>
@@ -197,7 +206,7 @@ function AllNews() {
         </div>
 
         <div className="all-news-grid">
-          {stories.slice(1).map((story, index) => (
+         {filteredStories.slice(1).map((story, index) => (
             <motion.article
               key={story.id}
               className="all-news-card"
@@ -270,6 +279,7 @@ function AllNews() {
           </Link>
         </div>
       </section>
+
       <Footer />
     </div>
   );

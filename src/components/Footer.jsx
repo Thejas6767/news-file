@@ -27,41 +27,33 @@ function Footer() {
 
         <div className="news-footer-links">
 
-          <div className="news-footer-column">
+ <div className="news-footer-column">
 
-            <span>
-              SECTIONS
-            </span>
+  <span>
+    EXPLORE
+  </span>
 
-            <Link to="/news">
-              All News
-            </Link>
+  <Link to="/">
+    Home
+  </Link>
 
-            <Link to="/live">
-              Live TV
-            </Link>
+  <Link to="/news">
+    All News
+  </Link>
 
-            <Link to="/politics">
-              Politics
-            </Link>
+  <Link to="/live">
+    Live TV & Video
+  </Link>
 
-            <Link to="/business">
-              Business
-            </Link>
+  <Link to="/about">
+    About Us
+  </Link>
 
-            <Link to="/india">
-              India
-            </Link>
+  <Link to="/contact">
+    Contact & Submissions
+  </Link>
 
-            <Link to="/world">
-              World
-            </Link>
-
-            <Link to="/fact-check">
-              Fact Check
-            </Link>
-
-          </div>
+</div>
 
 
           {/* NEWSROOM */}

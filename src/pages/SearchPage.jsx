@@ -10,68 +10,50 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
+import {
+  featuredNews,
+  latestNews,
+} from "../data/newsData";
+
 const results = [
-  {
-    id: 1,
-    category: "POLITICS",
-    title:
-      "Political developments continue to shape the national conversation",
+  ...featuredNews.map((story) => ({
+    id: story.id,
+    category: story.category,
+    title: story.title,
+    description: story.description,
+    time: story.time,
+  })),
+
+  ...latestNews.map((story) => ({
+    id: story.id,
+    category: story.category,
+    title: story.title,
     description:
-      "The latest decisions, statements and developments from India's political landscape.",
-    time: "8 min ago",
-  },
-  {
-    id: 2,
-    category: "INDIA",
-    title: "Major developments emerge from across the country",
-    description:
-      "A look at the stories making an impact across India's cities and states.",
-    time: "16 min ago",
-  },
-  {
-    id: 3,
-    category: "BUSINESS",
-    title: "Markets watch fresh signals as economic activity shifts",
-    description:
-      "Businesses and investors assess the latest movement across the economy.",
-    time: "24 min ago",
-  },
-  {
-    id: 4,
-    category: "WORLD",
-    title: "Global developments put international markets on alert",
-    description:
-      "International events continue to influence markets, governments and communities.",
-    time: "31 min ago",
-  },
-  {
-    id: 5,
-    category: "FACT CHECK",
-    title: "Viral claim circulating online gets a closer examination",
-    description:
-      "News File's verification desk examines the evidence behind a widely shared claim.",
-    time: "43 min ago",
-  },
-  {
-    id: 6,
-    category: "INDIA",
-    title: "Cities prepare for a new wave of infrastructure projects",
-    description:
-      "New plans focus on connectivity, urban development and public infrastructure.",
-    time: "52 min ago",
-  },
+      story.title,
+    time: story.time,
+  })),
 ];
 
 function SearchPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeFilter, setActiveFilter] = useState("ALL");
 
+  const filters = [
+    "ALL",
+    "POLITICS",
+    "INDIA",
+    "BUSINESS",
+    "WORLD",
+    "FACT CHECK",
+  ];
+
   const filteredResults = useMemo(() => {
     const query = searchTerm.trim().toLowerCase();
 
     return results.filter((story) => {
       const matchesCategory =
-        activeFilter === "ALL" || story.category === activeFilter;
+        activeFilter === "ALL" ||
+        story.category === activeFilter;
 
       const matchesSearch =
         query === "" ||
@@ -83,21 +65,11 @@ function SearchPage() {
     });
   }, [searchTerm, activeFilter]);
 
-  const filters = [
-    "ALL",
-    "POLITICS",
-    "INDIA",
-    "BUSINESS",
-    "WORLD",
-    "FACT CHECK",
-  ];
-
   return (
     <div className="search-page">
       <Navbar />
 
       {/* HERO */}
-
       <section className="search-page-hero">
         <div className="search-page-grid" />
 
@@ -125,18 +97,14 @@ function SearchPage() {
         <div className="search-page-number">09</div>
       </section>
 
-
       {/* SEARCH FORM */}
-
       <section className="search-page-form-section">
-
         <div className="search-page-section-label">
           <span>01</span>
           SEARCH NEWSROOM
         </div>
 
         <div className="search-page-form">
-
           <Search size={25} />
 
           <input
@@ -159,19 +127,17 @@ function SearchPage() {
             SEARCH
             <ArrowUpRight size={18} />
           </button>
-
         </div>
 
-
         {/* FILTERS */}
-
         <div className="search-page-filters">
-
           {filters.map((filter) => (
             <button
               type="button"
               key={filter}
-              className={activeFilter === filter ? "active" : ""}
+              className={
+                activeFilter === filter ? "active" : ""
+              }
               onClick={() => setActiveFilter(filter)}
             >
               {filter}
@@ -189,18 +155,12 @@ function SearchPage() {
             <SlidersHorizontal size={15} />
             RESET
           </button>
-
         </div>
-
       </section>
 
-
       {/* RESULTS */}
-
       <section className="search-results-section">
-
         <div className="search-results-header">
-
           <div className="search-page-section-label">
             <span>02</span>
             SEARCH RESULTS
@@ -208,14 +168,14 @@ function SearchPage() {
 
           <div className="search-results-count">
             {filteredResults.length}{" "}
-            {filteredResults.length === 1 ? "STORY" : "STORIES"} FOUND
+            {filteredResults.length === 1
+              ? "STORY"
+              : "STORIES"}{" "}
+            FOUND
           </div>
-
         </div>
 
-
         {/* SEARCH STATUS */}
-
         {(searchTerm || activeFilter !== "ALL") && (
           <motion.div
             className="search-active-status"
@@ -236,18 +196,21 @@ function SearchPage() {
           </motion.div>
         )}
 
-
         {/* RESULT LIST */}
-
         {filteredResults.length > 0 ? (
           <div className="search-results-list">
-
             {filteredResults.map((story, index) => (
               <motion.article
                 key={story.id}
                 className="search-result-card"
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{
+                  opacity: 0,
+                  y: 25,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
                 viewport={{ once: true }}
                 transition={{
                   duration: 0.5,
@@ -255,16 +218,12 @@ function SearchPage() {
                 }}
                 whileHover={{ x: 8 }}
               >
-
                 <div className="search-result-number">
                   {String(index + 1).padStart(2, "0")}
                 </div>
 
-
                 <div className="search-result-main">
-
                   <div className="search-result-top">
-
                     <span className="search-result-category">
                       {story.category}
                     </span>
@@ -273,45 +232,41 @@ function SearchPage() {
                       <Clock3 size={13} />
                       {story.time}
                     </span>
-
                   </div>
-
 
                   <h2>{story.title}</h2>
 
                   <p>{story.description}</p>
 
-
-                 <Link
-  to={`/article/${story.id}`}
-  className="search-result-read"
->
+                  <Link
+                    to={`/article/${story.id}`}
+                    className="search-result-read"
+                  >
                     READ STORY
                     <ArrowUpRight size={17} />
                   </Link>
-
                 </div>
-
 
                 <ArrowUpRight
                   className="search-result-arrow"
                   size={22}
                 />
-
               </motion.article>
             ))}
-
           </div>
         ) : (
-
           /* NO RESULTS */
-
           <motion.div
             className="search-no-results"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{
+              opacity: 0,
+              y: 20,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
           >
-
             <Search size={40} />
 
             <h2>NO STORIES FOUND.</h2>
@@ -331,24 +286,17 @@ function SearchPage() {
               CLEAR SEARCH
               <ArrowUpRight size={18} />
             </button>
-
           </motion.div>
-
         )}
-
       </section>
 
-
       {/* CLOSING SECTION */}
-
       <section className="search-page-closing">
-
         <div className="search-page-closing-bg">
           FIND
         </div>
 
         <div className="search-page-closing-content">
-
           <span>NEWS FILE</span>
 
           <h2>
@@ -368,11 +316,10 @@ function SearchPage() {
             BACK TO HOME
             <ArrowUpRight size={18} />
           </Link>
-
         </div>
-
       </section>
-<Footer />
+
+      <Footer />
     </div>
   );
 }

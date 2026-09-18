@@ -1,19 +1,18 @@
 export const breakingNews = [
   "News File brings verified ground reports from across India",
-  "Live updates from Karnataka and across the nation",
+  "Live updates from across India and the nation",
   "Independent fact-checking and field journalism",
   "Watch News File Live TV for the latest developments",
 ];
 
-
 export const featuredNews = [
   {
     id: 1,
-    category: "KARNATAKA",
+    category: "INDIA",
     time: "12 MIN AGO",
     title: "Stories from the ground, where every development begins",
     description:
-      "Get the latest verified developments, reports and voices from across Karnataka.",
+      "Get the latest verified developments, reports and voices from across India.",
     image:
       "https://images.unsplash.com/photo-1532375810709-75b1da00537c?auto=format&fit=crop&w=1400&q=85",
     featured: true,
@@ -53,12 +52,11 @@ export const featuredNews = [
   },
 ];
 
-
 export const latestNews = [
   {
     id: 5,
-    category: "KARNATAKA",
-    title: "Ground reports and developments from Karnataka",
+    category: "INDIA",
+    title: "Ground reports and developments from across India",
     time: "12 MIN AGO",
   },
 
@@ -90,7 +88,6 @@ export const latestNews = [
     time: "1 HR AGO",
   },
 ];
-
 
 /* ==========================================
    POLITICS
@@ -127,7 +124,6 @@ export const politicsStories = [
   },
 ];
 
-
 /* ==========================================
    KARNATAKA
 ========================================== */
@@ -162,7 +158,6 @@ export const karnatakaStories = [
       "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1000&q=85",
   },
 ];
-
 
 /* ==========================================
    INDIA
@@ -199,7 +194,6 @@ export const indiaStories = [
   },
 ];
 
-
 /* ==========================================
    BUSINESS
 ========================================== */
@@ -234,7 +228,6 @@ export const businessStories = [
       "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1000&q=85",
   },
 ];
-
 
 /* ==========================================
    WORLD

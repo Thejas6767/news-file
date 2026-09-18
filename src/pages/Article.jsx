@@ -13,17 +13,17 @@ import Footer from "../components/Footer";
 
 const articles = {
   1: {
-    category: "KARNATAKA",
+    category: "INDIA",
     title: "Stories from the ground, where every development begins",
     description:
-      "Get the latest verified developments, reports and voices from across Karnataka.",
+      "Get the latest verified developments, reports and voices from across India.",
     time: "12 min ago",
     author: "NEWS FILE DESK",
-    location: "KARNATAKA",
+    location: "India",
     image:
       "https://images.unsplash.com/photo-1532375810709-75b1da00537c?auto=format&fit=crop&w=1800&q=85",
     paragraphs: [
-      "Stories from the ground provide a closer look at the developments, reports and voices emerging from Karnataka.",
+      "Stories from the ground provide a closer look at the developments, reports and voices emerging from India.",
       "Local developments continue to shape conversations across cities, towns and communities as events unfold.",
       "News File focuses on verified information and field reporting while clearly separating confirmed developments from claims and speculation.",
       "Further updates will follow as more information becomes available from the ground.",
@@ -83,6 +83,96 @@ const articles = {
       "Further developments will be reported as verified information becomes available.",
     ],
   },
+
+  5: {
+    category: "INDIA",
+    title: "Ground reports and developments from across India",
+    description:
+      "Ground reports and developments from across India.",
+    time: "12 min ago",
+    author: "NEWS FILE DESK",
+    location: "INDIA",
+    image:
+      "https://images.unsplash.com/photo-1532375810709-75b1da00537c?auto=format&fit=crop&w=1800&q=85",
+    paragraphs: [
+      "News File brings verified ground reports from across India, covering developments as they unfold.",
+      "Reports from cities, towns and communities provide context around the developments being followed by readers.",
+      "The newsroom focuses on verified information and responsible reporting.",
+      "Further updates will be added as confirmed information becomes available.",
+    ],
+  },
+
+  6: {
+    category: "INDIA",
+    title: "National developments you need to know today",
+    description:
+      "National developments you need to know today.",
+    time: "24 min ago",
+    author: "NEWS FILE INDIA DESK",
+    location: "INDIA",
+    image:
+      "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1800&q=85",
+    paragraphs: [
+      "National developments continue to shape conversations across India.",
+      "Stories from different parts of the country provide a broader view of developments affecting communities and public life.",
+      "News File follows confirmed information and reports developments with context.",
+      "Further updates will follow as more verified information becomes available.",
+    ],
+  },
+
+  7: {
+    category: "POLITICS",
+    title: "Political developments across the country",
+    description:
+      "Political developments across the country.",
+    time: "37 min ago",
+    author: "NEWS FILE POLITICS DESK",
+    location: "NEW DELHI",
+    image:
+      "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1800&q=85",
+    paragraphs: [
+      "Political developments across the country continue to influence public discussions.",
+      "Decisions, responses and developments from different parts of India remain an important part of the national conversation.",
+      "News File follows confirmed developments and provides context around political stories.",
+      "Further developments will be reported as verified information becomes available.",
+    ],
+  },
+
+  8: {
+    category: "BUSINESS",
+    title: "Business and economic updates",
+    description:
+      "Business and economic updates.",
+    time: "48 min ago",
+    author: "NEWS FILE BUSINESS DESK",
+    location: "INDIA",
+    image:
+      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1800&q=85",
+    paragraphs: [
+      "Business and economic developments continue to influence companies, markets and communities across India.",
+      "Businesses and investors continue to follow developments affecting economic activity.",
+      "News File's business desk focuses on verified information and the context behind important economic developments.",
+      "Further updates will follow as confirmed announcements and developments emerge.",
+    ],
+  },
+
+  9: {
+    category: "WORLD",
+    title: "International developments and global affairs",
+    description:
+      "International developments and global affairs.",
+    time: "1 hr ago",
+    author: "NEWS FILE WORLD DESK",
+    location: "GLOBAL",
+    image:
+      "https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1800&q=85",
+    paragraphs: [
+      "International developments continue to connect events across countries and regions.",
+      "Global affairs can influence governments, markets and communities beyond national borders.",
+      "News File follows international developments and focuses on verified information and clear context.",
+      "Further updates will be reported as confirmed information becomes available.",
+    ],
+  },
 };
 
 const relatedStories = [
@@ -138,17 +228,13 @@ function Article() {
       <Navbar />
 
       {/* ARTICLE HERO */}
-
       <section className="article-hero">
-
         <div className="article-hero-image">
           <img src={article.image} alt={article.title} />
-
           <div className="article-image-overlay" />
         </div>
 
         <div className="article-hero-content">
-
           <motion.div
             className="article-back"
             initial={{ opacity: 0, x: -20 }}
@@ -208,24 +294,17 @@ function Article() {
 
             <span>{article.author}</span>
           </motion.div>
-
         </div>
 
         <div className="article-number">
           {String(id || 1).padStart(2, "0")}
         </div>
-
       </section>
 
-
       {/* ARTICLE BODY */}
-
       <section className="article-body-section">
-
         <div className="article-layout">
-
           <aside className="article-sidebar">
-
             <div className="article-sidebar-label">
               SHARE
             </div>
@@ -246,35 +325,32 @@ function Article() {
               <LinkIcon size={18} />
             </button>
 
-           <button
-  type="button"
-  onClick={handleShare}
-  aria-label="Share"
->
-  X
-</button>
+            <button
+              type="button"
+              onClick={handleShare}
+              aria-label="Share"
+            >
+              X
+            </button>
 
-<button
-  type="button"
-  onClick={handleShare}
-  aria-label="Share"
->
-  f
-</button>
+            <button
+              type="button"
+              onClick={handleShare}
+              aria-label="Share"
+            >
+              f
+            </button>
 
-<button
-  type="button"
-  onClick={handleShare}
-  aria-label="Share"
->
-  in
-</button>
-
+            <button
+              type="button"
+              onClick={handleShare}
+              aria-label="Share"
+            >
+              in
+            </button>
           </aside>
 
-
           <article className="article-content">
-
             <div className="article-kicker">
               NEWS FILE / REPORT
             </div>
@@ -306,9 +382,7 @@ function Article() {
               </motion.p>
             ))}
 
-
             <div className="article-verification">
-
               <div className="article-verification-mark">
                 ✓
               </div>
@@ -323,34 +397,23 @@ function Article() {
                   newsroom at the time of publication.
                 </p>
               </div>
-
             </div>
-
           </article>
-
         </div>
-
       </section>
 
-
       {/* RELATED STORIES */}
-
       <section className="article-related">
-
         <div className="article-related-header">
-
           <div className="article-section-label">
             <span>03</span>
             RELATED STORIES
           </div>
 
           <span className="article-related-line" />
-
         </div>
 
-
         <div className="article-related-grid">
-
           {relatedStories.map((story, index) => (
             <motion.div
               key={story.id}
@@ -373,7 +436,6 @@ function Article() {
                 y: -8,
               }}
             >
-
               <div className="article-related-number">
                 {String(index + 1).padStart(2, "0")}
               </div>
@@ -390,25 +452,18 @@ function Article() {
                 READ STORY
                 <ArrowUpRight size={17} />
               </Link>
-
             </motion.div>
           ))}
-
         </div>
-
       </section>
 
-
       {/* CLOSING */}
-
       <section className="article-closing">
-
         <div className="article-closing-bg">
           REPORT
         </div>
 
         <div className="article-closing-content">
-
           <span>NEWS FILE</span>
 
           <h2>
@@ -421,15 +476,17 @@ function Article() {
             Follow the stories that shape India and the world.
           </p>
 
-          <Link to="/news" className="article-home-button">
+          <Link
+            to="/news"
+            className="article-home-button"
+          >
             EXPLORE ALL NEWS
             <ArrowUpRight size={18} />
           </Link>
-
         </div>
-
       </section>
-<Footer />
+
+      <Footer />
     </div>
   );
 }
