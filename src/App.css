@@ -12467,6 +12467,20 @@ a {
   background: #d71920;
   border-radius: 50%;
 }
+/* =========================================
+   HERO SECTION FIX FOR "FIND NEWS."
+========================================= */
+
+.search-page-hero {
+  position: relative;
+  padding: 140px 7vw 80px;
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #0f0f11; /* Ensure hero background is dark */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
 
 .search-page-hero h1 {
   font-size: clamp(3rem, 7vw, 5.5rem);
@@ -12474,17 +12488,18 @@ a {
   line-height: 0.95;
   margin: 0 0 20px;
   letter-spacing: -0.03em;
-  color: #111111;
+  color: #ffffff !important; /* Forces "FIND" to render in pure white */
 }
 
 .search-page-hero h1 span {
-  color: #d71920;
+  color: #d71920 !important; /* Keeps "NEWS." in red */
+  margin-left: 12px;
 }
 
 .search-page-hero p {
   font-size: 16px;
   line-height: 1.6;
-  color: #555555;
+  color: rgba(255, 255, 255, 0.7) !important; /* Ensures readable light text for description */
   margin: 0;
 }
 
@@ -12872,4 +12887,1210 @@ a {
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.18em;
+}
+/* =========================================
+   1. HERO SECTION (LIGHT BACKGROUND DEFAULT)
+========================================= */
+
+.search-page-hero {
+  position: relative;
+  padding: 140px 7vw 80px;
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #f8f9fa; /* Light background */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.search-page-hero h1 {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  margin: 0 0 20px;
+  letter-spacing: -0.03em;
+  color: #111111 !important; /* "FIND" in dark text */
+}
+
+.search-page-hero h1 span {
+  color: #d71920 !important; /* "NEWS." in red */
+  margin-left: 12px;
+}
+
+.search-page-hero p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #555555 !important; /* Subtitle in legible dark gray */
+  margin: 0;
+}
+
+
+/* =========================================
+   2. CARDS: LIGHT DEFAULT -> DARK ON HOVER
+========================================= */
+
+/* Default State (White Background + Dark Text) */
+.search-result-card {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  background: #ffffff !important; /* Default light card */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+  padding: 28px 35px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-result-number {
+  font-size: 18px;
+  font-weight: 900;
+  color: #888888;
+  min-width: 30px;
+  transition: color 0.3s ease;
+}
+
+.search-result-main h2 {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 0 8px;
+  color: #111111 !important; /* Title in dark text */
+  transition: color 0.3s ease;
+}
+
+.search-result-main p {
+  font-size: 14px;
+  color: #555555 !important; /* Paragraph in dark gray */
+  margin: 0 0 15px;
+  line-height: 1.5;
+  transition: color 0.3s ease;
+}
+
+.search-result-time {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  color: #666666;
+  transition: color 0.3s ease;
+}
+
+.search-result-category {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: #d71920;
+}
+
+.search-result-read {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: #111111;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.arrow-wrapper {
+  color: #888888;
+  transition: color 0.3s ease;
+}
+
+/* Hover State (Black Background + Pure White Text) */
+.search-result-card:hover {
+  background-color: #121215 !important; /* Dark background on hover */
+  border-color: #d71920 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.search-result-card:hover .search-result-main h2 {
+  color: #ffffff !important; /* Pure white title on hover */
+}
+
+.search-result-card:hover .search-result-main p {
+  color: rgba(255, 255, 255, 0.85) !important; /* Bright white description on hover */
+}
+
+.search-result-card:hover .search-result-number {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.search-result-card:hover .search-result-time {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.search-result-card:hover .search-result-read {
+  color: #d71920 !important;
+}
+
+.search-result-card:hover .arrow-wrapper {
+  color: #d71920 !important;
+}
+
+/* =========================================
+   SIDE MENU OVERLAY & CONTAINER
+========================================= */
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 380px;
+  height: 100vh;
+  background-color: #ffffff;
+  z-index: 1000;
+  padding: 30px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+}
+
+/* Header */
+.side-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.side-logo {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #111111;
+}
+
+.side-logo span {
+  color: #d71920;
+}
+
+.close-menu {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #111111;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.close-menu:hover {
+  background-color: #111111;
+  color: #ffffff;
+  border-color: #111111;
+}
+
+/* Links List */
+.side-menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 30px 0;
+  flex: 1;
+}
+
+.side-menu-link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 14px 18px;
+  background-color: #f8f9fa;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  text-align: left;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.side-link-num {
+  font-size: 11px;
+  font-weight: 800;
+  color: #d71920;
+  margin-right: 14px;
+}
+
+.side-link-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111111;
+  flex: 1;
+}
+.side-link-arrow {
+  color: #888888;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+/* Link Hover State */
+.side-menu-link:hover {
+  background-color: #111111;
+  border-color: #111111;
+}
+
+.side-menu-link:hover .side-link-text {
+  color: #ffffff;
+}
+
+.side-menu-link:hover .side-link-arrow {
+  color: #d71920;
+  transform: translateX(4px);
+}
+
+/* Footer Tagline */
+.side-menu-footer {
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.side-menu-footer p {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  color: #888888;
+  margin: 3px 0;
+}
+/* =========================================
+   CONTACT PAGE BASE STYLING & 3D SETUP
+========================================= */
+
+.contact-page {
+  background-color: #f8f9fa;
+  color: #111111;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-page main {
+  flex: 1;
+}
+
+/* =========================================
+   CONTACT HERO SECTION
+========================================= */
+
+.contact-hero {
+  padding: 120px 7vw 70px;
+  background-color: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.contact-hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.contact-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  color: #d71920;
+  margin-bottom: 24px;
+}
+
+.contact-hero h1 {
+  font-size: clamp(3.2rem, 7vw, 6rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin: 0 0 28px;
+  color: #111111;
+}
+
+.contact-hero h1 strong {
+  font-weight: 900;
+  color: #d71920;
+}
+
+.contact-hero p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #555555;
+  max-width: 580px;
+  margin: 0;
+}
+
+/* =========================================
+   CONTACT INFORMATION & 3D TILT CARDS
+========================================= */
+
+.contact-information {
+  padding: 90px 7vw;
+  background-color: #f8f9fa;
+}
+
+.contact-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.contact-intro span {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: #888888;
+}
+
+.contact-intro h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.05;
+  margin: 12px 0 20px;
+  letter-spacing: -0.02em;
+}
+
+.contact-intro h2 strong {
+  color: #d71920;
+}
+
+.contact-intro p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #666666;
+  margin: 0;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  perspective: 1000px; /* Enables 3D Magnetic Parallax Tilt */
+}
+
+.contact-detail-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 28px 30px;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  text-decoration: none;
+  color: #111111;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+  will-change: transform;
+}
+
+.contact-detail-card svg {
+  color: #d71920;
+  flex-shrink: 0;
+}
+
+.contact-detail-card div {
+  flex: 1;
+}
+
+.contact-detail-card span {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  color: #888888;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.contact-detail-card h3 {
+  font-size: 16px;
+  font-weight: 800;
+  margin: 0;
+  word-break: break-all;
+}
+
+/* =========================================
+   SUBMISSION GUIDELINES
+========================================= */
+
+.submission-section {
+  padding: 90px 7vw;
+  background-color: #ffffff;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.submission-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 60px;
+}
+
+.submission-heading span {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: #888888;
+}
+
+.submission-heading h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.05;
+  margin: 12px 0 0;
+  letter-spacing: -0.02em;
+}
+
+.submission-heading h2 strong {
+  color: #d71920;
+}
+
+.submission-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.submission-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 22px 24px;
+  background-color: #f8f9fa;
+  border-left: 3px solid #d71920;
+  border-radius: 0 6px 6px 0;
+}
+
+.submission-item span {
+  font-size: 13px;
+  font-weight: 900;
+  color: #d71920;
+}
+
+.submission-item p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333333;
+  margin: 0;
+}
+
+/* =========================================
+   CONTACT CTA SECTION WITH PULSE
+========================================= */
+
+.contact-cta {
+  padding: 100px 7vw;
+  background-color: #111115;
+  color: #ffffff;
+  text-align: center;
+}
+
+.contact-cta svg {
+  color: #d71920;
+}
+
+.contact-cta h2 {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.05;
+  margin: 28px 0 35px;
+  letter-spacing: -0.02em;
+}
+
+.contact-cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 36px;
+  background-color: #d71920;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+  transition: background-color 0.25s ease;
+}
+
+.contact-cta-button:hover {
+  background-color: #b81218;
+}
+
+/* =========================================
+   BACK TO NEWS LINK
+========================================= */
+
+.contact-back {
+  padding: 40px 7vw;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-back a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #111111;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.contact-back a:hover {
+  color: #d71920;
+}
+
+/* =========================================
+   RESPONSIVE LAYOUT BREAKPOINTS
+========================================= */
+
+@media (max-width: 868px) {
+  .contact-grid,
+  .submission-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .contact-hero {
+    padding-top: 90px;
+  }
+}
+/* =========================================
+   LIVE TV PAGE STYLES
+========================================= */
+
+.live-tv-page {
+  background-color: #0c0c0e;
+  color: #ffffff;
+  min-height: 100vh;
+  font-family: inherit;
+}
+
+/* =========================================
+   HERO SECTION
+========================================= */
+
+.live-tv-hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 7vw 60px;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 30%, #181820 0%, #0c0c0e 70%);
+}
+
+.live-tv-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+.live-tv-orbit {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed rgba(215, 25, 32, 0.2);
+  pointer-events: none;
+}
+
+.live-tv-orbit-one {
+  width: 500px;
+  height: 500px;
+}
+
+.live-tv-orbit-two {
+  width: 750px;
+  height: 750px;
+}
+
+.live-tv-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.live-tv-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: #d71920;
+  margin-bottom: 20px;
+}
+
+.live-tv-pulse {
+  width: 8px;
+  height: 8px;
+  background-color: #d71920;
+  border-radius: 50%;
+}
+
+.live-tv-hero h1 {
+  font-size: clamp(60px, 10vw, 120px);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  margin: 0 0 20px;
+}
+
+.live-tv-hero h1 span {
+  color: #d71920;
+}
+
+.live-tv-hero p {
+  font-size: clamp(14px, 1.5vw, 18px);
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 560px;
+  line-height: 1.6;
+  margin: 0 0 30px;
+}
+
+.live-tv-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background-color: rgba(215, 25, 32, 0.1);
+  border: 1px solid rgba(215, 25, 32, 0.3);
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: #ffffff;
+}
+
+.live-tv-number {
+  position: absolute;
+  right: 5vw;
+  bottom: 10%;
+  font-size: 180px;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.live-tv-scroll {
+  position: absolute;
+  bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.live-tv-scroll span {
+  width: 2px;
+  height: 14px;
+  background-color: #d71920;
+}
+
+/* =========================================
+   COMMON SECTION LABELS
+========================================= */
+
+.live-tv-section-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: #888888;
+  margin-bottom: 30px;
+}
+
+.live-tv-section-label span {
+  color: #d71920;
+}
+
+/* =========================================
+   PLAYER SECTION
+========================================= */
+
+.live-tv-player-section {
+  padding: 60px 7vw 100px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.live-tv-player {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  background-color: #121216;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+.live-tv-player-grid {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(215, 25, 32, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.live-tv-player-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
+.live-tv-on-air {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: #ffffff;
+}
+
+.live-tv-on-air span {
+  width: 8px;
+  height: 8px;
+  background-color: #d71920;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #d71920;
+}
+
+.live-tv-player-channel {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.live-tv-player-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 2;
+}
+
+.live-tv-play {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: #d71920;
+  color: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 24px;
+  outline: none;
+}
+
+.live-tv-player-title {
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.live-tv-player-title strong {
+  font-weight: 900;
+  color: #d71920;
+  margin-left: 6px;
+}
+
+.live-tv-player-center p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.live-tv-player-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 18px;
+}
+
+/* =========================================
+   SCHEDULE SECTION
+========================================= */
+
+.live-tv-schedule {
+  padding: 80px 7vw;
+  background-color: #09090b;
+}
+
+.live-tv-schedule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+}
+
+.live-tv-schedule-header h2 {
+  font-size: 36px;
+  font-weight: 300;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.live-tv-schedule-header h2 strong {
+  font-weight: 900;
+}
+
+.live-tv-date {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: #d71920;
+}
+
+.live-tv-schedule-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 120px 40px;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  background-color: #121216;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+}
+
+.live-tv-schedule-row.active {
+  border-left: 4px solid #d71920;
+}
+
+.live-tv-time {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 900;
+  color: #d71920;
+}
+
+.live-tv-time span {
+  width: 6px;
+  height: 6px;
+  background-color: #d71920;
+  border-radius: 50%;
+}
+
+.live-tv-program h3 {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0 0 6px;
+}
+
+.live-tv-program p {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.live-tv-program-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 800;
+  color: #d71920;
+}
+
+/* =========================================
+   LIVE DESK (LINKED STORIES GRID)
+========================================= */
+
+.live-tv-desk {
+  padding: 100px 7vw;
+  background-color: #0c0c0e;
+}
+
+.live-tv-desk-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.live-tv-desk-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.live-tv-desk-status span {
+  width: 6px;
+  height: 6px;
+  background-color: #d71920;
+  border-radius: 50%;
+}
+
+.live-tv-story-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.live-tv-story-card {
+  height: 100%;
+  background-color: #141419;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 24px;
+  box-sizing: border-box;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.live-tv-story-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(215, 25, 32, 0.5);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(215, 25, 32, 0.15);
+}
+
+.live-tv-story-card:hover .story-image-preview img {
+  transform: scale(1.08);
+}
+
+.story-image-preview img {
+  transition: transform 0.5s ease;
+}
+
+.live-tv-story-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 12px;
+}
+
+.live-tv-story-top span:last-child {
+  color: #d71920;
+}
+
+.live-tv-story-line {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.08);
+  width: 100%;
+}
+
+.live-tv-story-card h3 {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #ffffff;
+  margin: 0;
+}
+
+.live-tv-story-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.live-tv-story-footer span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* =========================================
+   CLOSING SECTION
+========================================= */
+
+.live-tv-closing {
+  position: relative;
+  padding: 120px 7vw;
+  text-align: center;
+  background-color: #08080a;
+  overflow: hidden;
+}
+
+.live-tv-closing-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 25vw;
+  font-weight: 900;
+  color: #ffffff;
+  pointer-events: none;
+  user-select: none;
+}
+
+.live-tv-closing-content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.live-tv-closing-content span {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: #d71920;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.live-tv-closing-content h2 {
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1.05;
+  margin: 0 0 20px;
+}
+
+.live-tv-closing-content h2 strong {
+  font-weight: 900;
+}
+
+.live-tv-closing-content p {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 32px;
+}
+
+.live-tv-home-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background-color: #d71920;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+}
+
+/* =========================================
+   RESPONSIVE MEDIA QUERIES
+========================================= */
+
+@media (max-width: 768px) {
+  .live-tv-player {
+    height: 420px;
+    padding: 20px;
+  }
+
+  .live-tv-schedule-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .live-tv-number {
+    display: none;
+  }
+}
+.fact-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.claim-panel,
+.verdict-panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 36px;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+  height: 100%;
+}
+/* Fix for heading text overflow & font scaling */
+.hero-heading {
+  font-family: serif; /* or your heading font */
+  font-weight: 900;
+  color: #d71920;
+  
+  /* Prevents text from pushing past screen boundaries */
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  
+  /* Controlled fluid font size (min, responsive, max) */
+  font-size: clamp(2.2rem, 5.5vw, 4.8rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  
+  /* Ensures words wrap properly and spaces are rendered */
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
+  margin-bottom: 1.5rem;
+}
+
+/* Container constraints to prevent overflow */
+.hero-content {
+  max-width: 1200px;
+  width: 100%;
+  padding-right: 2rem;
+  box-sizing: border-box;
 }

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
@@ -10,6 +11,7 @@ import {
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+
 const indiaStories = [
   {
     number: "01",
@@ -64,166 +66,244 @@ const desks = [
   },
 ];
 
+// High-end Editorial Motion Curve
+const editorialEase = [0.25, 1, 0.5, 1];
+
+// Animation Variants
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: editorialEase,
+    },
+  },
+};
+
+const scaleReveal = {
+  hidden: { opacity: 0, scale: 0.95, y: 20 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      duration: 0.9,
+      ease: editorialEase,
+    },
+  },
+};
+
 function India() {
+  const [activeStory, setActiveStory] = useState(null);
+
   return (
     <>
       <Navbar />
 
-      <main className="india-page">
-
-        {/* HERO */}
-
+      <main className="india-page" style={{ overflow: "hidden" }}>
+        {/* HERO SECTION */}
         <section className="india-hero">
-          <div className="india-map-pattern"></div>
-
-          <div className="india-hero-orbit"></div>
+          <div className="india-map-pattern" />
+          <div className="india-hero-orbit" />
 
           <motion.div
             className="india-hero-content"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
           >
-            <div className="india-eyebrow">
-              <Radio size={15} />
+            <motion.div className="india-eyebrow" variants={fadeUp}>
+              <motion.div
+                animate={{ opacity: [0.4, 1, 0.4] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                style={{ display: "inline-flex" }}
+              >
+                <Radio size={15} />
+              </motion.div>
               NEWS FILE NATIONAL BUREAU
-            </div>
+            </motion.div>
 
-            <h1>
+            <motion.h1 variants={fadeUp}>
               One country.
               <br />
-              <span>Many stories.</span>
-            </h1>
+              <motion.span
+                initial={{ backgroundSize: "0% 100%" }}
+                animate={{ backgroundSize: "100% 100%" }}
+                transition={{ duration: 1, delay: 0.5, ease: editorialEase }}
+              >
+                Many stories.
+              </motion.span>
+            </motion.h1>
 
-            <p>
+            <motion.p variants={fadeUp}>
               From the capital to the smallest district, News File follows the
               people, decisions and events shaping India.
-            </p>
+            </motion.p>
 
-            <div className="india-hero-meta">
+            <motion.div className="india-hero-meta" variants={fadeUp}>
               <span>28 STATES</span>
               <span>•</span>
               <span>8 UNION TERRITORIES</span>
               <span>•</span>
               <span>ONE NEWSROOM</span>
-            </div>
+            </motion.div>
           </motion.div>
 
           <motion.div
             className="india-hero-mark"
-            initial={{ opacity: 0, scale: 0.7 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
+            initial={{ opacity: 0, x: 60 }}
+            animate={{ opacity: 0.08, x: 0 }}
+            transition={{ duration: 1.2, delay: 0.3, ease: editorialEase }}
           >
             INDIA
           </motion.div>
 
-          <div className="india-page-number">05</div>
+          <motion.div
+            className="india-page-number"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.8 }}
+          >
+            05
+          </motion.div>
         </section>
 
-        {/* NATIONAL SNAPSHOT */}
-
+        {/* NATIONAL SNAPSHOT SECTION */}
         <section className="india-snapshot">
-
-          <div className="desk-label">
+          <motion.div
+            className="desk-label"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeUp}
+          >
             <span>01</span>
             NATIONAL SNAPSHOT
-          </div>
+          </motion.div>
 
           <div className="snapshot-grid">
-
             <motion.div
               className="snapshot-main"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={scaleReveal}
+              whileHover="hover"
             >
-              <div className="snapshot-image">
-                <div className="snapshot-overlay"></div>
-
+              <div className="snapshot-image" style={{ overflow: "hidden" }}>
+                <motion.div
+                  className="snapshot-overlay"
+                  variants={{
+                    hover: { scale: 1.05 },
+                  }}
+                  transition={{ duration: 0.8, ease: editorialEase }}
+                />
                 <span>GROUND REPORT</span>
-
                 <strong>INDIA</strong>
               </div>
             </motion.div>
 
             <motion.div
               className="snapshot-copy"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
             >
-              <div className="story-meta">
+              <motion.div className="story-meta" variants={fadeUp}>
                 <span>NATIONAL</span>
                 <span>NEWS FILE</span>
-              </div>
+              </motion.div>
 
-              <h2>
+              <motion.h2 variants={fadeUp}>
                 The country is bigger
                 <br />
                 than the <em>headline.</em>
-              </h2>
+              </motion.h2>
 
-              <p>
+              <motion.p variants={fadeUp}>
                 India's national story is being written across thousands of
                 places at the same time.
-              </p>
+              </motion.p>
 
-              <p>
+              <motion.p variants={fadeUp}>
                 Our national desk connects those stories — bringing together
                 politics, governance, society, security and development from
                 across the country.
-              </p>
+              </motion.p>
 
-              <button className="india-read-button">
+              <motion.button
+                className="india-read-button"
+                variants={fadeUp}
+                whileHover={{ x: 6 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2, ease: editorialEase }}
+              >
                 READ NATIONAL REPORT
                 <ArrowUpRight size={18} />
-              </button>
+              </motion.button>
             </motion.div>
-
           </div>
         </section>
 
-        {/* STORIES */}
-
+        {/* STORIES SECTION */}
         <section className="india-stories">
-
-          <div className="india-heading">
+          <motion.div
+            className="india-heading"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+          >
             <div>
-              <div className="desk-label">
+              <motion.div className="desk-label" variants={fadeUp}>
                 <span>02</span>
                 INDIA REPORTS
-              </div>
+              </motion.div>
 
-              <h2>
+              <motion.h2 variants={fadeUp}>
                 Beyond the
                 <br />
                 <em>capital.</em>
-              </h2>
+              </motion.h2>
             </div>
 
-            <p>
+            <motion.p variants={fadeUp}>
               National stories reported with context, verification and a
               ground-level perspective.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="india-story-grid">
-
-            {indiaStories.map((story, index) => (
+          <motion.div
+            className="india-story-grid"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={staggerContainer}
+          >
+            {indiaStories.map((story) => (
               <motion.article
                 className="india-story-card"
                 key={story.number}
-                initial={{ opacity: 0, y: 45 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.1,
-                }}
-                whileHover={{ y: -8 }}
+                variants={fadeUp}
+                onHoverStart={() => setActiveStory(story.number)}
+                onHoverEnd={() => setActiveStory(null)}
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.3, ease: editorialEase }}
+                style={{ position: "relative" }}
               >
                 <div className="india-story-top">
                   <span>{story.number}</span>
@@ -231,38 +311,64 @@ function India() {
                 </div>
 
                 <h3>{story.title}</h3>
-
                 <p>{story.description}</p>
 
-                <button>
+                <motion.button
+                  animate={{ x: activeStory === story.number ? 4 : 0 }}
+                  transition={{ duration: 0.2 }}
+                >
                   READ REPORT
                   <ArrowUpRight size={17} />
-                </button>
+                </motion.button>
 
-                <div className="india-card-line"></div>
+                {/* Animated Accent Line */}
+                <motion.div
+                  className="india-card-line"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: activeStory === story.number ? 1 : 0 }}
+                  transition={{ duration: 0.4, ease: editorialEase }}
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: "2px",
+                    background: "currentColor",
+                    transformOrigin: "left",
+                  }}
+                />
               </motion.article>
             ))}
-
-          </div>
+          </motion.div>
         </section>
 
-        {/* DESKS */}
-
+        {/* DESKS SECTION */}
         <section className="india-desks">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+          >
+            <motion.div className="desk-label" variants={fadeUp}>
+              <span>03</span>
+              NATIONAL DESKS
+            </motion.div>
 
-          <div className="desk-label">
-            <span>03</span>
-            NATIONAL DESKS
-          </div>
+            <motion.h2 variants={fadeUp}>
+              India,
+              <br />
+              <em>reported.</em>
+            </motion.h2>
+          </motion.div>
 
-          <h2>
-            India,
-            <br />
-            <em>reported.</em>
-          </h2>
-
-          <div className="india-desk-grid">
-
+          <motion.div
+            className="india-desk-grid"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={staggerContainer}
+          >
             {desks.map((desk, index) => {
               const Icon = desk.icon;
 
@@ -270,67 +376,73 @@ function India() {
                 <motion.div
                   className="india-desk-card"
                   key={desk.title}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    delay: index * 0.1,
-                  }}
-                  whileHover={{ y: -8 }}
+                  variants={fadeUp}
+                  whileHover={{ y: -6 }}
+                  transition={{ duration: 0.3, ease: editorialEase }}
                 >
-                  <div className="india-desk-icon">
+                  <motion.div
+                    className="india-desk-icon"
+                    whileHover={{ rotate: 8, scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     <Icon size={24} strokeWidth={1.7} />
-                  </div>
+                  </motion.div>
 
                   <span>0{index + 1}</span>
-
                   <h3>{desk.title}</h3>
-
                   <p>{desk.description}</p>
 
                   <ArrowUpRight className="india-desk-arrow" size={20} />
                 </motion.div>
               );
             })}
-
-          </div>
+          </motion.div>
         </section>
 
-        {/* CLOSING */}
-
+        {/* CLOSING SECTION */}
         <section className="india-closing">
-
-          <div className="india-closing-bg">
+          <motion.div
+            className="india-closing-bg"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 0.05, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, ease: editorialEase }}
+          >
             INDIA
-          </div>
+          </motion.div>
 
           <motion.div
             className="india-closing-content"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
+            variants={staggerContainer}
           >
-            <span>NEWS FILE / NATIONAL BUREAU</span>
+            <motion.span variants={fadeUp}>NEWS FILE / NATIONAL BUREAU</motion.span>
 
-            <h2>
+            <motion.h2 variants={fadeUp}>
               Every region
               <br />
               has a story.
-            </h2>
+            </motion.h2>
 
-            <p>
+            <motion.p variants={fadeUp}>
               We go beyond the obvious to find the stories that matter.
-            </p>
+            </motion.p>
 
-            <button>
+            <motion.button
+              variants={fadeUp}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.2, ease: editorialEase }}
+            >
               EXPLORE ALL INDIA NEWS
               <ArrowUpRight size={18} />
-            </button>
+            </motion.button>
           </motion.div>
-
         </section>
-
       </main>
+
       <Footer />
     </>
   );

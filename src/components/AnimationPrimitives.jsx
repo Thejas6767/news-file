@@ -47,7 +47,7 @@ export function PerspectiveCard({ children, onClick, className = "" }) {
 }
 
 /* =========================================
-    2. KINETIC TEXT REVEAL
+    2. KINETIC TEXT REVEAL (FIXED)
 ========================================= */
 export function KineticHeadline({ text, className = "" }) {
   const words = text.split(" ");
@@ -67,27 +67,39 @@ export function KineticHeadline({ text, className = "" }) {
       rotateX: 0,
       transition: {
         type: "spring",
-        damping: 12,
+        damping: 14,
         stiffness: 100,
       },
     },
     hidden: {
       opacity: 0,
-      y: 40,
-      rotateX: -90,
+      y: 30,
+      rotateX: -45,
     },
   };
 
   return (
     <motion.h1
-      className={`flex flex-wrap overflow-hidden ${className}`}
+      className={`flex flex-wrap gap-x-[0.3em] gap-y-[0.1em] max-w-full overflow-hidden ${className}`}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+      style={{
+        wordBreak: "normal",
+        overflowWrap: "break-word",
+        whiteSpace: "normal",
+      }}
     >
       {words.map((word, index) => (
-        <span key={index} className="mr-3 inline-block overflow-hidden py-1">
-          <motion.span variants={wordVariants} className="inline-block origin-bottom">
+        <span
+          key={index}
+          className="inline-block overflow-hidden py-1"
+          style={{ display: "inline-block" }}
+        >
+          <motion.span
+            variants={wordVariants}
+            className="inline-block origin-bottom"
+          >
             {word}
           </motion.span>
         </span>

@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import {
-  ArrowUpRight,
   TrendingUp,
   BarChart3,
   Building2,
@@ -10,6 +9,7 @@ import {
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+
 const marketData = [
   { name: "NIFTY 50", value: "25,458.40", change: "+0.82%" },
   { name: "SENSEX", value: "83,216.14", change: "+0.74%" },
@@ -64,6 +64,26 @@ const sectors = [
   },
 ];
 
+// Animation Variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
 function Business() {
   return (
     <>
@@ -71,160 +91,207 @@ function Business() {
 
       <main className="business-page">
 
-        {/* HERO */}
+        {/* HERO SECTION */}
 
         <section className="business-hero">
           <div className="business-grid"></div>
 
-          <div className="business-glow"></div>
-
           <motion.div
-            className="business-hero-content"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="business-eyebrow">
+            className="business-glow"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          ></motion.div>
+
+          <div className="business-hero-content">
+            <motion.div
+              className="business-eyebrow"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
               <TrendingUp size={15} />
               NEWS FILE BUSINESS DESK
-            </div>
+            </motion.div>
 
-            <h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.9,
+                delay: 0.25,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+            >
               Money.
               <br />
               <span>Markets. Meaning.</span>
-            </h1>
+            </motion.h1>
 
-            <p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.45 }}
+            >
               Business journalism beyond the numbers — tracking the economy,
               companies, markets and the decisions shaping India's future.
-            </p>
+            </motion.p>
 
             <motion.div
               className="business-scroll"
-              animate={{ y: [0, 8, 0] }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, y: [0, 8, 0] }}
               transition={{
-                duration: 1.8,
-                repeat: Infinity,
+                opacity: { delay: 0.7, duration: 0.5 },
+                y: { duration: 1.8, repeat: Infinity, ease: "easeInOut" },
               }}
             >
               EXPLORE BUSINESS
               <span></span>
             </motion.div>
-          </motion.div>
+          </div>
 
-          <div className="business-hero-index">
+          <motion.div
+            className="business-hero-index"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
             <span>05</span>
             BUSINESS
-          </div>
+          </motion.div>
         </section>
 
-        {/* MARKET TICKER */}
+        {/* MARKET SNAPSHOT */}
 
         <section className="market-section">
-
-          <div className="market-top">
+          <motion.div
+            className="market-top"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={fadeInUp}
+          >
             <div className="desk-label">
               <span>01</span>
               MARKET SNAPSHOT
             </div>
 
             <div className="market-status">
-              <span></span>
+              <motion.span
+                animate={{ scale: [1, 1.4, 1], opacity: [0.6, 1, 0.6] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              ></motion.span>
               MARKET DATA
             </div>
-          </div>
+          </motion.div>
 
-          <div className="market-grid">
-
-            {marketData.map((item, index) => (
+          <motion.div
+            className="market-grid"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={staggerContainer}
+          >
+            {marketData.map((item) => (
               <motion.div
                 className="market-card"
                 key={item.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  delay: index * 0.1,
-                  duration: 0.5,
+                variants={fadeInUp}
+                whileHover={{
+                  y: -8,
+                  borderColor: "rgba(215, 25, 32, 0.4)",
+                  boxShadow: "0 12px 30px rgba(0, 0, 0, 0.5)",
                 }}
-                whileHover={{ y: -6 }}
+                transition={{ duration: 0.3 }}
               >
-                <div className="market-card-name">
-                  {item.name}
-                </div>
+                <div className="market-card-name">{item.name}</div>
 
-                <div className="market-card-value">
-                  {item.value}
-                </div>
+                <div className="market-card-value">{item.value}</div>
 
                 <div className="market-card-bottom">
-                  <span className="market-up">
-                    {item.change}
-                  </span>
+                  <span className="market-up">{item.change}</span>
 
                   <div className="market-bars">
-                    {[20, 35, 25, 50, 42, 65, 58, 80].map(
-                      (height, i) => (
-                        <motion.i
-                          key={i}
-                          initial={{ height: 0 }}
-                          whileInView={{ height: `${height}%` }}
-                          viewport={{ once: true }}
-                          transition={{
-                            delay: 0.4 + i * 0.05,
-                            duration: 0.5,
-                          }}
-                        />
-                      )
-                    )}
+                    {[20, 35, 25, 50, 42, 65, 58, 80].map((height, i) => (
+                      <motion.i
+                        key={i}
+                        initial={{ height: 0 }}
+                        whileInView={{ height: `${height}%` }}
+                        viewport={{ once: true }}
+                        transition={{
+                          delay: 0.2 + i * 0.04,
+                          duration: 0.6,
+                          ease: [0.16, 1, 0.3, 1],
+                        }}
+                      />
+                    ))}
                   </div>
                 </div>
               </motion.div>
             ))}
-
-          </div>
+          </motion.div>
         </section>
 
-        {/* LEAD STORY */}
+        {/* LEAD STORY / BUSINESS INTELLIGENCE */}
 
         <section className="business-lead">
-
-          <div className="desk-label">
+          <motion.div
+            className="desk-label"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
             <span>02</span>
             BUSINESS INTELLIGENCE
-          </div>
+          </motion.div>
 
           <div className="business-lead-grid">
-
             <motion.div
               className="business-lead-visual"
-              initial={{ opacity: 0, scale: 0.96 }}
+              initial={{ opacity: 0, scale: 0.94 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="visual-grid"></div>
 
-              <div className="visual-circle"></div>
+              <motion.div
+                className="visual-circle"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+              ></motion.div>
 
               <div className="visual-label">
                 <span>FIELD</span>
                 <strong>REPORT</strong>
               </div>
 
-              <div className="visual-data">
+              <motion.div
+                className="visual-data"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+              >
                 <span>ECONOMIC SIGNAL</span>
                 <strong>+08.2%</strong>
-              </div>
+              </motion.div>
             </motion.div>
 
             <motion.article
               className="business-lead-story"
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="story-meta">
                 <span>ECONOMY</span>
@@ -249,20 +316,28 @@ function Business() {
                 everyday economy.
               </p>
 
-              <button className="business-read">
+              <motion.button
+                className="business-read"
+                whileHover={{ scale: 1.03, x: 4 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.2 }}
+              >
                 READ FULL REPORT
-                <ArrowUpRight size={18} />
-              </button>
+              </motion.button>
             </motion.article>
-
           </div>
         </section>
 
-        {/* STORIES */}
+        {/* LATEST BUSINESS STORIES */}
 
         <section className="business-stories">
-
-          <div className="business-stories-heading">
+          <motion.div
+            className="business-stories-heading"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
             <div>
               <div className="desk-label">
                 <span>03</span>
@@ -280,29 +355,26 @@ function Business() {
               The companies, markets and economic developments that deserve
               your attention.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="business-story-list">
-
-            {businessStories.map((story, index) => (
+          <motion.div
+            className="business-story-list"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={staggerContainer}
+          >
+            {businessStories.map((story) => (
               <motion.article
                 className="business-story"
                 key={story.number}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.1,
-                }}
-                whileHover={{ x: 8 }}
+                variants={fadeInUp}
+                whileHover={{ x: 10 }}
+                transition={{ duration: 0.3 }}
               >
-                <div className="business-story-number">
-                  {story.number}
-                </div>
+                <div className="business-story-number">{story.number}</div>
 
                 <div className="business-story-content">
-
                   <div className="story-meta">
                     <span>{story.category}</span>
                     <span>NEWS FILE</span>
@@ -314,81 +386,81 @@ function Business() {
 
                   <button>
                     READ REPORT
-                    <ArrowUpRight size={17} />
                   </button>
-
                 </div>
-
-                <div className="story-arrow">
-                  <ArrowUpRight size={25} />
-                </div>
-
               </motion.article>
             ))}
-
-          </div>
+          </motion.div>
         </section>
 
         {/* SECTORS */}
 
         <section className="business-sectors">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <div className="desk-label">
+              <span>04</span>
+              BUSINESS DESK
+            </div>
 
-          <div className="desk-label">
-            <span>04</span>
-            BUSINESS DESK
-          </div>
+            <h2>
+              Follow the
+              <br />
+              <em>signal.</em>
+            </h2>
+          </motion.div>
 
-          <h2>
-            Follow the
-            <br />
-            <em>signal.</em>
-          </h2>
-
-          <div className="sector-grid">
-
-            {sectors.map((sector, index) => {
+          <motion.div
+            className="sector-grid"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={staggerContainer}
+          >
+            {sectors.map((sector) => {
               const Icon = sector.icon;
 
               return (
                 <motion.div
                   className="sector-card"
                   key={sector.title}
-                  initial={{ opacity: 0, y: 35 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    delay: index * 0.1,
-                  }}
+                  variants={fadeInUp}
                   whileHover={{
-                    y: -8,
+                    y: -10,
+                    borderColor: "rgba(215, 25, 32, 0.5)",
                   }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <div className="sector-icon">
+                  <motion.div
+                    className="sector-icon"
+                    whileHover={{ scale: 1.1, rotate: -5 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     <Icon size={23} />
-                  </div>
+                  </motion.div>
 
                   <h3>{sector.title}</h3>
 
                   <p>{sector.text}</p>
-
-                  <ArrowUpRight className="sector-arrow" size={20} />
                 </motion.div>
               );
             })}
-
-          </div>
+          </motion.div>
         </section>
 
-        {/* CTA */}
+        {/* CTA SECTION */}
 
         <section className="business-cta">
-
           <motion.div
             className="business-cta-inner"
-            initial={{ opacity: 0, scale: 0.97 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 30, scale: 0.98 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <span>NEWS FILE BUSINESS</span>
 
@@ -398,12 +470,14 @@ function Business() {
               what moves.
             </h2>
 
-            <button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+            >
               EXPLORE ALL BUSINESS
-              <ArrowUpRight size={18} />
-            </button>
+            </motion.button>
           </motion.div>
-
         </section>
 
       </main>

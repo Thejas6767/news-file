@@ -2,34 +2,50 @@ import { motion } from "framer-motion";
 import {
   ArrowUpRight,
   Clock3,
+  Flame,
+  Pause,
   Play,
   Radio,
   Signal,
   Volume2,
+  VolumeX,
 } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
+// Dynamically routeable story data
 const liveStories = [
-  {
+ {
+    id: "/politics",
     number: "01",
     category: "POLITICS",
-    title: "Karnataka assembly updates",
+    title: "Indian Parliament & State Assembly updates",
+    excerpt: "Key legislative bills, policy debates, and governance strategies live from the Vidhana Soudha and Parliament sessions.",
     time: "TOP STORY",
+    readTime: "3 MIN READ",
+    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&q=80",
   },
   {
+    id: "/business",
     number: "02",
     category: "BUSINESS",
     title: "Regional energy transition",
+    excerpt: "Green infrastructure expansion accelerates across Southern India with new power grid projects.",
     time: "TOP STORY",
+    readTime: "5 MIN READ",
+    image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=600&q=80",
   },
   {
+    id: "/fact-check",
     number: "03",
     category: "FACT CHECK",
     title: "Verifying viral claims",
+    excerpt: "Deconstructing manipulated media and viral social dispatches with field investigation.",
     time: "TOP STORY",
+    readTime: "4 MIN READ",
+    image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=600&q=80",
   },
 ];
 
@@ -76,16 +92,18 @@ const storyGridVariants = {
 };
 
 const storyCardVariants = {
-  hidden: { opacity: 0, rotateX: 25, y: 40 },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
-    rotateX: 0,
     y: 0,
-    transition: { duration: 0.7, ease: [0.215, 0.61, 0.355, 1] },
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
 function LiveTV() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -212,7 +230,7 @@ function LiveTV() {
               transition={{ duration: 2, repeat: Infinity }}
             >
               <span />
-              ON AIR
+              {isPlaying ? "LIVE STREAM ACTIVE" : "ON AIR"}
             </motion.div>
 
             <div className="live-tv-player-channel">NEWS FILE 01</div>
@@ -221,6 +239,7 @@ function LiveTV() {
           <div className="live-tv-player-center">
             <motion.button
               className="live-tv-play"
+              onClick={() => setIsPlaying(!isPlaying)}
               initial={{ scale: 0.8, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true }}
@@ -230,9 +249,13 @@ function LiveTV() {
               }}
               whileTap={{ scale: 0.9 }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
-              aria-label="Play live broadcast"
+              aria-label={isPlaying ? "Pause broadcast" : "Play live broadcast"}
             >
-              <Play size={30} fill="currentColor" />
+              {isPlaying ? (
+                <Pause size={30} fill="currentColor" />
+              ) : (
+                <Play size={30} fill="currentColor" />
+              )}
             </motion.button>
 
             <motion.div
@@ -252,19 +275,33 @@ function LiveTV() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              Your live newsroom. Independent reporting. No noise.
+              {isPlaying
+                ? "Streaming official broadcast channel in HD."
+                : "Your live newsroom. Independent reporting. No noise."}
             </motion.p>
           </div>
 
           <div className="live-tv-player-bottom">
-            <span>
-              <Volume2 size={15} />
-              AUDIO
-            </span>
+            <button
+              type="button"
+              onClick={() => setIsMuted(!isMuted)}
+              style={{
+                background: "none",
+                border: "none",
+                color: "inherit",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+              }}
+            >
+              {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
+              {isMuted ? "MUTED" : "AUDIO"}
+            </button>
 
             <span>00:00 LIVE</span>
 
-            <span>HD</span>
+            <span>HD 1080P</span>
           </div>
         </motion.div>
       </section>
@@ -342,7 +379,7 @@ function LiveTV() {
       </section>
 
       {/* =========================================
-          LIVE DESK
+          LIVE DESK (LINKED STORIES)
       ========================================= */}
       <section className="live-tv-desk">
         <div className="live-tv-desk-header">
@@ -370,45 +407,100 @@ function LiveTV() {
           viewport={{ once: true, margin: "-50px" }}
         >
           {liveStories.map((story) => (
-            <motion.article
-              key={story.number}
-              className="live-tv-story-card"
-              variants={storyCardVariants}
-              whileHover={{
-                y: -10,
-                scale: 1.02,
-                borderColor: "rgba(215, 25, 32, 0.6)",
-                boxShadow: "0 12px 30px rgba(0, 0, 0, 0.4)",
-              }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="live-tv-story-top">
-                <span>{story.number}</span>
-                <span>{story.category}</span>
-              </div>
+            <motion.div key={story.id} variants={storyCardVariants}>
+           <Link
+  to={story.id.startsWith("/") ? story.id : `/news/${story.id}`}
+  className="live-tv-story-card"
+  style={{ textDecoration: "none", display: "block" }}
+>
+                <div className="live-tv-story-top">
+                  <span>{story.number}</span>
+                  <span>{story.category}</span>
+                </div>
 
-              <motion.div
-                className="live-tv-story-line"
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                style={{ transformOrigin: "left" }}
-              />
+                <motion.div
+                  className="live-tv-story-line"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  style={{ transformOrigin: "left" }}
+                />
 
-              <h3>{story.title}</h3>
+                <div
+                  className="story-image-preview"
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    height: "160px",
+                    borderRadius: "6px",
+                    overflow: "hidden",
+                    margin: "15px 0",
+                  }}
+                >
+                  <img
+                    src={story.image}
+                    alt={story.title}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background:
+                        "linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(23,23,28,0.9) 100%)",
+                    }}
+                  />
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: "10px",
+                      left: "10px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px",
+                      backgroundColor: "rgba(0, 0, 0, 0.65)",
+                      backdropFilter: "blur(6px)",
+                      color: "#ffffff",
+                      fontSize: "9px",
+                      fontWeight: 800,
+                      padding: "4px 8px",
+                      borderRadius: "4px",
+                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                    }}
+                  >
+                    <Flame size={12} color="#d71920" /> TRENDING
+                  </span>
+                </div>
 
-              <div className="live-tv-story-footer">
-                <span>
-                  <Clock3 size={13} />
-                  {story.time}
-                </span>
+                <h3>{story.title}</h3>
+                <p
+                  style={{
+                    fontSize: "13px",
+                    lineHeight: "1.5",
+                    color: "rgba(255, 255, 255, 0.6)",
+                    margin: "8px 0 18px",
+                  }}
+                >
+                  {story.excerpt}
+                </p>
 
-                <motion.div whileHover={{ rotate: 45 }}>
-                  <ArrowUpRight size={17} />
-                </motion.div>
-              </div>
-            </motion.article>
+                <div className="live-tv-story-footer">
+                  <span>
+                    <Clock3 size={13} />
+                    {story.time} • {story.readTime}
+                  </span>
+
+                  <motion.div whileHover={{ x: 3, y: -3 }}>
+                    <ArrowUpRight size={17} color="#d71920" />
+                  </motion.div>
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </motion.div>
       </section>

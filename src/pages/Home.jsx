@@ -72,7 +72,7 @@ function Home() {
           <div className="hero-overlay" />
 
           {/* Hero content */}
-          <div className="hero-content relative z-10">
+          <div className="hero-content relative z-10 max-w-4xl w-full px-4 sm:px-6">
             <motion.div
               className="hero-kicker"
               initial={{
@@ -93,14 +93,24 @@ function Home() {
               BREAKING: Ground dispatches updated
             </motion.div>
 
-            {/* Kinetic Text Animation */}
-            <KineticHeadline
-              text="Different languages. One standard of truth."
-              className="hero-headline-kinetic"
-            />
+            {/* Kinetic Text Animation with controlled wrapping and fluid sizing */}
+            <div 
+              className="hero-headline-wrapper my-4" 
+              style={{
+                maxWidth: "100%",
+                wordBreak: "normal",
+                overflowWrap: "break-word",
+                whiteSpace: "normal"
+              }}
+            >
+              <KineticHeadline
+                text="Different languages. One standard of truth."
+                className="hero-headline-kinetic text-3xl sm:text-5xl md:text-6xl font-black leading-tight tracking-tight text-red-600"
+              />
+            </div>
 
             <motion.p
-              className="hero-description"
+              className="hero-description max-w-xl text-base sm:text-lg text-slate-300 leading-relaxed mb-8"
               initial={{
                 opacity: 0,
                 y: 25,
@@ -121,7 +131,7 @@ function Home() {
             </motion.p>
 
             <motion.div
-              className="hero-actions"
+              className="hero-actions flex flex-wrap items-center gap-4"
               initial={{
                 opacity: 0,
                 y: 25,

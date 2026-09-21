@@ -35,7 +35,6 @@ function Navbar() {
 
   const handleMenuNavigation = (item) => {
     setMenuOpen(false);
-
     if (routes[item]) {
       navigate(routes[item]);
     }
@@ -230,30 +229,18 @@ function Navbar() {
             {/* OVERLAY */}
             <motion.div
               className="menu-overlay"
-              initial={{
-                opacity: 0,
-              }}
-              animate={{
-                opacity: 1,
-              }}
-              exit={{
-                opacity: 0,
-              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               onClick={() => setMenuOpen(false)}
             />
 
             {/* SIDE MENU */}
             <motion.aside
               className="side-menu"
-              initial={{
-                x: "-100%",
-              }}
-              animate={{
-                x: 0,
-              }}
-              exit={{
-                x: "-100%",
-              }}
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
               transition={{
                 duration: 0.45,
                 ease: [0.22, 1, 0.36, 1],
@@ -269,8 +256,9 @@ function Navbar() {
                   onClick={() => setMenuOpen(false)}
                   whileHover={{ scale: 1.1, rotate: 90 }}
                   whileTap={{ scale: 0.9 }}
+                  aria-label="Close menu"
                 >
-                  <X size={24} />
+                  <X size={22} />
                 </motion.button>
               </div>
 
@@ -294,9 +282,11 @@ function Navbar() {
                     whileHover={{ x: 6 }}
                     onClick={() => handleMenuNavigation(item)}
                   >
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-                    {item}
-                    <ChevronRight size={18} />
+                    <span className="side-link-num">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="side-link-text">{item}</span>
+                    <ChevronRight size={18} className="side-link-arrow" />
                   </motion.button>
                 ))}
               </div>
