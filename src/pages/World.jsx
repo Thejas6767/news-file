@@ -10,64 +10,6 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-const worldStories = [
-  {
-    id: 1,
-    category: "EUROPE",
-    title: "Global developments reshape the political landscape",
-    description:
-      "A closer look at the latest international developments and the decisions shaping the world beyond borders.",
-    location: "Europe",
-    time: "12 min ago",
-    featured: true,
-  },
-  {
-    id: 2,
-    category: "ASIA",
-    title: "Asia enters a new phase of economic cooperation",
-    description:
-      "Regional economies focus on trade, technology and stronger cross-border partnerships.",
-    location: "Asia",
-    time: "28 min ago",
-  },
-  {
-    id: 3,
-    category: "AMERICAS",
-    title: "Markets react to major international developments",
-    description:
-      "Investors and policymakers assess the impact of fresh global announcements.",
-    location: "Americas",
-    time: "41 min ago",
-  },
-  {
-    id: 4,
-    category: "MIDDLE EAST",
-    title: "Diplomatic efforts continue across the region",
-    description:
-      "International leaders intensify discussions as negotiations move forward.",
-    location: "Middle East",
-    time: "1 hr ago",
-  },
-  {
-    id: 5,
-    category: "AFRICA",
-    title: "New initiatives target growth and infrastructure",
-    description:
-      "Governments and international organisations announce new development priorities.",
-    location: "Africa",
-    time: "2 hrs ago",
-  },
-  {
-    id: 6,
-    category: "WORLD",
-    title: "Technology becomes central to global policy",
-    description:
-      "Countries rethink regulation, innovation and digital cooperation in a rapidly changing world.",
-    location: "Global",
-    time: "3 hrs ago",
-  },
-];
-
 const regions = [
   "Europe",
   "Asia",
@@ -184,11 +126,11 @@ function World() {
         </div>
       </section>
 
-      {/* FEATURED STORY */}
+      {/* GLOBAL COVERAGE */}
       <section className="world-featured">
         <div className="world-section-label">
           <span>02</span>
-          GLOBAL FOCUS
+          GLOBAL COVERAGE
         </div>
 
         <motion.article
@@ -216,92 +158,145 @@ function World() {
 
           <div className="world-featured-copy">
             <div className="world-story-category">
-              {worldStories[0].category}
+              WORLD
             </div>
 
-            <h2>{worldStories[0].title}</h2>
+            <h2>
+              Stories beyond
+              <br />
+              <strong>borders.</strong>
+            </h2>
 
-            <p>{worldStories[0].description}</p>
+            <p>
+              Follow international developments, global affairs and stories
+              connecting India with the wider world.
+            </p>
 
             <div className="world-story-details">
               <span>
                 <MapPin size={14} />
-                {worldStories[0].location}
+                GLOBAL
               </span>
 
               <span>
                 <Clock3 size={14} />
-                {worldStories[0].time}
+                WORLD DESK
               </span>
             </div>
 
             <Link to="/news" className="world-read-button">
-              READ FULL STORY
+              EXPLORE ALL NEWS
               <ArrowUpRight size={18} />
             </Link>
           </div>
         </motion.article>
       </section>
 
-      {/* LATEST WORLD NEWS */}
+      {/* WORLD DESK */}
       <section className="world-latest">
         <div className="world-latest-heading">
           <div className="world-section-label">
             <span>03</span>
-            LATEST FROM THE WORLD
+            WORLD DESK
           </div>
 
           <div className="world-live-indicator">
             <span />
-            LIVE DESK
+            NEWSROOM
           </div>
         </div>
 
         <div className="world-story-grid">
-          {worldStories.slice(1).map((story, index) => (
-            <motion.article
-              key={story.id}
-              className="world-story-card"
-              initial={{ opacity: 0, y: 35 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.6,
-                delay: index * 0.08,
-              }}
-              whileHover={{ y: -8 }}
-            >
-              <div className="world-story-top">
-                <span className="world-story-number">
-                  0{index + 2}
-                </span>
+          <motion.article
+            className="world-story-card"
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            whileHover={{ y: -8 }}
+          >
+            <div className="world-story-top">
+              <span className="world-story-number">
+                01
+              </span>
 
-                <span className="world-story-category">
-                  {story.category}
-                </span>
+              <span className="world-story-category">
+                WORLD
+              </span>
 
-                <ArrowUpRight size={18} />
-              </div>
+              <ArrowUpRight size={18} />
+            </div>
 
-              <div className="world-card-line" />
+            <div className="world-card-line" />
 
-              <h3>{story.title}</h3>
+            <h3>
+              International coverage from the News File newsroom.
+            </h3>
 
-              <p>{story.description}</p>
+            <p>
+              Explore the latest newsroom coverage and follow stories that
+              connect developments across India and the world.
+            </p>
 
-              <div className="world-story-footer">
-                <span>
-                  <MapPin size={13} />
-                  {story.location}
-                </span>
+            <div className="world-story-footer">
+              <span>
+                <MapPin size={13} />
+                GLOBAL
+              </span>
 
-                <span>
-                  <Clock3 size={13} />
-                  {story.time}
-                </span>
-              </div>
-            </motion.article>
-          ))}
+              <span>
+                <Clock3 size={13} />
+                NEWS DESK
+              </span>
+            </div>
+          </motion.article>
+
+          <motion.article
+            className="world-story-card"
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.6,
+              delay: 0.08,
+            }}
+            whileHover={{ y: -8 }}
+          >
+            <div className="world-story-top">
+              <span className="world-story-number">
+                02
+              </span>
+
+              <span className="world-story-category">
+                NEWS FILE
+              </span>
+
+              <ArrowUpRight size={18} />
+            </div>
+
+            <div className="world-card-line" />
+
+            <h3>
+              Verified reporting with context beyond the headline.
+            </h3>
+
+            <p>
+              Return to the main newsroom to explore the stories currently
+              available across News File.
+            </p>
+
+            <div className="world-story-footer">
+              <span>
+                <MapPin size={13} />
+                INDIA
+              </span>
+
+              <span>
+                <Clock3 size={13} />
+                NEWSROOM
+              </span>
+            </div>
+          </motion.article>
         </div>
       </section>
 
@@ -327,15 +322,15 @@ function World() {
             that shape tomorrow.
           </p>
 
-          <Link to="/" className="world-back-home">
-            BACK TO NEWS FILE
+          <Link to="/news" className="world-back-home">
+            EXPLORE NEWS FILE
             <ArrowUpRight size={18} />
           </Link>
         </div>
       </section>
+
       <Footer />
     </div>
-    
   );
 }
 

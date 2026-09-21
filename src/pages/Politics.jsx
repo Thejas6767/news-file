@@ -4,6 +4,7 @@ import {
   Clock3,
   ChevronDown,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -12,17 +13,14 @@ import { politicsStories } from "../data/newsData";
 function Politics() {
   return (
     <div className="page">
-
       <Navbar />
 
       <main>
-
         {/* =====================================
             POLITICS HERO
         ===================================== */}
 
         <section className="politics-hero">
-
           <div className="politics-hero-inner">
 
             <motion.div
@@ -34,7 +32,6 @@ function Politics() {
               <span />
               POLITICS DESK
             </motion.div>
-
 
             <motion.h1
               initial={{ opacity: 0, y: 60 }}
@@ -52,7 +49,6 @@ function Politics() {
               People.
             </motion.h1>
 
-
             <motion.p
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
@@ -64,9 +60,7 @@ function Politics() {
               Political developments, decisions and voices
               shaping India — reported from the ground.
             </motion.p>
-
           </div>
-
 
           <motion.div
             className="politics-hero-number"
@@ -76,7 +70,6 @@ function Politics() {
           >
             04
           </motion.div>
-
 
           <motion.div
             className="politics-scroll"
@@ -89,16 +82,13 @@ function Politics() {
             <span>EXPLORE STORIES</span>
             <ChevronDown size={16} />
           </motion.div>
-
         </section>
-
 
         {/* =====================================
             FEATURED POLITICS
         ===================================== */}
 
         <section className="politics-featured">
-
           <motion.div
             className="politics-featured-image"
             initial={{
@@ -117,7 +107,6 @@ function Politics() {
               duration: 1,
             }}
           >
-
             <img
               src={politicsStories[0].image}
               alt={politicsStories[0].title}
@@ -128,9 +117,7 @@ function Politics() {
             <span className="featured-tag">
               TOP STORY
             </span>
-
           </motion.div>
-
 
           <motion.div
             className="politics-featured-content"
@@ -149,7 +136,6 @@ function Politics() {
               duration: 0.8,
             }}
           >
-
             <span className="story-category">
               POLITICS
             </span>
@@ -167,30 +153,34 @@ function Politics() {
               {politicsStories[0].description}
             </p>
 
-            <button className="read-report-button">
+            <Link
+              to={`/article/${politicsStories[0].id}`}
+              className="read-report-button"
+            >
               Read full report
               <ArrowUpRight size={18} />
-            </button>
-
+            </Link>
           </motion.div>
-
         </section>
-
 
         {/* =====================================
             LATEST POLITICS
         ===================================== */}
 
         <section className="politics-latest">
-
           <motion.div
             className="politics-section-title"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{
+              opacity: 0,
+              y: 30,
+            }}
             whileInView={{
               opacity: 1,
               y: 0,
             }}
-            viewport={{ once: true }}
+            viewport={{
+              once: true,
+            }}
           >
             <span>
               04 — LATEST POLITICS
@@ -203,12 +193,9 @@ function Politics() {
             </h2>
           </motion.div>
 
-
           <div className="politics-story-grid">
-
             {politicsStories.slice(1).map(
               (story, index) => (
-
                 <motion.article
                   className="politics-story-card"
                   key={story.id}
@@ -229,9 +216,7 @@ function Politics() {
                     delay: index * 0.12,
                   }}
                 >
-
                   <div className="politics-card-image">
-
                     <img
                       src={story.image}
                       alt={story.title}
@@ -246,12 +231,9 @@ function Politics() {
                     >
                       <ArrowUpRight size={18} />
                     </motion.div>
-
                   </div>
 
-
                   <div className="politics-card-content">
-
                     <div className="story-time">
                       <Clock3 size={11} />
                       {story.time}
@@ -261,29 +243,22 @@ function Politics() {
                       {story.title}
                     </h3>
 
-                    <button>
+                    <Link to={`/article/${story.id}`}>
                       Read report
                       <ArrowUpRight size={14} />
-                    </button>
-
+                    </Link>
                   </div>
-
                 </motion.article>
-
               )
             )}
-
           </div>
-
         </section>
-
 
         {/* =====================================
             POLITICAL ANALYSIS
         ===================================== */}
 
         <section className="analysis-section">
-
           <motion.div
             className="analysis-content"
             initial={{
@@ -298,7 +273,6 @@ function Politics() {
               once: true,
             }}
           >
-
             <span>
               NEWS FILE ANALYSIS
             </span>
@@ -316,22 +290,19 @@ function Politics() {
               communities on the ground.
             </p>
 
-            <button>
+            <Link to="/news">
               Explore analysis
               <ArrowUpRight size={17} />
-            </button>
-
+            </Link>
           </motion.div>
-
 
           <div className="analysis-mark">
             N/F
           </div>
-
         </section>
-
       </main>
-<Footer />
+
+      <Footer />
     </div>
   );
 }

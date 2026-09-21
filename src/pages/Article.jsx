@@ -10,7 +10,8 @@ import {
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-
+// At the top of Article.jsx
+import { MagneticButton, PerspectiveCard } from "../components/AnimationPrimitives";
 const articles = {
   1: {
     category: "INDIA",
@@ -29,7 +30,6 @@ const articles = {
       "Further updates will follow as more information becomes available from the ground.",
     ],
   },
-
   2: {
     category: "INDIA",
     title: "The stories shaping India's next chapter",
@@ -47,7 +47,6 @@ const articles = {
       "Further details will be added as confirmed information becomes available.",
     ],
   },
-
   3: {
     category: "BUSINESS",
     title: "Markets, money and the forces changing business",
@@ -65,7 +64,6 @@ const articles = {
       "Further updates will depend on incoming information, market developments and confirmed announcements.",
     ],
   },
-
   4: {
     category: "POLITICS",
     title: "Inside the decisions shaping the country",
@@ -83,7 +81,6 @@ const articles = {
       "Further developments will be reported as verified information becomes available.",
     ],
   },
-
   5: {
     category: "INDIA",
     title: "Ground reports and developments from across India",
@@ -101,7 +98,6 @@ const articles = {
       "Further updates will be added as confirmed information becomes available.",
     ],
   },
-
   6: {
     category: "INDIA",
     title: "National developments you need to know today",
@@ -119,7 +115,6 @@ const articles = {
       "Further updates will follow as more verified information becomes available.",
     ],
   },
-
   7: {
     category: "POLITICS",
     title: "Political developments across the country",
@@ -137,7 +132,6 @@ const articles = {
       "Further developments will be reported as verified information becomes available.",
     ],
   },
-
   8: {
     category: "BUSINESS",
     title: "Business and economic updates",
@@ -155,7 +149,6 @@ const articles = {
       "Further updates will follow as confirmed announcements and developments emerge.",
     ],
   },
-
   9: {
     category: "WORLD",
     title: "International developments and global affairs",
@@ -211,7 +204,7 @@ function Article() {
           url: window.location.href,
         });
       } catch {
-        // User cancelled sharing.
+        // User cancelled
       }
     } else {
       try {
@@ -230,7 +223,13 @@ function Article() {
       {/* ARTICLE HERO */}
       <section className="article-hero">
         <div className="article-hero-image">
-          <img src={article.image} alt={article.title} />
+          <motion.img
+            src={article.image}
+            alt={article.title}
+            initial={{ scale: 1.1, opacity: 0.8 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          />
           <div className="article-image-overlay" />
         </div>
 
@@ -305,66 +304,77 @@ function Article() {
       <section className="article-body-section">
         <div className="article-layout">
           <aside className="article-sidebar">
-            <div className="article-sidebar-label">
-              SHARE
-            </div>
+            <div className="article-sidebar-label">SHARE</div>
 
-            <button
+            <motion.button
               type="button"
               onClick={handleShare}
               aria-label="Share article"
+              whileHover={{ scale: 1.15, color: "#d71920" }}
+              whileTap={{ scale: 0.9 }}
             >
               <Share2 size={18} />
-            </button>
+            </motion.button>
 
-            <button
+            <motion.button
               type="button"
               onClick={handleShare}
               aria-label="Copy article link"
+              whileHover={{ scale: 1.15, color: "#d71920" }}
+              whileTap={{ scale: 0.9 }}
             >
               <LinkIcon size={18} />
-            </button>
+            </motion.button>
 
-            <button
+            <motion.button
               type="button"
               onClick={handleShare}
-              aria-label="Share"
+              aria-label="Share on X"
+              whileHover={{ scale: 1.15, color: "#d71920" }}
+              whileTap={{ scale: 0.9 }}
             >
               X
-            </button>
+            </motion.button>
 
-            <button
+            <motion.button
               type="button"
               onClick={handleShare}
-              aria-label="Share"
+              aria-label="Share on Facebook"
+              whileHover={{ scale: 1.15, color: "#d71920" }}
+              whileTap={{ scale: 0.9 }}
             >
               f
-            </button>
+            </motion.button>
 
-            <button
+            <motion.button
               type="button"
               onClick={handleShare}
-              aria-label="Share"
+              aria-label="Share on LinkedIn"
+              whileHover={{ scale: 1.15, color: "#d71920" }}
+              whileTap={{ scale: 0.9 }}
             >
               in
-            </button>
+            </motion.button>
           </aside>
 
           <article className="article-content">
-            <div className="article-kicker">
-              NEWS FILE / REPORT
-            </div>
+            <div className="article-kicker">NEWS FILE / REPORT</div>
 
-            <p className="article-lead">
+            <motion.p
+              className="article-lead"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+            >
               {article.description}
-            </p>
+            </motion.p>
 
             {article.paragraphs.map((paragraph, index) => (
               <motion.p
                 key={index}
                 initial={{
                   opacity: 0,
-                  y: 20,
+                  y: 25,
                 }}
                 whileInView={{
                   opacity: 1,
@@ -376,28 +386,30 @@ function Article() {
                 }}
                 transition={{
                   duration: 0.6,
+                  delay: index * 0.05,
                 }}
               >
                 {paragraph}
               </motion.p>
             ))}
 
-            <div className="article-verification">
-              <div className="article-verification-mark">
-                ✓
-              </div>
+            <motion.div
+              className="article-verification"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="article-verification-mark">✓</div>
 
               <div>
-                <strong>
-                  NEWS FILE / VERIFIED DESK
-                </strong>
-
+                <strong>NEWS FILE / VERIFIED DESK</strong>
                 <p>
-                  Reporting is based on information available to the
-                  newsroom at the time of publication.
+                  Reporting is based on information available to the newsroom
+                  at the time of publication.
                 </p>
               </div>
-            </div>
+            </motion.div>
           </article>
         </div>
       </section>
@@ -434,6 +446,7 @@ function Article() {
               }}
               whileHover={{
                 y: -8,
+                transition: { duration: 0.2 },
               }}
             >
               <div className="article-related-number">
@@ -444,9 +457,7 @@ function Article() {
                 {story.category}
               </div>
 
-              <h3>
-                {story.title}
-              </h3>
+              <h3>{story.title}</h3>
 
               <Link to={`/article/${story.id}`}>
                 READ STORY
@@ -459,9 +470,7 @@ function Article() {
 
       {/* CLOSING */}
       <section className="article-closing">
-        <div className="article-closing-bg">
-          REPORT
-        </div>
+        <div className="article-closing-bg">REPORT</div>
 
         <div className="article-closing-content">
           <span>NEWS FILE</span>
@@ -472,17 +481,14 @@ function Article() {
             <strong>INFORMED.</strong>
           </h2>
 
-          <p>
-            Follow the stories that shape India and the world.
-          </p>
+          <p>Follow the stories that shape India and the world.</p>
 
-          <Link
-            to="/news"
-            className="article-home-button"
-          >
-            EXPLORE ALL NEWS
-            <ArrowUpRight size={18} />
-          </Link>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Link to="/news" className="article-home-button">
+              EXPLORE ALL NEWS
+              <ArrowUpRight size={18} />
+            </Link>
+          </motion.div>
         </div>
       </section>
 

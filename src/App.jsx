@@ -1,5 +1,8 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
+
+import PageTransition from "./components/PageTransition";
 
 import Home from "./pages/Home";
 import AllNews from "./pages/AllNews";
@@ -35,79 +38,139 @@ function ScrollToTop() {
 
 
 /* =========================================
+   ANIMATED ROUTES
+========================================= */
+
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+
+        <Route
+          path="/"
+          element={
+            <PageTransition>
+              <Home />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/news"
+          element={
+            <PageTransition>
+              <AllNews />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/live"
+          element={
+            <PageTransition>
+              <LiveTV />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/search"
+          element={
+            <PageTransition>
+              <SearchPage />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/article/:id"
+          element={
+            <PageTransition>
+              <Article />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/politics"
+          element={
+            <PageTransition>
+              <Politics />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/fact-check"
+          element={
+            <PageTransition>
+              <FactCheck />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/business"
+          element={
+            <PageTransition>
+              <Business />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/india"
+          element={
+            <PageTransition>
+              <India />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/world"
+          element={
+            <PageTransition>
+              <World />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/about"
+          element={
+            <PageTransition>
+              <About />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/contact"
+          element={
+            <PageTransition>
+              <Contact />
+            </PageTransition>
+          }
+        />
+
+      </Routes>
+    </AnimatePresence>
+  );
+}
+
+
+/* =========================================
    APP
 ========================================= */
 
 function App() {
   return (
     <BrowserRouter>
-
       <ScrollToTop />
-
-      <Routes>
-
-        <Route
-          path="/"
-          element={<Home />}
-        />
-
-        <Route
-          path="/news"
-          element={<AllNews />}
-        />
-
-        <Route
-          path="/live"
-          element={<LiveTV />}
-        />
-
-        <Route
-          path="/search"
-          element={<SearchPage />}
-        />
-
-        <Route
-          path="/article/:id"
-          element={<Article />}
-        />
-
-        <Route
-          path="/politics"
-          element={<Politics />}
-        />
-
-        <Route
-          path="/fact-check"
-          element={<FactCheck />}
-        />
-
-        <Route
-          path="/business"
-          element={<Business />}
-        />
-
-        <Route
-          path="/india"
-          element={<India />}
-        />
-
-        <Route
-          path="/world"
-          element={<World />}
-        />
-
-        <Route
-          path="/about"
-          element={<About />}
-        />
-
-        <Route
-          path="/contact"
-          element={<Contact />}
-        />
-
-      </Routes>
-
+      <AnimatedRoutes />
     </BrowserRouter>
   );
 }

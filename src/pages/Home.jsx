@@ -10,24 +10,54 @@ import { Link, useNavigate } from "react-router-dom";
 import LatestNews from "../components/LatestNews";
 import LiveTV from "../components/LiveTV";
 import Footer from "../components/Footer";
+
+import {
+  KineticHeadline,
+  MagneticButton,
+  PerspectiveCard,
+} from "../components/AnimationPrimitives";
+
 function Home() {
   const navigate = useNavigate();
 
   return (
-    <div className="app">
-
+    <div className="app relative overflow-hidden">
       <Navbar />
 
       <main>
-
         {/* =========================================
             HERO SECTION
         ========================================= */}
-
-        <section className="hero">
+        <section className="hero relative overflow-hidden">
+          {/* Animated Ambient Light Orbs */}
+          <motion.div
+            className="pointer-events-none absolute -top-40 -left-40 w-96 h-96 bg-red-600/10 rounded-full blur-3xl opacity-50"
+            animate={{
+              x: [0, 50, 0],
+              y: [0, 30, 0],
+              scale: [1, 1.15, 1],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="pointer-events-none absolute top-1/2 -right-40 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl opacity-40"
+            animate={{
+              x: [0, -40, 0],
+              y: [0, -50, 0],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
 
           {/* Background image */}
-
           <motion.div
             className="hero-background"
             initial={{ scale: 1.12 }}
@@ -39,14 +69,10 @@ function Home() {
           />
 
           {/* Dark overlay */}
-
           <div className="hero-overlay" />
 
-
           {/* Hero content */}
-
-          <div className="hero-content">
-
+          <div className="hero-content relative z-10">
             <motion.div
               className="hero-kicker"
               initial={{
@@ -58,41 +84,20 @@ function Home() {
                 y: 0,
               }}
               transition={{
-                delay: 0.5,
+                delay: 0.3,
                 duration: 0.7,
+                ease: "easeOut",
               }}
             >
-
               <span className="hero-live-dot" />
-
               BREAKING: Ground dispatches updated
-
             </motion.div>
 
-
-            <motion.h1
-              initial={{
-                opacity: 0,
-                y: 50,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                delay: 0.7,
-                duration: 0.9,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-            >
-
-              Different languages.
-              <br />
-
-              <span>One standard of truth.</span>
-
-            </motion.h1>
-
+            {/* Kinetic Text Animation */}
+            <KineticHeadline
+              text="Different languages. One standard of truth."
+              className="hero-headline-kinetic"
+            />
 
             <motion.p
               className="hero-description"
@@ -105,17 +110,15 @@ function Home() {
                 y: 0,
               }}
               transition={{
-                delay: 1,
+                delay: 0.8,
                 duration: 0.7,
+                ease: "easeOut",
               }}
             >
-
               Verified real-time journalism from across India.
               Unfiltered field reporting and independent fact-checks
               in English, Hindi, and Kannada.
-
             </motion.p>
-
 
             <motion.div
               className="hero-actions"
@@ -128,107 +131,68 @@ function Home() {
                 y: 0,
               }}
               transition={{
-                delay: 1.2,
+                delay: 1,
                 duration: 0.7,
+                ease: "easeOut",
               }}
             >
-
-              <button
+              {/* Magnetic Interactive Primary Button */}
+              <MagneticButton
                 className="hero-primary-button"
                 onClick={() => navigate("/live")}
               >
-
-                <span>
-                  Watch Live TV
-                </span>
-
+                <span>Watch Live TV</span>
                 <span className="button-icon">
                   <Play size={16} fill="currentColor" />
                 </span>
+              </MagneticButton>
 
-              </button>
-
-
-              <Link
-                to="/news"
-                className="hero-secondary-button"
+              <motion.div 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                Explore News
-                <ArrowUpRight size={17} />
-              </Link>
-
+                <Link to="/news" className="hero-secondary-button flex items-center gap-1">
+                  Explore News
+                  <ArrowUpRight size={17} />
+                </Link>
+              </motion.div>
             </motion.div>
-
           </div>
 
-
           {/* =========================================
-              LIVE STATUS CARD
+              LIVE STATUS CARD (3D Perspective Tilt)
           ========================================= */}
-
-          <motion.div
-            className="hero-live-card"
+          <PerspectiveCard
+            className="hero-live-card cursor-pointer"
             onClick={() => navigate("/live")}
-            style={{ cursor: "pointer" }}
-            initial={{
-              opacity: 0,
-              x: 50,
-            }}
-            animate={{
-              opacity: 1,
-              x: 0,
-            }}
-            transition={{
-              delay: 1.3,
-              duration: 0.8,
-            }}
           >
-
             <div className="live-card-top">
-
               <div className="live-card-status">
-
                 <span />
-
                 STREAMING NOW
-
               </div>
-
               <Radio size={17} />
-
             </div>
 
-
             <div className="live-card-content">
-
               <p>24/7 BROADCAST</p>
-
               <h3>
                 Live from
                 <br />
                 the field.
               </h3>
-
             </div>
-
 
             <div className="live-card-bottom">
-
-              <span>
-                National Evening Dispatch
-              </span>
-
+              <span>National Evening Dispatch</span>
               <ArrowUpRight size={17} />
-
             </div>
-
-          </motion.div>
-
+          </PerspectiveCard>
 
           {/* =========================================
               SCROLL INDICATOR
           ========================================= */}
-
           <motion.div
             className="hero-scroll"
             initial={{
@@ -238,12 +202,11 @@ function Home() {
               opacity: 1,
             }}
             transition={{
-              delay: 2,
+              delay: 1.6,
+              duration: 0.8,
             }}
           >
-
             <span>SCROLL TO EXPLORE</span>
-
             <motion.div
               animate={{
                 y: [0, 8, 0],
@@ -251,38 +214,25 @@ function Home() {
               transition={{
                 duration: 1.5,
                 repeat: Infinity,
+                ease: "easeInOut",
               }}
             >
               <ChevronDown size={17} />
             </motion.div>
-
           </motion.div>
-
         </section>
 
-
         {/* =========================================
-            LATEST NEWS
+            LATEST NEWS & LIVE TV
         ========================================= */}
-
         <LatestNews />
-
-
-        {/* =========================================
-            LIVE TV
-        ========================================= */}
-
         <LiveTV />
-
 
         {/* =========================================
             OUR METHODOLOGY
         ========================================= */}
-
-        <section className="methodology-section">
-
-          <div className="methodology-inner">
-
+        <section className="methodology-section relative overflow-hidden py-24">
+          <div className="methodology-inner container mx-auto px-4">
             <motion.div
               className="methodology-heading"
               initial={{
@@ -295,25 +245,20 @@ function Home() {
               }}
               viewport={{
                 once: true,
-                amount: 0.25,
+                amount: 0.3,
               }}
               transition={{
                 duration: 0.8,
+                ease: [0.21, 0.47, 0.32, 0.98],
               }}
             >
-
-              <span className="section-eyebrow">
-                OUR METHODOLOGY
-              </span>
-
+              <span className="section-eyebrow">OUR METHODOLOGY</span>
               <h2>
                 Unbiased regional
                 <br />
                 <strong>dispatches.</strong>
               </h2>
-
             </motion.div>
-
 
             <motion.div
               className="methodology-content"
@@ -327,35 +272,31 @@ function Home() {
               }}
               viewport={{
                 once: true,
-                amount: 0.25,
+                amount: 0.3,
               }}
               transition={{
                 duration: 0.8,
-                delay: 0.15,
+                delay: 0.2,
+                ease: [0.21, 0.47, 0.32, 0.98],
               }}
             >
-
               <p>
                 News File focuses on verified ground reporting,
                 bringing regional developments and independent
                 fact-checks together with context from the field.
               </p>
-
               <p>
                 Our reporting process is built around verification,
                 responsible journalism and clear sourcing, helping
                 readers understand what is happening beyond the
                 headlines.
               </p>
-
             </motion.div>
-
           </div>
-
         </section>
-             <Footer />
-      </main>
 
+        <Footer />
+      </main>
     </div>
   );
 }
