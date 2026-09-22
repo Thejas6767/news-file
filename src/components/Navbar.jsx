@@ -9,6 +9,21 @@ import {
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+/* =========================================
+   NEWS FILE LOGO
+   No image required
+   No circle
+========================================= */
+
+const NewsFileLogo = ({ className = "" }) => {
+  return (
+    <div className={`news-file-logo ${className}`}>
+      <div className="news-logo-word">NEWS</div>
+      <div className="file-logo-word">FILE</div>
+    </div>
+  );
+};
+
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -35,6 +50,7 @@ function Navbar() {
 
   const handleMenuNavigation = (item) => {
     setMenuOpen(false);
+
     if (routes[item]) {
       navigate(routes[item]);
     }
@@ -45,8 +61,10 @@ function Navbar() {
       {/* =========================================
           TOP NEWS STRIP
       ========================================= */}
+
       <div className="top-strip">
         <div className="top-strip-inner">
+
           <div className="top-live">
             <span className="live-dot"></span>
             LIVE
@@ -60,12 +78,14 @@ function Navbar() {
             <span>English</span>
             <span>हिन्दी</span>
           </div>
+
         </div>
       </div>
 
       {/* =========================================
           MAIN NAVBAR
       ========================================= */}
+
       <motion.header
         className="navbar"
         initial={{ y: -100, opacity: 0 }}
@@ -75,7 +95,9 @@ function Navbar() {
           ease: [0.22, 1, 0.36, 1],
         }}
       >
+
         {/* MENU */}
+
         <motion.button
           className="menu-button"
           onClick={() => setMenuOpen(true)}
@@ -87,6 +109,7 @@ function Navbar() {
         </motion.button>
 
         {/* LOGO */}
+
         <Link
           to="/"
           style={{
@@ -104,12 +127,14 @@ function Navbar() {
             }}
             whileHover={{ scale: 1.03 }}
           >
-            NEWS<span>FILE</span>
+            <NewsFileLogo />
           </motion.div>
         </Link>
 
         {/* RIGHT ACTIONS */}
+
         <div className="navbar-right">
+
           <motion.button
             className="live-button"
             onClick={() => navigate("/live")}
@@ -122,10 +147,12 @@ function Navbar() {
             <span className="live-pulse">
               <Radio size={15} />
             </span>
+
             LIVE TV
           </motion.button>
 
           {/* SEARCH */}
+
           <motion.button
             className="search-button"
             onClick={() => navigate("/search")}
@@ -135,12 +162,14 @@ function Navbar() {
           >
             <Search size={21} />
           </motion.button>
+
         </div>
       </motion.header>
 
       {/* =========================================
           CATEGORY / MAIN NAVIGATION
       ========================================= */}
+
       <motion.nav
         className="category-nav"
         initial={{
@@ -156,7 +185,9 @@ function Navbar() {
           duration: 0.5,
         }}
       >
+
         <div className="category-nav-inner">
+
           {navItems.map((item, index) => (
             <motion.div
               key={item}
@@ -182,19 +213,23 @@ function Navbar() {
               </Link>
             </motion.div>
           ))}
+
         </div>
       </motion.nav>
 
       {/* =========================================
           BREAKING NEWS BAR
       ========================================= */}
+
       <div className="breaking-bar">
+
         <div className="breaking-label">
           <span className="breaking-dot"></span>
           BREAKING
         </div>
 
         <div className="breaking-track">
+
           <motion.div
             className="breaking-content"
             animate={{
@@ -206,27 +241,52 @@ function Navbar() {
               ease: "linear",
             }}
           >
-            <span>Ground dispatches updated across India</span>
+
+            <span>
+              Ground dispatches updated across India
+            </span>
+
             <i>◆</i>
-            <span>News File delivers verified field reporting</span>
+
+            <span>
+              News File delivers verified field reporting
+            </span>
+
             <i>◆</i>
-            <span>Watch News File Live TV</span>
+
+            <span>
+              Watch News File Live TV
+            </span>
+
             <i>◆</i>
-            <span>Ground dispatches updated across India</span>
+
+            <span>
+              Ground dispatches updated across India
+            </span>
+
             <i>◆</i>
-            <span>News File delivers verified field reporting</span>
+
+            <span>
+              News File delivers verified field reporting
+            </span>
+
             <i>◆</i>
+
           </motion.div>
+
         </div>
       </div>
 
       {/* =========================================
           SIDE MENU
       ========================================= */}
+
       <AnimatePresence>
+
         {menuOpen && (
           <>
             {/* OVERLAY */}
+
             <motion.div
               className="menu-overlay"
               initial={{ opacity: 0 }}
@@ -236,6 +296,7 @@ function Navbar() {
             />
 
             {/* SIDE MENU */}
+
             <motion.aside
               className="side-menu"
               initial={{ x: "-100%" }}
@@ -246,23 +307,32 @@ function Navbar() {
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
+
               <div className="side-menu-header">
+
+                {/* SAME RECTANGULAR LOGO */}
+
                 <div className="side-logo">
-                  NEWS<span>FILE</span>
+                  <NewsFileLogo />
                 </div>
 
                 <motion.button
                   className="close-menu"
                   onClick={() => setMenuOpen(false)}
-                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  whileHover={{
+                    scale: 1.1,
+                    rotate: 90,
+                  }}
                   whileTap={{ scale: 0.9 }}
                   aria-label="Close menu"
                 >
                   <X size={22} />
                 </motion.button>
+
               </div>
 
               <div className="side-menu-links">
+
                 {navItems.map((item, index) => (
                   <motion.button
                     type="button"
@@ -282,22 +352,34 @@ function Navbar() {
                     whileHover={{ x: 6 }}
                     onClick={() => handleMenuNavigation(item)}
                   >
+
                     <span className="side-link-num">
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <span className="side-link-text">{item}</span>
-                    <ChevronRight size={18} className="side-link-arrow" />
+
+                    <span className="side-link-text">
+                      {item}
+                    </span>
+
+                    <ChevronRight
+                      size={18}
+                      className="side-link-arrow"
+                    />
+
                   </motion.button>
                 ))}
+
               </div>
 
               <div className="side-menu-footer">
                 <p>VERIFIED GROUND REPORTING.</p>
                 <p>UNBIASED DISPATCH.</p>
               </div>
+
             </motion.aside>
           </>
         )}
+
       </AnimatePresence>
     </>
   );

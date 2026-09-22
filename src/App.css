@@ -14094,3 +14094,68 @@ a {
   padding-right: 2rem;
   box-sizing: border-box;
 }
+/* =========================================
+   NEWS FILE LOGO
+========================================= */
+
+.news-file-logo {
+  display: inline-flex;
+  flex-direction: column;
+  width: 145px;
+  line-height: 1;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 900;
+  text-align: center;
+  overflow: hidden;
+}
+
+.news-logo-word {
+  background: #e21b23;
+  color: #ffffff;
+  padding: 5px 10px 4px;
+  font-size: 27px;
+  letter-spacing: -1.5px;
+  line-height: 1;
+}
+
+.file-logo-word {
+  background: #00a4df;
+  color: #ffffff;
+  padding: 5px 10px 4px;
+  font-size: 27px;
+  letter-spacing: -1.5px;
+  line-height: 1;
+}
+
+/* =========================================
+   SIDE MENU
+========================================= */
+
+.side-logo .news-file-logo {
+  width: 120px;
+}
+
+.side-logo .news-logo-word,
+.side-logo .file-logo-word {
+  font-size: 23px;
+  padding: 4px 8px;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+  .news-file-logo {
+    width: 115px;
+  }
+
+  .news-logo-word,
+  .file-logo-word {
+    font-size: 22px;
+  }
+
+  .side-logo .news-file-logo {
+    width: 105px;
+  }
+}
