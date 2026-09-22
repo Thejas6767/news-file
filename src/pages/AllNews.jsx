@@ -30,6 +30,8 @@ const stories = [
     description:
       "Get the latest verified developments, reports and voices from across Karnataka.",
     time: "12 MIN AGO",
+    image:
+      "https://images.unsplash.com/photo-1595658658481-d53d3f999875?auto=format&fit=crop&w=1600&q=85",
   },
   {
     id: 2,
@@ -38,6 +40,8 @@ const stories = [
     description:
       "National developments, politics and public affairs from across the country.",
     time: "28 MIN AGO",
+    image:
+      "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1600&q=85",
   },
   {
     id: 3,
@@ -46,6 +50,8 @@ const stories = [
     description:
       "Business intelligence and economic developments that matter.",
     time: "41 MIN AGO",
+    image:
+      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1600&q=85",
   },
   {
     id: 4,
@@ -54,8 +60,13 @@ const stories = [
     description:
       "Political developments with context from the ground.",
     time: "1 HR AGO",
+    image:
+      "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1600&q=85",
   },
 ];
+
+const heroImage =
+  "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=2200&q=85";
 
 /* =========================================
    3D STORY CARD
@@ -108,6 +119,15 @@ function StoryCard({ story, index }) {
         rotateX,
         rotateY,
         transformPerspective: 1200,
+
+        backgroundImage:
+          "linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.42) 45%, rgba(0,0,0,0.94) 100%), url(" +
+          story.image +
+          ")",
+
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}
       initial={{
         opacity: 0,
@@ -321,6 +341,15 @@ function AllNews() {
           style={{
             x: smoothHeroX,
             y: smoothHeroY,
+
+            backgroundImage:
+              "linear-gradient(90deg, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.78) 40%, rgba(0,0,0,0.38) 75%, rgba(0,0,0,0.76) 100%), url(" +
+              heroImage +
+              ")",
+
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
           }}
         />
 
@@ -348,6 +377,19 @@ function AllNews() {
             duration: 8,
             repeat: Infinity,
             ease: "easeInOut",
+          }}
+        />
+
+        {/* Red cinematic ring */}
+        <motion.div
+          className="all-news-hero-ring"
+          animate={{
+            rotate: [0, 360],
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "linear",
           }}
         />
 
@@ -440,9 +482,39 @@ function AllNews() {
             }}
           >
             Every important story. One newsroom.
+            <br />
             Independent reporting across India and
             the world.
           </motion.p>
+
+          <motion.div
+            className="all-news-hero-mini-line"
+            initial={{
+              scaleX: 0,
+            }}
+            animate={{
+              scaleX: 1,
+            }}
+            transition={{
+              delay: 1.1,
+              duration: 0.9,
+            }}
+          />
+
+          <motion.span
+            className="all-news-hero-tagline"
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            transition={{
+              delay: 1.3,
+            }}
+          >
+            REAL STORIES. REAL PEOPLE. REAL TIME.
+          </motion.span>
         </motion.div>
 
         {/* Giant number */}
@@ -678,6 +750,15 @@ function AllNews() {
           >
             <motion.div
               className="all-news-featured-visual"
+              style={{
+                backgroundImage:
+                  "linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.55) 100%), url(" +
+                  filteredStories[0]?.image +
+                  ")",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
               whileHover={{
                 scale: 1.015,
               }}
