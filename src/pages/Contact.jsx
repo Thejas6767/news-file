@@ -1,6 +1,6 @@
+import React from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowUpRight, Mail, MapPin, Send } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ArrowUpRight, Mail, MapPin, Send, Clock, Lock, ShieldCheck } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -57,8 +57,30 @@ function TiltCard({ children, href, className }) {
   );
 }
 
+// Helper component to split text into words while keeping character animations intact without breaking words mid-string
+function AnimatedText({ text, variants, style, className }) {
+  const words = text.split(" ");
+
+  return (
+    <span style={{ display: "inline-block", wordBreak: "keep-all", ...style }} className={className}>
+      {words.map((word, wIdx) => (
+        <span key={wIdx} style={{ display: "inline-block", whiteSpace: "nowrap", marginRight: wIdx < words.length - 1 ? "0.28em" : 0 }}>
+          {word.split("").map((char, cIdx) => (
+            <motion.span
+              key={`${wIdx}-${cIdx}`}
+              variants={variants}
+              style={{ display: "inline-block" }}
+            >
+              {char}
+            </motion.span>
+          ))}
+        </span>
+      ))}
+    </span>
+  );
+}
+
 function Contact() {
-  // Kinetic Character Split Helpers
   const letterContainerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -89,19 +111,6 @@ function Contact() {
     },
   };
 
-  const listItemVariants = {
-    hidden: { opacity: 0, x: -30, filter: "blur(8px)" },
-    visible: {
-      opacity: 1,
-      x: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-    },
-  };
-
-  const lineOne = "Have a story?";
-  const lineTwo = "Tell us.";
-
   return (
     <div className="contact-page" style={{ overflowX: "hidden" }}>
       <Navbar />
@@ -110,93 +119,56 @@ function Contact() {
         {/* =========================================
             CONTACT HERO
         ========================================= */}
-        <section className="contact-hero">
-          <div className="contact-hero-inner">
-            <motion.span
-              className="contact-label"
-              initial={{ opacity: 0, scale: 0.8, letterSpacing: "0.1em" }}
-              animate={{ opacity: 1, scale: 1, letterSpacing: "0.2em" }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            >
-              CONTACT & SUBMISSIONS
-            </motion.span>
+        <section className="contact-hero" style={{ padding: "100px 24px 60px 24px" }}>
+          <div
+            className="contact-hero-inner"
+            style={{
+              maxWidth: "1280px",
+              margin: "0 auto",
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
+              gap: "48px",
+              alignItems: "center",
+              textAlign: "left",
+            }}
+          >
+            {/* LEFT COLUMN: HERO TEXT */}
+            <div>
+              <motion.span
+                className="contact-label"
+                initial={{ opacity: 0, scale: 0.8, letterSpacing: "0.1em" }}
+                animate={{ opacity: 1, scale: 1, letterSpacing: "0.2em" }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                style={{ textAlign: "left", display: "inline-block" }}
+              >
+                CONTACT & SUBMISSIONS
+              </motion.span>
 
-            {/* Kinetic Letter Reveal */}
-            <motion.h1
-              variants={letterContainerVariants}
-              initial="hidden"
-              animate="visible"
-              style={{ perspective: 1000 }}
-            >
-              <span style={{ display: "inline-block" }}>
-                {lineOne.split("").map((char, index) => (
-                  <motion.span
-                    key={`l1-${index}`}
-                    variants={letterVariants}
-                    style={{ display: "inline-block" }}
-                  >
-                    {char === " " ? "\u00A0" : char}
-                  </motion.span>
-                ))}
-              </span>
-              <br />
-              <strong style={{ display: "inline-block" }}>
-                {lineTwo.split("").map((char, index) => (
-                  <motion.span
-                    key={`l2-${index}`}
-                    variants={letterVariants}
-                    style={{ display: "inline-block" }}
-                  >
-                    {char === " " ? "\u00A0" : char}
-                  </motion.span>
-                ))}
-              </strong>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 25, filter: "blur(10px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.8, delay: 0.55 }}
-            >
-              News tips, story submissions and newsroom enquiries can be
-              directed to the News File team.
-            </motion.p>
-          </div>
-        </section>
-
-        {/* =========================================
-            CONTACT INFORMATION
-        ========================================= */}
-        <section className="contact-information">
-          <div className="contact-grid">
-            <motion.div
-              className="contact-intro"
-              initial={{
-                opacity: 0,
-                clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)",
-              }}
-              whileInView={{
-                opacity: 1,
-                clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-              }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 1, ease: [0.25, 1, 0.5, 1] }}
-            >
-              <span>NEWSROOM</span>
-
-              <h2>
-                Connect with
+              {/* Kinetic Letter Reveal with Word-Wrap Fix */}
+              <motion.h1
+                variants={letterContainerVariants}
+                initial="hidden"
+                animate="visible"
+                style={{ perspective: 1000, textAlign: "left", margin: "16px 0" }}
+              >
+                <AnimatedText text="Have a story?" variants={letterVariants} />
                 <br />
-                <strong>News File.</strong>
-              </h2>
+                <AnimatedText text="Tell us." variants={letterVariants} style={{ color: "#d71920" }} />
+              </motion.h1>
 
-              <p>
-                Whether you have a news tip, a story idea, or a submission for
-                our newsroom, reach out using the details below.
-              </p>
-            </motion.div>
+              <motion.p
+                initial={{ opacity: 0, y: 25, filter: "blur(10px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 0.8, delay: 0.55 }}
+                style={{ textAlign: "left", margin: 0, maxWidth: "520px" }}
+              >
+                News tips, story submissions and newsroom enquiries can be
+                directed to the News File team.
+              </motion.p>
+            </div>
 
-            <div className="contact-details">
+            {/* RIGHT COLUMN: TILT CARDS */}
+            <div className="contact-details" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
               <TiltCard
                 href="mailto:newsroom@newsfileindia.com"
                 className="contact-detail-card"
@@ -226,133 +198,315 @@ function Contact() {
         </section>
 
         {/* =========================================
-            SUBMISSION GUIDELINES
+            SUBMISSION GUIDELINES (BALANCED TWO-COLUMN)
         ========================================= */}
-        <section className="submission-section">
-          <div className="submission-inner">
+        <section className="submission-section" style={{ padding: "100px 24px", backgroundColor: "#f9fafb" }}>
+          <div
+            className="submission-inner"
+            style={{
+              maxWidth: "1280px",
+              margin: "0 auto",
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
+              gap: "60px",
+              alignItems: "start",
+            }}
+          >
+            {/* LEFT COLUMN: EDITORIAL PROMISE & BADGE CARD */}
             <motion.div
-              className="submission-heading"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              style={{ textAlign: "left", position: "sticky", top: "120px" }}
             >
-              <span>STORY SUBMISSIONS</span>
-              <h2>
+              <span
+                style={{
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  letterSpacing: "0.2em",
+                  color: "#d71920",
+                  display: "block",
+                  marginBottom: "12px",
+                  textTransform: "uppercase",
+                }}
+              >
+                Story Submissions
+              </span>
+              <h2 style={{ fontSize: "44px", fontWeight: "900", lineHeight: "1.08", color: "#111827", margin: "0 0 20px 0" }}>
                 What to
                 <br />
-                <strong>include.</strong>
+                <strong style={{ color: "#d71920" }}>include.</strong>
               </h2>
+              <p style={{ fontSize: "16px", color: "#4b5563", lineHeight: "1.6", maxWidth: "420px", margin: "0 0 32px 0" }}>
+                We review every tip thoroughly. Please follow these guidelines to help our investigative desk evaluate your submission efficiently.
+              </p>
+
+              {/* EDITORIAL GUARANTEE CARD */}
+              <div
+                style={{
+                  backgroundColor: "#ffffff",
+                  borderRadius: "20px",
+                  padding: "28px",
+                  border: "1px solid #e5e7eb",
+                  boxShadow: "0 20px 40px rgba(0, 0, 0, 0.04)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "20px",
+                }}
+              >
+                {/* LIVE STATUS PILL */}
+                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                  <span style={{ position: "relative", display: "flex", width: "10px", height: "10px" }}>
+                    <motion.span
+                      animate={{ scale: [1, 2, 1], opacity: [0.75, 0, 0.75] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        borderRadius: "50%",
+                        backgroundColor: "#10b981",
+                      }}
+                    />
+                    <span
+                      style={{
+                        position: "relative",
+                        width: "10px",
+                        height: "10px",
+                        borderRadius: "50%",
+                        backgroundColor: "#059669",
+                      }}
+                    />
+                  </span>
+                  <span style={{ fontSize: "12px", fontWeight: "800", letterSpacing: "0.12em", color: "#059669" }}>
+                    CONFIDENTIAL & ENCRYPTED
+                  </span>
+                </div>
+
+                {/* GUARANTEE ITEMS */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px", borderTop: "1px solid #f3f4f6", paddingTop: "16px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                    <div style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#fef2f2", display: "flex", alignItems: "center", justifyContent: "center", color: "#d71920", flexShrink: 0 }}>
+                      <Lock size={18} />
+                    </div>
+                    <div>
+                      <h4 style={{ margin: 0, fontSize: "14px", fontWeight: "800", color: "#111827" }}>Source Protection</h4>
+                      <p style={{ margin: "2px 0 0 0", fontSize: "13px", color: "#6b7280" }}>Anonymity guaranteed upon request.</p>
+                    </div>
+                  </div>
+
+                  <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                    <div style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#fef2f2", display: "flex", alignItems: "center", justifyContent: "center", color: "#d71920", flexShrink: 0 }}>
+                      <Clock size={18} />
+                    </div>
+                    <div>
+                      <h4 style={{ margin: 0, fontSize: "14px", fontWeight: "800", color: "#111827" }}>24-48h Desk Review</h4>
+                      <p style={{ margin: "2px 0 0 0", fontSize: "13px", color: "#6b7280" }}>Urgent leads prioritized immediately.</p>
+                    </div>
+                  </div>
+
+                  <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                    <div style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#fef2f2", display: "flex", alignItems: "center", justifyContent: "center", color: "#d71920", flexShrink: 0 }}>
+                      <ShieldCheck size={18} />
+                    </div>
+                    <div>
+                      <h4 style={{ margin: 0, fontSize: "14px", fontWeight: "800", color: "#111827" }}>Independent Fact-Check</h4>
+                      <p style={{ margin: "2px 0 0 0", fontSize: "13px", color: "#6b7280" }}>Rigorous editorial verification.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </motion.div>
 
+            {/* RIGHT COLUMN: SUBMISSION STEPS */}
             <motion.div
               className="submission-list"
               variants={listContainerVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
+              style={{ display: "flex", flexDirection: "column", gap: "20px" }}
             >
-              <motion.div
-                className="submission-item"
-                variants={listItemVariants}
-                whileHover={{ x: 12, backgroundColor: "rgba(0,0,0,0.02)" }}
-                transition={{ duration: 0.2 }}
-              >
-                <span>01</span>
-                <p>
-                  A clear description of the story or development you want to
-                  bring to our attention.
-                </p>
-              </motion.div>
+              {/* STEP 1 */}
+              <TiltCard>
+                <div
+                  style={{
+                    backgroundColor: "#ffffff",
+                    borderRadius: "16px",
+                    padding: "28px 32px",
+                    border: "1px solid #f3f4f6",
+                    boxShadow: "0 10px 30px rgba(0,0,0,0.03)",
+                    textAlign: "left",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "12px" }}>
+                    <span
+                      style={{
+                        backgroundColor: "#fef2f2",
+                        color: "#d71920",
+                        fontWeight: "900",
+                        fontSize: "13px",
+                        padding: "4px 10px",
+                        borderRadius: "20px",
+                        border: "1px solid rgba(215,25,32,0.15)",
+                      }}
+                    >
+                      01
+                    </span>
+                    <h3 style={{ margin: 0, fontSize: "18px", fontWeight: "800", color: "#111827" }}>
+                      Pitch Summary
+                    </h3>
+                  </div>
+                  <p style={{ margin: 0, fontSize: "15px", color: "#4b5563", lineHeight: "1.6" }}>
+                    A clear description of the story or development you want to bring to our attention.
+                  </p>
+                </div>
+              </TiltCard>
 
-              <motion.div
-                className="submission-item"
-                variants={listItemVariants}
-                whileHover={{ x: 12, backgroundColor: "rgba(0,0,0,0.02)" }}
-                transition={{ duration: 0.2 }}
-              >
-                <span>02</span>
-                <p>
-                  Relevant details, documents, photographs or other supporting
-                  information where available.
-                </p>
-              </motion.div>
+              {/* STEP 2 */}
+              <TiltCard>
+                <div
+                  style={{
+                    backgroundColor: "#ffffff",
+                    borderRadius: "16px",
+                    padding: "28px 32px",
+                    border: "1px solid #f3f4f6",
+                    boxShadow: "0 10px 30px rgba(0,0,0,0.03)",
+                    textAlign: "left",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "12px" }}>
+                    <span
+                      style={{
+                        backgroundColor: "#fef2f2",
+                        color: "#d71920",
+                        fontWeight: "900",
+                        fontSize: "13px",
+                        padding: "4px 10px",
+                        borderRadius: "20px",
+                        border: "1px solid rgba(215,25,32,0.15)",
+                      }}
+                    >
+                      02
+                    </span>
+                    <h3 style={{ margin: 0, fontSize: "18px", fontWeight: "800", color: "#111827" }}>
+                      Evidence & Media
+                    </h3>
+                  </div>
+                  <p style={{ margin: 0, fontSize: "15px", color: "#4b5563", lineHeight: "1.6" }}>
+                    Relevant details, documents, photographs, or supporting information where available.
+                  </p>
+                </div>
+              </TiltCard>
 
-              <motion.div
-                className="submission-item"
-                variants={listItemVariants}
-                whileHover={{ x: 12, backgroundColor: "rgba(0,0,0,0.02)" }}
-                transition={{ duration: 0.2 }}
-              >
-                <span>03</span>
-                <p>
-                  Your contact information so the newsroom can follow up when
-                  necessary.
-                </p>
-              </motion.div>
+              {/* STEP 3 */}
+              <TiltCard>
+                <div
+                  style={{
+                    backgroundColor: "#ffffff",
+                    borderRadius: "16px",
+                    padding: "28px 32px",
+                    border: "1px solid #f3f4f6",
+                    boxShadow: "0 10px 30px rgba(0,0,0,0.03)",
+                    textAlign: "left",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "12px" }}>
+                    <span
+                      style={{
+                        backgroundColor: "#fef2f2",
+                        color: "#d71920",
+                        fontWeight: "900",
+                        fontSize: "13px",
+                        padding: "4px 10px",
+                        borderRadius: "20px",
+                        border: "1px solid rgba(215,25,32,0.15)",
+                      }}
+                    >
+                      03
+                    </span>
+                    <h3 style={{ margin: 0, fontSize: "18px", fontWeight: "800", color: "#111827" }}>
+                      Contact Info
+                    </h3>
+                  </div>
+                  <p style={{ margin: 0, fontSize: "15px", color: "#4b5563", lineHeight: "1.6" }}>
+                    Your contact details so the newsroom team can follow up when necessary.
+                  </p>
+                </div>
+              </TiltCard>
             </motion.div>
           </div>
         </section>
 
         {/* =========================================
-            CTA WITH RADIAL PULSE
+            CTA CARD SECTION (VISUALLY SEPARATED)
         ========================================= */}
-        <section className="contact-cta">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 30 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div style={{ position: "relative", display: "inline-block" }}>
-              <motion.div
-                style={{
-                  position: "absolute",
-                  inset: -12,
-                  borderRadius: "50%",
-                  border: "2px solid #d71920",
-                  pointerEvents: "none",
-                }}
-                animate={{ scale: [1, 1.4, 1], opacity: [0.8, 0, 0.8] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <Send size={30} />
-            </div>
-
-            <h2>
-              Ready to share
-              <br />
-              the story?
-            </h2>
-
-            <motion.a
-              href="mailto:newsroom@newsfileindia.com"
-              className="contact-cta-button"
-              whileHover={{ scale: 1.05, boxShadow: "0 12px 35px rgba(215,25,32,0.3)" }}
-              whileTap={{ scale: 0.96 }}
+        <section style={{ padding: "80px 24px 60px 24px", backgroundColor: "#0b0b0c" }}>
+          <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+            <div
+              style={{
+                backgroundColor: "#131417",
+                borderRadius: "24px",
+                padding: "60px 32px",
+                textAlign: "center",
+                border: "1px solid #23252a",
+                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
+                maxWidth: "800px",
+                margin: "0 auto",
+                position: "relative",
+                overflow: "hidden",
+              }}
             >
-              Contact the newsroom
-              <motion.span
-                animate={{ x: [0, 4, 0], y: [0, -4, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              <div
+                style={{
+                  width: "56px",
+                  height: "56px",
+                  borderRadius: "50%",
+                  backgroundColor: "rgba(215, 25, 32, 0.12)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "0 auto 20px auto",
+                  color: "#d71920",
+                }}
               >
-                <ArrowUpRight size={18} />
-              </motion.span>
-            </motion.a>
-          </motion.div>
-        </section>
+                <Send size={24} />
+              </div>
 
-        {/* =========================================
-            BACK TO NEWS
-        ========================================= */}
-        <div className="contact-back">
-          <motion.div whileHover={{ x: -4 }} transition={{ type: "spring", stiffness: 300 }}>
-            <Link to="/news">
-              Explore all news
-              <ArrowUpRight size={17} />
-            </Link>
-          </motion.div>
-        </div>
+              <h2
+                style={{
+                  fontSize: "36px",
+                  fontWeight: "900",
+                  color: "#ffffff",
+                  margin: "0 0 24px 0",
+                  lineHeight: "1.2",
+                }}
+              >
+                Ready to share the story?
+              </h2>
+
+              <a
+                href="mailto:newsroom@newsfileindia.com"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  backgroundColor: "#d71920",
+                  color: "#ffffff",
+                  fontWeight: "700",
+                  fontSize: "15px",
+                  padding: "14px 28px",
+                  borderRadius: "8px",
+                  textDecoration: "none",
+                  transition: "background-color 0.2s ease, transform 0.2s ease",
+                }}
+              >
+                Contact the newsroom
+                <ArrowUpRight size={18} />
+              </a>
+            </div>
+          </div>
+        </section>
       </main>
 
       <Footer />

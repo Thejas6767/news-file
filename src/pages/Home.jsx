@@ -93,16 +93,8 @@ function Home() {
               BREAKING: Ground dispatches updated
             </motion.div>
 
-            {/* Kinetic Text Animation with controlled wrapping and fluid sizing */}
-            <div 
-              className="hero-headline-wrapper my-4" 
-              style={{
-                maxWidth: "100%",
-                wordBreak: "normal",
-                overflowWrap: "break-word",
-                whiteSpace: "normal"
-              }}
-            >
+            {/* Kinetic Text Animation Wrapper */}
+            <div className="hero-headline-wrapper my-4">
               <KineticHeadline
                 text="Different languages. One standard of truth."
                 className="hero-headline-kinetic text-3xl sm:text-5xl md:text-6xl font-black leading-tight tracking-tight text-red-600"
@@ -311,4 +303,5 @@ function Home() {
   );
 }
 
+// Fixed missing default export causing the Vite module loading error
 export default Home;

@@ -2,9 +2,8 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import {
   ArrowUpRight,
+  ChevronRight,
   Clock3,
-  Filter,
-  Flame,
   Search,
   TrendingUp,
 } from "lucide-react";
@@ -78,27 +77,20 @@ function StoryCard({ story, index }) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const rotateX = useSpring(
-    useTransform(mouseY, [-0.5, 0.5], [7, -7]),
-    {
-      stiffness: 180,
-      damping: 18,
-    }
-  );
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [7, -7]), {
+    stiffness: 180,
+    damping: 18,
+  });
 
-  const rotateY = useSpring(
-    useTransform(mouseX, [-0.5, 0.5], [-7, 7]),
-    {
-      stiffness: 180,
-      damping: 18,
-    }
-  );
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-7, 7]), {
+    stiffness: 180,
+    damping: 18,
+  });
 
   const handleMouseMove = (event) => {
     if (!cardRef.current) return;
 
     const rect = cardRef.current.getBoundingClientRect();
-
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
 
@@ -124,73 +116,28 @@ function StoryCard({ story, index }) {
           "linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.42) 45%, rgba(0,0,0,0.94) 100%), url(" +
           story.image +
           ")",
-
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
-      initial={{
-        opacity: 0,
-        y: 80,
-        scale: 0.94,
-      }}
-      whileInView={{
-        opacity: 1,
-        y: 0,
-        scale: 1,
-      }}
-      viewport={{
-        once: true,
-        amount: 0.2,
-      }}
-      transition={{
-        duration: 0.8,
-        delay: index * 0.12,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      whileHover={{
-        scale: 1.015,
-      }}
+      initial={{ opacity: 0, y: 80, scale: 0.94 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.8, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ scale: 1.015 }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <motion.div
-        className="all-news-card-glow"
-        initial={{ opacity: 0 }}
-        whileHover={{ opacity: 1 }}
-      />
+      <motion.div className="all-news-card-glow" initial={{ opacity: 0 }} whileHover={{ opacity: 1 }} />
 
       <div className="all-news-card-top">
-        <motion.span
-          className="all-news-card-number"
-          whileHover={{
-            scale: 1.15,
-            x: 4,
-          }}
-        >
+        <motion.span className="all-news-card-number" whileHover={{ scale: 1.15, x: 4 }}>
           {String(index + 2).padStart(2, "0")}
         </motion.span>
-
-        <motion.span
-          className="all-news-category"
-          whileHover={{
-            x: 5,
-          }}
-        >
+        <motion.span className="all-news-category" whileHover={{ x: 5 }}>
           {story.category}
         </motion.span>
-
-        <motion.div
-          whileHover={{
-            rotate: 45,
-            scale: 1.2,
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 300,
-            damping: 15,
-          }}
-        >
+        <motion.div whileHover={{ rotate: 45, scale: 1.2 }} transition={{ type: "spring", stiffness: 300, damping: 15 }}>
           <ArrowUpRight size={17} />
         </motion.div>
       </div>
@@ -200,48 +147,23 @@ function StoryCard({ story, index }) {
         initial={{ scaleX: 0 }}
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true }}
-        transition={{
-          duration: 0.9,
-          delay: index * 0.12 + 0.2,
-        }}
+        transition={{ duration: 0.9, delay: index * 0.12 + 0.2 }}
       />
 
       <motion.h3
-        initial={{
-          opacity: 0,
-          y: 15,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        viewport={{
-          once: true,
-        }}
-        transition={{
-          duration: 0.6,
-          delay: index * 0.12 + 0.25,
-        }}
+        initial={{ opacity: 0, y: 15 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: index * 0.12 + 0.25 }}
       >
         {story.title}
       </motion.h3>
 
       <motion.p
-        initial={{
-          opacity: 0,
-          y: 12,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        viewport={{
-          once: true,
-        }}
-        transition={{
-          duration: 0.6,
-          delay: index * 0.12 + 0.35,
-        }}
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: index * 0.12 + 0.35 }}
       >
         {story.description}
       </motion.p>
@@ -251,29 +173,12 @@ function StoryCard({ story, index }) {
           <Clock3 size={13} />
           {story.time}
         </span>
-
-        <motion.span
-          whileHover={{
-            letterSpacing: "0.18em",
-          }}
-        >
-          NEWS FILE
-        </motion.span>
+        <motion.span whileHover={{ letterSpacing: "0.18em" }}>NEWS FILE</motion.span>
       </div>
 
-      <Link
-        to={`/article/${story.id}`}
-        className="all-news-card-link"
-        aria-label={`Read ${story.title}`}
-      >
+      <Link to={`/article/${story.id}`} className="all-news-card-link" aria-label={`Read ${story.title}`}>
         <span>READ STORY</span>
-
-        <motion.span
-          whileHover={{
-            x: 5,
-            y: -5,
-          }}
-        >
+        <motion.span whileHover={{ x: 5, y: -5 }}>
           <ArrowUpRight size={16} />
         </motion.span>
       </Link>
@@ -287,466 +192,292 @@ function StoryCard({ story, index }) {
 
 function AllNews() {
   const [activeCategory, setActiveCategory] = useState("ALL");
+  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
+  const contentRef = useRef(null);
 
   const filteredStories =
     activeCategory === "ALL"
       ? stories
-      : stories.filter(
-          (story) => story.category === activeCategory
-        );
+      : stories.filter((story) => story.category === activeCategory);
 
-  /* HERO PARALLAX */
-
-  const heroX = useMotionValue(0);
-  const heroY = useMotionValue(0);
-
-  const smoothHeroX = useSpring(heroX, {
-    stiffness: 80,
-    damping: 20,
-  });
-
-  const smoothHeroY = useSpring(heroY, {
-    stiffness: 80,
-    damping: 20,
-  });
-
-  const handleHeroMouseMove = (event) => {
-    const x = event.clientX / window.innerWidth - 0.5;
-    const y = event.clientY / window.innerHeight - 0.5;
-
-    heroX.set(x * 25);
-    heroY.set(y * 25);
+  const handleHeroMouseMove = (e) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    setMousePos({
+      x: (clientX / innerWidth) * 100,
+      y: (clientY / innerHeight) * 100,
+    });
   };
 
-  const resetHero = () => {
-    heroX.set(0);
-    heroY.set(0);
+  const handleCategoryClick = (category) => {
+    setActiveCategory(category);
+    if (contentRef.current) {
+      const offset = 80;
+      const elementPosition = contentRef.current.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - offset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
   };
 
   return (
-    <div
-      className="all-news-page"
-      onMouseMove={handleHeroMouseMove}
-      onMouseLeave={resetHero}
-    >
+    <div className="all-news-page">
       <Navbar />
 
       {/* =====================================
-          HERO
+          CINEMATIC HERO
       ===================================== */}
 
-      <section className="all-news-hero">
-        <motion.div
-          className="all-news-hero-bg"
+      <section
+        className="all-news-hero"
+        onMouseMove={handleHeroMouseMove}
+        style={{
+          position: "relative",
+          minHeight: "85vh",
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          overflow: "hidden",
+          backgroundColor: "#0a0a0a",
+          color: "#ffffff",
+          padding: "112px 32px 48px 32px",
+          boxSizing: "border-box",
+        }}
+      >
+        <div
           style={{
-            x: smoothHeroX,
-            y: smoothHeroY,
-
-            backgroundImage:
-              "linear-gradient(90deg, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.78) 40%, rgba(0,0,0,0.38) 75%, rgba(0,0,0,0.76) 100%), url(" +
-              heroImage +
-              ")",
-
+            position: "absolute",
+            inset: 0,
+            zIndex: 0,
+            backgroundImage: `linear-gradient(180deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.95) 100%), url(${heroImage})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
+            opacity: 0.4,
           }}
         />
 
-        {/* Cinematic light */}
-        <motion.div
-          className="all-news-hero-light"
-          animate={{
-            scale: [1, 1.15, 1],
-            opacity: [0.35, 0.55, 0.35],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
+        <div
+          style={{
+            pointerEvents: "none",
+            position: "absolute",
+            inset: 0,
+            zIndex: 0,
+            background: `radial-gradient(600px circle at ${mousePos.x}% ${mousePos.y}%, rgba(220, 38, 38, 0.35), transparent 80%)`,
+            transition: "background 0.2s ease-out",
           }}
         />
 
-        {/* Floating grid */}
-        <motion.div
-          className="all-news-hero-grid"
-          animate={{
-            y: [0, -20, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-
-        {/* Red cinematic ring */}
-        <motion.div
-          className="all-news-hero-ring"
-          animate={{
-            rotate: [0, 360],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-
-        <motion.div
-          className="all-news-hero-content"
-          initial={{
-            opacity: 0,
-            y: 80,
-            filter: "blur(12px)",
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-          }}
-          transition={{
-            duration: 1.2,
-            ease: [0.16, 1, 0.3, 1],
+        {/* TOP META BAR */}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 10,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+            paddingBottom: "24px",
+            flexWrap: "wrap",
+            gap: "16px",
           }}
         >
           <motion.div
-            className="all-news-eyebrow"
-            initial={{
-              opacity: 0,
-              x: -40,
-            }}
-            animate={{
-              opacity: 1,
-              x: 0,
-            }}
-            transition={{
-              delay: 0.25,
-              duration: 0.8,
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "10px",
+              padding: "6px 14px",
+              borderRadius: "9999px",
+              backgroundColor: "rgba(220, 38, 38, 0.15)",
+              border: "1px solid rgba(220, 38, 38, 0.3)",
+              color: "#ef4444",
+              fontSize: "12px",
+              fontFamily: "monospace",
+              fontWeight: "700",
+              letterSpacing: "1px",
             }}
           >
-            <Flame size={17} />
-
-            <span>
-              NEWS FILE / NEWSROOM
+            <span style={{ position: "relative", display: "flex", height: "8px", width: "8px" }}>
+              <motion.span
+                animate={{ scale: [1, 2.2, 1], opacity: [0.8, 0, 0.8] }}
+                transition={{ repeat: Infinity, duration: 1.8 }}
+                style={{ position: "absolute", width: "100%", height: "100%", borderRadius: "50%", backgroundColor: "#ef4444" }}
+              />
+              <span style={{ position: "relative", width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "#dc2626" }} />
             </span>
+            LIVE NEWSROOM • UPDATED 2 MIN AGO
           </motion.div>
 
-          <motion.h1
-            initial={{
-              opacity: 0,
-              scale: 0.9,
-              y: 40,
-            }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              y: 0,
-            }}
-            transition={{
-              delay: 0.35,
-              duration: 1.1,
-              ease: [0.16, 1, 0.3, 1],
+          <div
+            style={{
+              display: "flex",
+              gap: "16px",
+              fontSize: "12px",
+              fontFamily: "monospace",
+              color: "#a3a3a3",
+              letterSpacing: "1px",
             }}
           >
-            ALL
-            <motion.span
-              initial={{
-                clipPath: "inset(0 100% 0 0)",
-              }}
-              animate={{
-                clipPath: "inset(0 0% 0 0)",
-              }}
-              transition={{
-                delay: 0.65,
-                duration: 0.9,
-                ease: [0.16, 1, 0.3, 1],
+            <span>VOL. 08</span>
+            <span>•</span>
+            <span>INDEPENDENT JOURNALISM</span>
+          </div>
+        </div>
+
+        {/* HERO MAIN TITLE & CONTENT */}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 10,
+            margin: "auto 0",
+            padding: "48px 0",
+            maxWidth: "1024px",
+          }}
+        >
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}>
+            <h1
+              style={{
+                fontSize: "clamp(3.5rem, 8vw, 8rem)",
+                fontWeight: "900",
+                letterSpacing: "-2px",
+                margin: 0,
+                lineHeight: "0.95",
+                textTransform: "uppercase",
               }}
             >
-              NEWS.
-            </motion.span>
-          </motion.h1>
+              ALL{" "}
+              <span
+                style={{
+                  background: "linear-gradient(90deg, #dc2626 0%, #ef4444 50%, #f59e0b 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                NEWS.
+              </span>
+            </h1>
+          </motion.div>
 
           <motion.p
-            initial={{
-              opacity: 0,
-              y: 25,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              delay: 0.8,
-              duration: 0.8,
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            style={{
+              marginTop: "24px",
+              fontSize: "clamp(1.125rem, 2vw, 1.5rem)",
+              color: "#d4d4d4",
+              maxWidth: "640px",
+              fontWeight: "300",
+              lineHeight: "1.6",
             }}
           >
-            Every important story. One newsroom.
-            <br />
-            Independent reporting across India and
-            the world.
+            Unfiltered reporting, real-time context, and ground stories across India and the globe.
           </motion.p>
 
+          {/* QUICK CATEGORY CHIPS */}
           <motion.div
-            className="all-news-hero-mini-line"
-            initial={{
-              scaleX: 0,
-            }}
-            animate={{
-              scaleX: 1,
-            }}
-            transition={{
-              delay: 1.1,
-              duration: 0.9,
-            }}
-          />
-
-          <motion.span
-            className="all-news-hero-tagline"
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              delay: 1.3,
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            style={{
+              marginTop: "32px",
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "8px",
             }}
           >
-            REAL STORIES. REAL PEOPLE. REAL TIME.
-          </motion.span>
-        </motion.div>
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => handleCategoryClick(cat)}
+                style={{
+                  padding: "8px 16px",
+                  fontSize: "12px",
+                  fontWeight: "700",
+                  letterSpacing: "1px",
+                  cursor: "pointer",
+                  transition: "all 0.3s ease",
+                  borderRadius: "4px",
+                  border: activeCategory === cat ? "1px solid #dc2626" : "1px solid #262626",
+                  backgroundColor: activeCategory === cat ? "#dc2626" : "rgba(23, 23, 23, 0.7)",
+                  color: activeCategory === cat ? "#ffffff" : "#a3a3a3",
+                  boxShadow: activeCategory === cat ? "0 10px 15px -3px rgba(220, 38, 38, 0.3)" : "none",
+                }}
+              >
+                {cat}
+              </button>
+            ))}
+          </motion.div>
+        </div>
 
-        {/* Giant number */}
-        <motion.div
-          className="all-news-number"
-          initial={{
-            opacity: 0,
-            scale: 0.5,
-            rotate: -10,
-          }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-            rotate: 0,
-          }}
-          transition={{
-            delay: 0.5,
-            duration: 1.2,
-            ease: [0.16, 1, 0.3, 1],
+        {/* BOTTOM BREAKING TICKER */}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 10,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+            paddingTop: "16px",
+            fontSize: "12px",
+            fontFamily: "monospace",
+            color: "#a3a3a3",
+            flexWrap: "wrap",
+            gap: "12px",
           }}
         >
-          <motion.span
-            animate={{
-              y: [0, -12, 0],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            08
-          </motion.span>
-        </motion.div>
-
-        {/* Live indicator */}
-        <motion.div
-          className="all-news-live"
-          initial={{
-            opacity: 0,
-            x: 40,
-          }}
-          animate={{
-            opacity: 1,
-            x: 0,
-          }}
-          transition={{
-            delay: 1,
-            duration: 0.7,
-          }}
-        >
-          <motion.span
-            animate={{
-              scale: [1, 1.5, 1],
-              opacity: [1, 0.5, 1],
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-            }}
-          />
-
-          LIVE NEWSROOM
-        </motion.div>
-      </section>
-
-      {/* =====================================
-          FILTERS
-      ===================================== */}
-
-      <section className="all-news-filter-section">
-        <motion.div
-          className="all-news-filter-top"
-          initial={{
-            opacity: 0,
-            y: 30,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-          }}
-          transition={{
-            duration: 0.8,
-          }}
-        >
-          <div className="all-news-section-label">
-            <motion.span
-              whileHover={{
-                scale: 1.2,
-              }}
-            >
-              01
-            </motion.span>
-
-            NEWSROOM
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <TrendingUp size={14} color="#ef4444" />
+            <span style={{ color: "#ffffff", fontWeight: "700", letterSpacing: "1px" }}>BREAKING:</span>
+            <span>Key economic indicators updated for Q3 with major shifts in tech sector...</span>
           </div>
 
-          <div className="all-news-count">
-            <TrendingUp size={15} />
-
-            <motion.span
-              animate={{
-                opacity: [0.5, 1, 0.5],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-              }}
-            >
-              24 STORIES TODAY
-            </motion.span>
-          </div>
-        </motion.div>
-
-        <div className="all-news-filters">
-          {categories.map((category, index) => (
-            <motion.button
-              key={category}
-              className={
-                activeCategory === category
-                  ? "active"
-                  : ""
-              }
-              onClick={() =>
-                setActiveCategory(category)
-              }
-              initial={{
-                opacity: 0,
-                y: 20,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                delay: index * 0.06,
-                duration: 0.5,
-              }}
-              whileHover={{
-                y: -4,
-              }}
-              whileTap={{
-                scale: 0.94,
-              }}
-            >
-              {activeCategory === category && (
-                <motion.span
-                  layoutId="activeNewsCategory"
-                  className="filter-active-bg"
-                  transition={{
-                    type: "spring",
-                    stiffness: 400,
-                    damping: 30,
-                  }}
-                />
-              )}
-
-              <span>
-                {category}
-              </span>
-            </motion.button>
-          ))}
-
-          <motion.button
-            className="filter-button"
-            whileHover={{
-              y: -4,
-              rotate: -1,
-            }}
-            whileTap={{
-              scale: 0.94,
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "4px",
+              color: "#ef4444",
+              cursor: "pointer",
+              fontWeight: "700",
             }}
           >
-            <Filter size={15} />
-            FILTER
-          </motion.button>
+            <span>REAL STORIES. REAL TIME.</span>
+            <ChevronRight size={14} />
+          </div>
         </div>
       </section>
 
       {/* =====================================
-          FEATURED STORY
+          FEATURED STORY (SCROLL TARGET)
       ===================================== */}
-
-      <section className="all-news-featured-section">
+      <section className="all-news-featured-section" ref={contentRef} style={{ paddingTop: '64px' }}>
         <motion.div
           className="all-news-section-label"
-          initial={{
-            opacity: 0,
-            x: -30,
-          }}
-          whileInView={{
-            opacity: 1,
-            x: 0,
-          }}
-          viewport={{
-            once: true,
-          }}
-          transition={{
-            duration: 0.7,
-          }}
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
         >
-          <span>02</span>
+          <span>01</span>
           TOP STORY
         </motion.div>
 
         {filteredStories.length > 0 ? (
           <motion.article
             className="all-news-featured"
-            initial={{
-              opacity: 0,
-              y: 100,
-              scale: 0.94,
-            }}
-            whileInView={{
-              opacity: 1,
-              y: 0,
-              scale: 1,
-            }}
-            viewport={{
-              once: true,
-              amount: 0.2,
-            }}
-            transition={{
-              duration: 1,
-              ease: [0.16, 1, 0.3, 1],
-            }}
+            initial={{ opacity: 0, y: 100, scale: 0.94 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
             <motion.div
               className="all-news-featured-visual"
@@ -759,60 +490,29 @@ function AllNews() {
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
               }}
-              whileHover={{
-                scale: 1.015,
-              }}
-              transition={{
-                duration: 0.6,
-              }}
+              whileHover={{ scale: 1.015 }}
+              transition={{ duration: 0.6 }}
             >
               <motion.div
                 className="all-news-featured-grid"
-                animate={{
-                  backgroundPosition: [
-                    "0px 0px",
-                    "60px 60px",
-                    "0px 0px",
-                  ],
-                }}
-                transition={{
-                  duration: 12,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
+                animate={{ backgroundPosition: ["0px 0px", "60px 60px", "0px 0px"] }}
+                transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
               />
 
               <motion.div
                 className="all-news-featured-mark"
-                animate={{
-                  rotate: [0, 3, 0, -3, 0],
-                  scale: [1, 1.03, 1],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+                animate={{ rotate: [0, 3, 0, -3, 0], scale: [1, 1.03, 1] }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
               >
                 NF
               </motion.div>
 
               <motion.div
                 className="all-news-featured-label"
-                initial={{
-                  opacity: 0,
-                  y: 15,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  delay: 0.5,
-                }}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
               >
                 DEVELOPING STORY
               </motion.div>
@@ -820,68 +520,29 @@ function AllNews() {
 
             <motion.div
               className="all-news-featured-copy"
-              initial={{
-                opacity: 0,
-                x: 70,
-              }}
-              whileInView={{
-                opacity: 1,
-                x: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                duration: 0.9,
-                delay: 0.2,
-                ease: [0.16, 1, 0.3, 1],
-              }}
+              initial={{ opacity: 0, x: 70 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
-              <motion.div
-                className="all-news-category"
-                whileHover={{
-                  x: 6,
-                }}
-              >
+              <motion.div className="all-news-category" whileHover={{ x: 6 }}>
                 {filteredStories[0]?.category}
               </motion.div>
 
               <motion.h2
-                initial={{
-                  opacity: 0,
-                  y: 30,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  delay: 0.35,
-                  duration: 0.8,
-                }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.35, duration: 0.8 }}
               >
                 {filteredStories[0]?.title}
               </motion.h2>
 
               <motion.p
-                initial={{
-                  opacity: 0,
-                  y: 20,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  delay: 0.45,
-                  duration: 0.7,
-                }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.45, duration: 0.7 }}
               >
                 {filteredStories[0]?.description}
               </motion.p>
@@ -893,27 +554,10 @@ function AllNews() {
                 </span>
               </div>
 
-              <motion.div
-                whileHover={{
-                  x: 8,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                }}
-              >
-                <Link
-                  to={`/article/${filteredStories[0]?.id}`}
-                  className="all-news-read"
-                >
+              <motion.div whileHover={{ x: 8 }} transition={{ type: "spring", stiffness: 300 }}>
+                <Link to={`/article/${filteredStories[0]?.id}`} className="all-news-read">
                   READ STORY
-
-                  <motion.span
-                    whileHover={{
-                      rotate: 45,
-                      scale: 1.15,
-                    }}
-                  >
+                  <motion.span whileHover={{ rotate: 45, scale: 1.15 }}>
                     <ArrowUpRight size={18} />
                   </motion.span>
                 </Link>
@@ -923,183 +567,64 @@ function AllNews() {
         ) : (
           <motion.div
             className="all-news-empty"
-            initial={{
-              opacity: 0,
-              scale: 0.95,
-            }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-            }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
           >
-            NO STORIES AVAILABLE
+            NO STORIES AVAILABLE IN THIS CATEGORY
           </motion.div>
         )}
       </section>
 
       {/* =====================================
-          LATEST STORIES
+          LATEST STORIES GRID
       ===================================== */}
 
       <section className="all-news-grid-section">
-        <div className="all-news-grid-heading">
+        <div className="all-news-grid-heading" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <motion.div
             className="all-news-section-label"
-            initial={{
-              opacity: 0,
-              x: -30,
-            }}
-            whileInView={{
-              opacity: 1,
-              x: 0,
-            }}
-            viewport={{
-              once: true,
-            }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
           >
-            <span>03</span>
+            <span>02</span>
             LATEST STORIES
           </motion.div>
 
-          <motion.div
-            className="all-news-search"
-            whileHover={{
-              x: 5,
-            }}
-          >
-            <Search size={16} />
-            SEARCH NEWS
-          </motion.div>
+          
         </div>
 
         <div className="all-news-grid">
-          {filteredStories
-            .slice(1)
-            .map((story, index) => (
-              <StoryCard
-                key={story.id}
-                story={story}
-                index={index}
-              />
-            ))}
+          {filteredStories.slice(1).map((story, index) => (
+            <StoryCard key={story.id} story={story} index={index} />
+          ))}
         </div>
-      </section>
 
-      {/* =====================================
-          CLOSING
-      ===================================== */}
-
-      <section className="all-news-closing">
-        <motion.div
-          className="all-news-closing-bg"
-          initial={{
-            opacity: 0,
-            scale: 0.8,
-          }}
-          whileInView={{
-            opacity: 1,
-            scale: 1,
-          }}
-          viewport={{
-            once: true,
-          }}
-          transition={{
-            duration: 1.2,
-          }}
-        >
-          NEWS
-        </motion.div>
-
-        <motion.div
-          className="all-news-closing-content"
-          initial={{
-            opacity: 0,
-            y: 80,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-          }}
-          transition={{
-            duration: 1,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-        >
-          <motion.span
-            initial={{
-              opacity: 0,
-              letterSpacing: "0.5em",
-            }}
-            whileInView={{
-              opacity: 1,
-              letterSpacing: "0.18em",
-            }}
-            viewport={{
-              once: true,
-            }}
-            transition={{
-              duration: 1,
-            }}
-          >
-            STAY INFORMED
-          </motion.span>
-
-          <h2>
-            THE STORY
-            <br />
-
-            <motion.strong
-              initial={{
-                clipPath: "inset(0 100% 0 0)",
-              }}
-              whileInView={{
-                clipPath: "inset(0 0% 0 0)",
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                duration: 1,
-                delay: 0.2,
-              }}
-            >
-              NEVER STOPS.
-            </motion.strong>
-          </h2>
-
-          <p>
-            Follow the stories that matter with News
-            File's independent newsroom.
-          </p>
-
-          <motion.div
-            whileHover={{
-              scale: 1.04,
-            }}
-            whileTap={{
-              scale: 0.96,
-            }}
-          >
+        {/* BACK TO HOME BUTTON (MOVED TO BOTTOM RIGHT) */}
+        <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "32px" }}>
+          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
             <Link
               to="/"
-              className="all-news-home-button"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                backgroundColor: "#dc2626",
+                color: "#ffffff",
+                padding: "10px 18px",
+                fontSize: "12px",
+                fontWeight: "700",
+                letterSpacing: "1px",
+                borderRadius: "4px",
+                textDecoration: "none",
+                transition: "background-color 0.2s ease",
+              }}
             >
               BACK TO HOME
-
-              <motion.span
-                whileHover={{
-                  x: 5,
-                  y: -5,
-                }}
-              >
-                <ArrowUpRight size={18} />
-              </motion.span>
+              <ArrowUpRight size={16} />
             </Link>
           </motion.div>
-        </motion.div>
+        </div>
       </section>
 
       <Footer />

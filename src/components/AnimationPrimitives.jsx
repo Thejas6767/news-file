@@ -1,4 +1,3 @@
-// src/components/AnimationPrimitives.jsx
 import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
@@ -6,22 +5,26 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
     1. 3D PERSPECTIVE TILT CARD
 ========================================= */
 export function PerspectiveCard({ children, onClick, className = "" }) {
+  const containerRef = useRef(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 20 });
-  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 20 });
+  const mouseXSpring = useSpring(x, { stiffness: 250, damping: 25 });
+  const mouseYSpring = useSpring(y, { stiffness: 250, damping: 25 });
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["12deg", "-12deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-12deg", "12deg"]);
 
   const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
 
-    x.set(mouseX / rect.width - 0.5);
-    y.set(mouseY / rect.height - 0.5);
+    const posX = e.clientX - rect.left;
+    const posY = e.clientY - rect.top;
+
+    x.set(posX / rect.width - 0.5);
+    y.set(posY / rect.height - 0.5);
   };
 
   const handleMouseLeave = () => {
@@ -31,6 +34,7 @@ export function PerspectiveCard({ children, onClick, className = "" }) {
 
   return (
     <motion.div
+      ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
@@ -39,70 +43,72 @@ export function PerspectiveCard({ children, onClick, className = "" }) {
         rotateX,
         transformStyle: "preserve-3d",
       }}
-      className={className}
+      className={`relative ${className}`}
     >
-      <div style={{ transform: "translateZ(30px)" }}>{children}</div>
+      <div style={{ transform: "translateZ(35px)" }}>{children}</div>
     </motion.div>
   );
 }
 
 /* =========================================
-    2. KINETIC TEXT REVEAL (FIXED)
+    2. KINETIC HEADLINE (GUARANTEED SPACING & NO RUNTIME ERRORS)
 ========================================= */
-export function KineticHeadline({ text, className = "" }) {
+export function KineticHeadline({ text = "", className = "" }) {
+  if (!text) return null;
+
   const words = text.split(" ");
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: (i = 1) => ({
+    visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.08, delayChildren: 0.2 * i },
-    }),
+      transition: {
+        staggerChildren: 0.06,
+        delayChildren: 0.1,
+      },
+    },
   };
 
   const wordVariants = {
+    hidden: {
+      opacity: 0,
+      y: 25,
+    },
     visible: {
       opacity: 1,
       y: 0,
-      rotateX: 0,
       transition: {
         type: "spring",
         damping: 14,
-        stiffness: 100,
+        stiffness: 120,
       },
-    },
-    hidden: {
-      opacity: 0,
-      y: 30,
-      rotateX: -45,
     },
   };
 
   return (
     <motion.h1
-      className={`flex flex-wrap gap-x-[0.3em] gap-y-[0.1em] max-w-full overflow-hidden ${className}`}
+      className={className}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
       style={{
+        display: "block",
         wordBreak: "normal",
         overflowWrap: "break-word",
         whiteSpace: "normal",
       }}
     >
       {words.map((word, index) => (
-        <span
-          key={index}
-          className="inline-block overflow-hidden py-1"
-          style={{ display: "inline-block" }}
+        <motion.span
+          key={`${word}-${index}`}
+          variants={wordVariants}
+          style={{
+            display: "inline-block",
+            marginRight: "0.35em", // Hardcoded margin prevents CSS flex overrides from collapsing word spaces
+          }}
         >
-          <motion.span
-            variants={wordVariants}
-            className="inline-block origin-bottom"
-          >
-            {word}
-          </motion.span>
-        </span>
+          {word}
+        </motion.span>
       ))}
     </motion.h1>
   );
@@ -116,6 +122,7 @@ export function MagneticButton({ children, onClick, className = "" }) {
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const handleMouse = (e) => {
+    if (!ref.current) return;
     const { clientX, clientY } = e;
     const { height, width, left, top } = ref.current.getBoundingClientRect();
     const middleX = clientX - (left + width / 2);
@@ -136,8 +143,10 @@ export function MagneticButton({ children, onClick, className = "" }) {
       onMouseMove={handleMouse}
       onMouseLeave={reset}
       animate={{ x, y }}
-      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-      className={className}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 180, damping: 15, mass: 0.1 }}
+      className={`relative overflow-hidden ${className}`}
     >
       {children}
     </motion.button>

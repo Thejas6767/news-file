@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowUpRight,
   Clock3,
@@ -9,547 +9,386 @@ import {
   Signal,
   Volume2,
   VolumeX,
+  Tv,
+  Eye,
+  Maximize2,
+  Share2,
+  Activity,
+  Layers,
+  Sparkles,
+  Camera,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
-// Dynamically routeable story data
+// Multi-Angle Broadcast Feeds
+const feeds = [
+  {
+    id: "feed-1",
+    label: "CAM 01 - MAIN STUDIO",
+    title: "Prime Time Desk & Live Debates",
+    image: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=1600&q=80",
+    badge: "PRIMARY FEED",
+  },
+  {
+    id: "feed-2",
+    label: "CAM 02 - PARLIAMENT",
+    title: "Vidhana Soudha & Central Hall Live",
+    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1600&q=80",
+    badge: "LEGISLATIVE",
+  },
+  {
+    id: "feed-3",
+    label: "CAM 03 - GROUND REPORT",
+    title: "Southern Region Bureau Field Network",
+    image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1600&q=80",
+    badge: "FIELD DISPATCH",
+  },
+];
+
+const tickerItems = [
+  "BREAKING: Special Economic Policy Session convenes in Parliament",
+  "INFRASTRUCTURE: Southern High-Speed Corridor expansion approved",
+  "FACT CHECK: Verifying social media claims on regional energy transition",
+];
+
 const liveStories = [
- {
+  {
     id: "/politics",
     number: "01",
     category: "POLITICS",
     title: "Indian Parliament & State Assembly updates",
     excerpt: "Key legislative bills, policy debates, and governance strategies live from the Vidhana Soudha and Parliament sessions.",
-    time: "TOP STORY",
+    time: "LIVE NOW",
     readTime: "3 MIN READ",
-    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&q=80",
+    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: "/business",
     number: "02",
     category: "BUSINESS",
-    title: "Regional energy transition",
+    title: "Regional energy transition & Green Power Grid",
     excerpt: "Green infrastructure expansion accelerates across Southern India with new power grid projects.",
-    time: "TOP STORY",
+    time: "10 MIN AGO",
     readTime: "5 MIN READ",
-    image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=600&q=80",
+    image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: "/fact-check",
     number: "03",
     category: "FACT CHECK",
-    title: "Verifying viral claims",
+    title: "Verifying viral claims: Media Manipulation Check",
     excerpt: "Deconstructing manipulated media and viral social dispatches with field investigation.",
-    time: "TOP STORY",
+    time: "25 MIN AGO",
     readTime: "4 MIN READ",
-    image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=600&q=80",
+    image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80",
   },
 ];
 
-/* Animation Variants */
-const heroContainerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const heroTitleVariants = {
-  hidden: { opacity: 0, scale: 0.9, letterSpacing: "-0.05em" },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    letterSpacing: "0em",
-    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
-  },
-};
-
-const heroItemVariants = {
-  hidden: { opacity: 0, filter: "blur(10px)", y: 20 },
-  visible: {
-    opacity: 1,
-    filter: "blur(0px)",
-    y: 0,
-    transition: { duration: 0.7, ease: "easeOut" },
-  },
-};
-
-const storyGridVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
-};
-
-const storyCardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  },
-};
-
 function LiveTV() {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
+  const [activeFeed, setActiveFeed] = useState(feeds[0]);
+  const [viewerCount, setViewerCount] = useState(38420);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const interval = setInterval(() => {
+      setViewerCount((prev) => prev + Math.floor(Math.random() * 15) - 7);
+    }, 2500);
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="live-tv-page" style={{ overflowX: "hidden" }}>
+    <div style={{ backgroundColor: "#060608", color: "#f3f4f6", overflowX: "hidden", fontFamily: "Inter, sans-serif" }}>
       <Navbar />
 
       {/* =========================================
-          LIVE HERO
+          ULTRA-CINEMATIC HERO SECTION
       ========================================= */}
-      <section className="live-tv-hero">
-        <div className="live-tv-grid" />
+      <section style={{ position: "relative", paddingTop: "110px", paddingBottom: "40px", overflow: "hidden" }}>
+        
+        {/* Ambient Red Studio Glows */}
+        <div style={{ position: "absolute", top: "0%", left: "50%", transform: "translateX(-50%)", width: "800px", height: "400px", background: "radial-gradient(ellipse at center, rgba(215, 25, 32, 0.22) 0%, rgba(0, 0, 0, 0) 70%)", filter: "blur(80px)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: "30%", right: "-10%", width: "400px", height: "400px", background: "radial-gradient(circle, rgba(215, 25, 32, 0.12) 0%, rgba(0, 0, 0, 0) 70%)", filter: "blur(90px)", pointerEvents: "none" }} />
 
-        {/* Orbit animations */}
-        <motion.div
-          className="live-tv-orbit live-tv-orbit-one"
-          animate={{ rotate: 360, scale: [1, 1.05, 1] }}
-          transition={{
-            rotate: { duration: 25, repeat: Infinity, ease: "linear" },
-            scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-          }}
-        />
-        <motion.div
-          className="live-tv-orbit live-tv-orbit-two"
-          animate={{ rotate: -360, scale: [1, 0.95, 1] }}
-          transition={{
-            rotate: { duration: 35, repeat: Infinity, ease: "linear" },
-            scale: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-          }}
-        />
+        <div style={{ maxWidth: "1320px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
+          
+          {/* TOP HEADER STATUS / TITLE */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "24px", flexWrap: "wrap", gap: "16px" }}>
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
+                <span style={{ position: "relative", display: "flex", height: "10px", width: "10px" }}>
+                  <span style={{ position: "absolute", display: "inline-flex", height: "100%", width: "100%", borderRadius: "50%", backgroundColor: "#ef4444", opacity: 0.75, animation: "ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite" }} />
+                  <span style={{ relative: "relative", display: "inline-flex", borderRadius: "50%", height: "10px", width: "10px", backgroundColor: "#dc2626" }} />
+                </span>
+                <span style={{ color: "#ef4444", fontSize: "11px", fontWeight: "800", letterSpacing: "2px", textTransform: "uppercase" }}>
+                  DIRECT STUDIO FEED • ULTRA HD
+                </span>
+              </div>
 
-        <motion.div
-          className="live-tv-hero-content"
-          variants={heroContainerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.div className="live-tv-eyebrow" variants={heroItemVariants}>
-            <motion.span
-              className="live-tv-pulse"
-              animate={{ scale: [1, 1.6, 1], opacity: [1, 0.4, 1] }}
-              transition={{ duration: 1.8, repeat: Infinity }}
-            />
-            NEWS FILE / BROADCAST
-          </motion.div>
-
-          <motion.h1 variants={heroTitleVariants}>
-            LIVE
-            <span>TV.</span>
-          </motion.h1>
-
-          <motion.p variants={heroItemVariants}>
-            Watch News File's live newsroom for breaking stories, ground
-            reports and verified developments as they happen.
-          </motion.p>
-
-          <motion.div
-            className="live-tv-status"
-            variants={heroItemVariants}
-            whileHover={{ scale: 1.05 }}
-          >
-            <motion.div
-              animate={{ rotate: [0, 15, -15, 0] }}
-              transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-            >
-              <Signal size={16} />
-            </motion.div>
-            LIVE SIGNAL ACTIVE
-          </motion.div>
-        </motion.div>
-
-        <motion.div
-          className="live-tv-number"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 0.15, x: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-          03
-        </motion.div>
-
-        <motion.div
-          className="live-tv-scroll"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-        >
-          <motion.span
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          />
-          SCROLL TO BROADCAST
-        </motion.div>
-      </section>
-
-      {/* =========================================
-          PLAYER
-      ========================================= */}
-      <section className="live-tv-player-section">
-        <motion.div
-          className="live-tv-section-label"
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <span>01</span>
-          LIVE BROADCAST
-        </motion.div>
-
-        <motion.div
-          className="live-tv-player"
-          initial={{ opacity: 0, perspective: 1000, rotateX: -15, y: 60 }}
-          whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div className="live-tv-player-grid" />
-
-          <div className="live-tv-player-top">
-            <motion.div
-              className="live-tv-on-air"
-              animate={{ opacity: [1, 0.5, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <span />
-              {isPlaying ? "LIVE STREAM ACTIVE" : "ON AIR"}
-            </motion.div>
-
-            <div className="live-tv-player-channel">NEWS FILE 01</div>
-          </div>
-
-          <div className="live-tv-player-center">
-            <motion.button
-              className="live-tv-play"
-              onClick={() => setIsPlaying(!isPlaying)}
-              initial={{ scale: 0.8, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              whileHover={{
-                scale: 1.15,
-                boxShadow: "0 0 35px rgba(215, 25, 32, 0.6)",
-              }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ type: "spring", stiffness: 300, damping: 15 }}
-              aria-label={isPlaying ? "Pause broadcast" : "Play live broadcast"}
-            >
-              {isPlaying ? (
-                <Pause size={30} fill="currentColor" />
-              ) : (
-                <Play size={30} fill="currentColor" />
-              )}
-            </motion.button>
-
-            <motion.div
-              className="live-tv-player-title"
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              NEWS FILE
-              <strong>LIVE</strong>
-            </motion.div>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              {isPlaying
-                ? "Streaming official broadcast channel in HD."
-                : "Your live newsroom. Independent reporting. No noise."}
-            </motion.p>
-          </div>
-
-          <div className="live-tv-player-bottom">
-            <button
-              type="button"
-              onClick={() => setIsMuted(!isMuted)}
-              style={{
-                background: "none",
-                border: "none",
-                color: "inherit",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-              }}
-            >
-              {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
-              {isMuted ? "MUTED" : "AUDIO"}
-            </button>
-
-            <span>00:00 LIVE</span>
-
-            <span>HD 1080P</span>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* =========================================
-          SCHEDULE
-      ========================================= */}
-      <section className="live-tv-schedule">
-        <div className="live-tv-schedule-header">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="live-tv-section-label">
-              <span>02</span>
-              NEWS FILE LIVE
+              <h1 style={{ fontSize: "clamp(2.2rem, 4.5vw, 3.8rem)", fontWeight: "900", margin: 0, letterSpacing: "-1.5px", lineHeight: "1" }}>
+                BROADCAST <span style={{ color: "#d71920" }}>CONSOLE</span>
+              </h1>
             </div>
 
-            <h2>
-              LIVE
-              <br />
-              <strong>FROM THE FIELD.</strong>
-            </h2>
-          </motion.div>
-
-          <motion.div
-            className="live-tv-date"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <Radio size={18} />
-            24/7 BROADCAST
-          </motion.div>
-        </div>
-
-        <div className="live-tv-schedule-list">
-          <motion.div
-            className="live-tv-schedule-row active"
-            initial={{ opacity: 0, x: -50, clipPath: "inset(0 100% 0 0)" }}
-            whileInView={{ opacity: 1, x: 0, clipPath: "inset(0 0% 0 0)" }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            whileHover={{ x: 8 }}
-          >
-            <div className="live-tv-time">
-              <span />
-              LIVE
+            {/* LIVE TELEMETRY & VIEWERS BAR */}
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", background: "rgba(18, 18, 24, 0.8)", backdropFilter: "blur(12px)", padding: "10px 16px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.1)" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <Eye size={16} color="#ef4444" />
+                <span style={{ fontWeight: "800", fontSize: "13px", color: "#ffffff" }}>{viewerCount.toLocaleString()}</span>
+                <span style={{ fontSize: "11px", color: "#71717a", fontWeight: "600" }}>LIVE WATCHERS</span>
+              </div>
+              <div style={{ width: "1px", height: "16px", backgroundColor: "rgba(255,255,255,0.15)" }} />
+              
+              {/* Audio Visualizer Waves */}
+              <div style={{ display: "flex", alignItems: "center", gap: "3px", height: "16px" }}>
+                {[60, 100, 40, 80, 50].map((h, i) => (
+                  <motion.span
+                    key={i}
+                    animate={{ height: isPlaying ? [`${h * 0.3}%`, `${h}%`, `${h * 0.4}%`] : "20%" }}
+                    transition={{ duration: 0.6 + i * 0.1, repeat: Infinity, ease: "easeInOut" }}
+                    style={{ width: "3px", backgroundColor: isPlaying ? "#ef4444" : "#52525b", borderRadius: "2px" }}
+                  />
+                ))}
+              </div>
             </div>
-
-            <div className="live-tv-program">
-              <h3>National Evening Dispatch</h3>
-              <p>
-                Continuous live broadcast with regional updates, state bureaus
-                and prime-time debates.
-              </p>
-            </div>
-
-            <div className="live-tv-program-status">
-              <Radio size={15} />
-              LIVE
-            </div>
-
-            <motion.div
-              whileHover={{ x: 4, y: -4 }}
-              transition={{ type: "spring", stiffness: 400 }}
-            >
-              <ArrowUpRight size={19} />
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* =========================================
-          LIVE DESK (LINKED STORIES)
-      ========================================= */}
-      <section className="live-tv-desk">
-        <div className="live-tv-desk-header">
-          <motion.div
-            className="live-tv-section-label"
-            initial={{ opacity: 0, y: -10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <span>03</span>
-            TOP STORIES TODAY
-          </motion.div>
-
-          <div className="live-tv-desk-status">
-            <span />
-            NEWS FILE
           </div>
-        </div>
 
-        <motion.div
-          className="live-tv-story-grid"
-          variants={storyGridVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-        >
-          {liveStories.map((story) => (
-            <motion.div key={story.id} variants={storyCardVariants}>
-           <Link
-  to={story.id.startsWith("/") ? story.id : `/news/${story.id}`}
-  className="live-tv-story-card"
-  style={{ textDecoration: "none", display: "block" }}
->
-                <div className="live-tv-story-top">
-                  <span>{story.number}</span>
-                  <span>{story.category}</span>
+          {/* MAIN PLAYER CONSOLE GRID */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 320px", gap: "20px", alignItems: "start" }}>
+            
+            {/* SCREEN CONTAINER */}
+            <div style={{ position: "relative", borderRadius: "16px", overflow: "hidden", border: "1px solid rgba(255, 255, 255, 0.12)", background: "#0a0a0f", boxShadow: "0 30px 60px -15px rgba(0, 0, 0, 0.9)" }}>
+              
+              <div style={{ position: "relative", width: "100%", aspectRatio: "16/9", maxHeight: "620px", overflow: "hidden" }}>
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={activeFeed.id}
+                    src={activeFeed.image}
+                    alt={activeFeed.title}
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: isPlaying ? 0.82 : 0.35, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4 }}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", filter: isPlaying ? "none" : "grayscale(90%)" }}
+                  />
+                </AnimatePresence>
+
+                {/* Overlays: Top Bar */}
+                <div style={{ position: "absolute", top: "16px", left: "16px", right: "16px", display: "flex", justifyContent: "space-between", zIndex: 10 }}>
+                  <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+                    <span style={{ background: "#d71920", color: "#fff", fontWeight: "900", fontSize: "11px", padding: "5px 10px", borderRadius: "4px", letterSpacing: "1px" }}>
+                      ● ON AIR
+                    </span>
+                    <span style={{ background: "rgba(0,0,0,0.75)", backdropFilter: "blur(8px)", color: "#fff", fontSize: "12px", fontWeight: "700", padding: "5px 12px", borderRadius: "4px", border: "1px solid rgba(255,255,255,0.15)" }}>
+                      {activeFeed.label}
+                    </span>
+                  </div>
+
+                  <span style={{ background: "rgba(0,0,0,0.75)", backdropFilter: "blur(8px)", color: "#22c55e", fontSize: "11px", fontWeight: "800", padding: "5px 10px", borderRadius: "4px", border: "1px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", gap: "6px" }}>
+                    <Signal size={12} /> 4K STREAM
+                  </span>
                 </div>
 
-                <motion.div
-                  className="live-tv-story-line"
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  style={{ transformOrigin: "left" }}
-                />
-
-                <div
-                  className="story-image-preview"
-                  style={{
-                    position: "relative",
-                    width: "100%",
-                    height: "160px",
-                    borderRadius: "6px",
-                    overflow: "hidden",
-                    margin: "15px 0",
-                  }}
+                {/* Big Floating Action Play/Pause */}
+                <button
+                  onClick={() => setIsPlaying(!isPlaying)}
+                  style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "76px", height: "76px", borderRadius: "50%", backgroundColor: "rgba(215, 25, 32, 0.95)", border: "none", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.25s ease", zIndex: 10, boxShadow: "0 0 40px rgba(215, 25, 32, 0.7)" }}
                 >
-                  <img
-                    src={story.image}
-                    alt={story.title}
+                  {isPlaying ? <Pause size={32} fill="#fff" /> : <Play size={32} fill="#fff" style={{ marginLeft: "4px" }} />}
+                </button>
+
+                {/* Lower Third Caption */}
+                <div style={{ position: "absolute", bottom: "0", left: "0", right: "0", background: "linear-gradient(0deg, rgba(6,6,8,0.95) 0%, rgba(6,6,8,0) 100%)", padding: "30px 20px 16px 20px", zIndex: 10 }}>
+                  <div style={{ color: "#ef4444", fontSize: "11px", fontWeight: "800", letterSpacing: "1.5px", marginBottom: "4px" }}>
+                    CURRENTLY BROADCASTING
+                  </div>
+                  <h2 style={{ fontSize: "clamp(1.1rem, 2vw, 1.6rem)", fontWeight: "800", margin: 0, color: "#ffffff" }}>
+                    {activeFeed.title}
+                  </h2>
+                </div>
+              </div>
+
+              {/* Player Bottom Control Strip */}
+              <div style={{ background: "#111116", padding: "14px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                  <button
+                    onClick={() => setIsMuted(!isMuted)}
+                    style={{ background: "none", border: "none", color: "#a1a1aa", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", fontWeight: "700" }}
+                  >
+                    {isMuted ? <VolumeX size={16} color="#ef4444" /> : <Volume2 size={16} />}
+                    {isMuted ? "MUTED" : "AUDIO ON"}
+                  </button>
+                  <span style={{ fontSize: "12px", color: "#52525b" }}>|</span>
+                  <span style={{ fontSize: "12px", color: "#a1a1aa", fontWeight: "600" }}></span>
+                </div>
+
+                <div style={{ display: "flex", gap: "12px" }}>
+                  <button style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "#fff", padding: "6px 12px", borderRadius: "6px", cursor: "pointer", fontSize: "12px", display: "flex", alignItems: "center", gap: "6px" }}>
+                    <Share2 size={14} /> SHARE
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* SIDEBAR: CAMERA / ANGLE SWITCHER */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+              <div style={{ padding: "8px 4px", color: "#a1a1aa", fontSize: "12px", fontWeight: "800", letterSpacing: "1px", display: "flex", alignItems: "center", gap: "6px" }}>
+                <Camera size={14} color="#ef4444" /> SELECT CAMERA FEED
+              </div>
+
+              {feeds.map((feed) => {
+                const isSelected = activeFeed.id === feed.id;
+                return (
+                  <motion.div
+                    key={feed.id}
+                    whileHover={{ x: 4 }}
+                    onClick={() => setActiveFeed(feed)}
                     style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      background:
-                        "linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(23,23,28,0.9) 100%)",
-                    }}
-                  />
-                  <span
-                    style={{
-                      position: "absolute",
-                      top: "10px",
-                      left: "10px",
+                      position: "relative",
+                      borderRadius: "12px",
+                      overflow: "hidden",
+                      cursor: "pointer",
+                      border: isSelected ? "2px solid #d71920" : "1px solid rgba(255,255,255,0.08)",
+                      background: isSelected ? "rgba(215, 25, 32, 0.15)" : "#0f0f14",
+                      padding: "12px",
                       display: "flex",
+                      gap: "12px",
                       alignItems: "center",
-                      gap: "4px",
-                      backgroundColor: "rgba(0, 0, 0, 0.65)",
-                      backdropFilter: "blur(6px)",
-                      color: "#ffffff",
-                      fontSize: "9px",
-                      fontWeight: 800,
-                      padding: "4px 8px",
-                      borderRadius: "4px",
-                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                      transition: "all 0.2s ease",
                     }}
                   >
-                    <Flame size={12} color="#d71920" /> TRENDING
+                    <div style={{ width: "80px", height: "54px", borderRadius: "6px", overflow: "hidden", flexShrink: 0, position: "relative" }}>
+                      <img src={feed.image} alt={feed.label} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                      {isSelected && <div style={{ position: "absolute", inset: 0, background: "rgba(215, 25, 32, 0.3)" }} />}
+                    </div>
+
+                    <div style={{ overflow: "hidden" }}>
+                      <span style={{ fontSize: "10px", fontWeight: "800", color: isSelected ? "#ef4444" : "#71717a", display: "block" }}>
+                        {feed.badge}
+                      </span>
+                      <h4 style={{ margin: "2px 0 0 0", fontSize: "13px", fontWeight: "700", color: isSelected ? "#fff" : "#d4d4d8", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                        {feed.label}
+                      </h4>
+                    </div>
+                  </motion.div>
+                );
+              })}
+
+              {/* NEWSROOM TICKER BANNER */}
+              <div style={{ marginTop: "8px", background: "rgba(215, 25, 32, 0.1)", border: "1px solid rgba(215, 25, 32, 0.3)", borderRadius: "12px", padding: "14px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "6px", color: "#ef4444", fontSize: "11px", fontWeight: "800", marginBottom: "6px" }}>
+                  <Flame size={14} /> BREAKING TICKER
+                </div>
+                <p style={{ margin: 0, fontSize: "12px", color: "#e4e4e7", lineHeight: "1.4" }}>
+                  {tickerItems[0]}
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================
+          LIVE DESK / DISPATCHES
+      ========================================= */}
+      <section style={{ maxWidth: "1320px", margin: "40px auto 60px auto", padding: "0 24px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
+          <div>
+            <span style={{ color: "#ef4444", fontSize: "12px", fontWeight: "800", letterSpacing: "1px" }}>FIELD DISPATCHES</span>
+            <h3 style={{ fontSize: "1.8rem", fontWeight: "800", margin: "4px 0 0 0" }}>Top Stories Coverage</h3>
+          </div>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px" }}>
+          {liveStories.map((story) => (
+            <motion.div key={story.id} whileHover={{ y: -6 }} transition={{ duration: 0.2 }}>
+              <Link
+                to={story.id}
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                  display: "block",
+                  background: "#0f0f14",
+                  borderRadius: "12px",
+                  overflow: "hidden",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  height: "100%",
+                }}
+              >
+                <div style={{ position: "relative", width: "100%", height: "160px" }}>
+                  <img src={story.image} alt={story.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  <span style={{ position: "absolute", top: "12px", left: "12px", background: "rgba(0,0,0,0.75)", backdropFilter: "blur(4px)", color: "#ef4444", fontSize: "10px", fontWeight: "800", padding: "4px 8px", borderRadius: "4px" }}>
+                    {story.category}
                   </span>
                 </div>
 
-                <h3>{story.title}</h3>
-                <p
-                  style={{
-                    fontSize: "13px",
-                    lineHeight: "1.5",
-                    color: "rgba(255, 255, 255, 0.6)",
-                    margin: "8px 0 18px",
-                  }}
-                >
-                  {story.excerpt}
-                </p>
-
-                <div className="live-tv-story-footer">
-                  <span>
-                    <Clock3 size={13} />
-                    {story.time} • {story.readTime}
-                  </span>
-
-                  <motion.div whileHover={{ x: 3, y: -3 }}>
-                    <ArrowUpRight size={17} color="#d71920" />
-                  </motion.div>
+                <div style={{ padding: "18px" }}>
+                  <h4 style={{ margin: "0 0 10px 0", fontSize: "16px", fontWeight: "700", lineHeight: "1.4" }}>{story.title}</h4>
+                  <p style={{ margin: "0 0 16px 0", fontSize: "13px", color: "#a1a1aa", lineHeight: "1.5" }}>{story.excerpt}</p>
+                  
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "12px", color: "#71717a", fontWeight: "600" }}>
+                    <span>{story.time}</span>
+                    <div style={{ display: "flex", alignItems: "center", gap: "4px", color: "#ef4444" }}>
+                      <span>FULL STORY</span>
+                      <ArrowUpRight size={14} />
+                    </div>
+                  </div>
                 </div>
               </Link>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </section>
 
       {/* =========================================
-          CLOSING
+          CLOSING CTA SECTION WITH BOTTOM RIGHT BUTTON
       ========================================= */}
-      <section className="live-tv-closing">
-        <motion.div
-          className="live-tv-closing-bg"
-          initial={{ opacity: 0, scale: 1.2 }}
-          whileInView={{ opacity: 0.05, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2 }}
-        >
-          LIVE
-        </motion.div>
+      <section style={{ maxWidth: "1320px", margin: "40px auto 60px auto", padding: "0 24px" }}>
+        <div style={{ background: "linear-gradient(135deg, #121218 0%, #060608 100%)", borderRadius: "20px", padding: "48px 36px", border: "1px solid rgba(255,255,255,0.1)", position: "relative", overflow: "hidden" }}>
+          
+          <div style={{ maxWidth: "600px" }}>
+            <span style={{ color: "#ef4444", fontSize: "12px", fontWeight: "800", letterSpacing: "2px" }}>NEWS FILE BROADCAST</span>
+            <h2 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: "900", margin: "12px 0 16px 0", lineHeight: "1.1" }}>
+              SEE IT. <br />
+              <span style={{ color: "#ef4444" }}>AS IT HAPPENS.</span>
+            </h2>
+            <p style={{ color: "#a1a1aa", fontSize: "15px", margin: 0, lineHeight: "1.6" }}>
+              Stay connected to our newsroom with 24/7 unhindered live reporting from across India and around the globe.
+            </p>
+          </div>
 
-        <motion.div
-          className="live-tv-closing-content"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <span>NEWS FILE BROADCAST</span>
+          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "32px" }}>
+            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
+              <Link
+                to="/"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  backgroundColor: "#d71920",
+                  color: "#ffffff",
+                  padding: "12px 24px",
+                  fontSize: "13px",
+                  fontWeight: "800",
+                  letterSpacing: "1px",
+                  borderRadius: "6px",
+                  textDecoration: "none",
+                  boxShadow: "0 10px 20px -5px rgba(215, 25, 32, 0.4)",
+                  transition: "all 0.2s ease",
+                }}
+              >
+                BACK TO HOME
+                <ArrowUpRight size={18} />
+              </Link>
+            </motion.div>
+          </div>
 
-          <h2>
-            SEE IT.
-            <br />
-            <strong>AS IT HAPPENS.</strong>
-          </h2>
-
-          <p>
-            Stay connected to the newsroom with live reporting from India and
-            around the world.
-          </p>
-
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            style={{ display: "inline-block" }}
-          >
-            <Link to="/" className="live-tv-home-button">
-              BACK TO HOME
-              <ArrowUpRight size={18} />
-            </Link>
-          </motion.div>
-        </motion.div>
+        </div>
       </section>
 
       <Footer />
