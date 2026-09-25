@@ -7,12 +7,10 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 /* =========================================
    NEWS FILE LOGO
-   No image required
-   No circle
 ========================================= */
 
 const NewsFileLogo = ({ className = "" }) => {
@@ -27,6 +25,7 @@ const NewsFileLogo = ({ className = "" }) => {
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   /* =========================================
      MAIN NAVIGATION
@@ -64,26 +63,20 @@ function Navbar() {
 
       <div className="top-strip">
         <div className="top-strip-inner">
-
-          <div className="top-live">
-            <span className="live-dot"></span>
-            LIVE
-          </div>
-
           <div className="top-message">
             Breaking News • Ground Reports • Verified Dispatches
           </div>
 
           <div className="top-links">
             <span>English</span>
-            <span>हिन्दी</span>
+            <span>ಹಿन्दी</span>
+            <span>ಕನ್ನಡ</span>
           </div>
-
         </div>
       </div>
 
       {/* =========================================
-          MAIN NAVBAR
+          MAIN NAVBAR (SINGLE-ROW HEADER)
       ========================================= */}
 
       <motion.header
@@ -95,9 +88,7 @@ function Navbar() {
           ease: [0.22, 1, 0.36, 1],
         }}
       >
-
-        {/* MENU */}
-
+        {/* MENU BUTTON */}
         <motion.button
           className="menu-button"
           onClick={() => setMenuOpen(true)}
@@ -109,7 +100,6 @@ function Navbar() {
         </motion.button>
 
         {/* LOGO */}
-
         <Link
           to="/"
           style={{
@@ -131,28 +121,72 @@ function Navbar() {
           </motion.div>
         </Link>
 
+        {/* INLINE HORIZONTAL BUTTON-LIKE NAVIGATION LINKS */}
+        <nav
+          className="inline-nav-links"
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: "10px",
+            marginLeft: "auto",
+            marginRight: "20px",
+          }}
+        >
+          {navItems.map((item, index) => {
+            const isActive = location.pathname === routes[item];
+
+            return (
+              <motion.div
+                key={item}
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + index * 0.05 }}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+              >
+                <Link
+                  to={routes[item]}
+                  className="inline-nav-link"
+                  style={{
+                    display: "inline-block",
+                    padding: "8px 16px",
+                    backgroundColor: isActive ? "#6c5f5f" : "#f1f3f5",
+                    color: isActive ? "#ffffff" : "#1a1818",
+                    borderRadius: "6px",
+                    fontWeight: 600,
+                    fontSize: "14px",
+                    textDecoration: "none",
+                    whiteSpace: "nowrap",
+                    border: "1px solid #e0e0e0",
+                    transition: "all 0.2s ease",
+                  }}
+                >
+                  {item}
+                </Link>
+              </motion.div>
+            );
+          })}
+        </nav>
+
         {/* RIGHT ACTIONS */}
-
         <div className="navbar-right">
-
           <motion.button
             className="live-button"
             onClick={() => navigate("/live")}
             whileHover={{
               scale: 1.05,
-              boxShadow: "0 10px 30px rgba(215,25,32,0.25)",
+              boxShadow: "0 10px 30px rgba(184, 38, 46, 0.25)",
             }}
             whileTap={{ scale: 0.95 }}
           >
             <span className="live-pulse">
               <Radio size={15} />
             </span>
-
             LIVE TV
           </motion.button>
 
-          {/* SEARCH */}
-
+          {/* SEARCH BUTTON */}
           <motion.button
             className="search-button"
             onClick={() => navigate("/search")}
@@ -162,74 +196,20 @@ function Navbar() {
           >
             <Search size={21} />
           </motion.button>
-
         </div>
       </motion.header>
-
-      {/* =========================================
-          CATEGORY / MAIN NAVIGATION
-      ========================================= */}
-
-      <motion.nav
-        className="category-nav"
-        initial={{
-          opacity: 0,
-          y: -10,
-        }}
-        animate={{
-          opacity: 1,
-          y: 0,
-        }}
-        transition={{
-          delay: 0.45,
-          duration: 0.5,
-        }}
-      >
-
-        <div className="category-nav-inner">
-
-          {navItems.map((item, index) => (
-            <motion.div
-              key={item}
-              initial={{
-                opacity: 0,
-                y: -8,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                delay: 0.5 + index * 0.05,
-              }}
-              whileHover={{ y: -2 }}
-            >
-              <Link
-                to={routes[item]}
-                className="category-link"
-                onClick={() => setMenuOpen(false)}
-              >
-                {item}
-              </Link>
-            </motion.div>
-          ))}
-
-        </div>
-      </motion.nav>
 
       {/* =========================================
           BREAKING NEWS BAR
       ========================================= */}
 
       <div className="breaking-bar">
-
         <div className="breaking-label">
           <span className="breaking-dot"></span>
           BREAKING
         </div>
 
         <div className="breaking-track">
-
           <motion.div
             className="breaking-content"
             animate={{
@@ -241,39 +221,17 @@ function Navbar() {
               ease: "linear",
             }}
           >
-
-            <span>
-              Ground dispatches updated across India
-            </span>
-
+            <span>Ground dispatches updated across India</span>
             <i>◆</i>
-
-            <span>
-              News File delivers verified field reporting
-            </span>
-
+            <span>News File delivers verified field reporting</span>
             <i>◆</i>
-
-            <span>
-              Watch News File Live TV
-            </span>
-
+            <span>Watch News File Live TV</span>
             <i>◆</i>
-
-            <span>
-              Ground dispatches updated across India
-            </span>
-
+            <span>Ground dispatches updated across India</span>
             <i>◆</i>
-
-            <span>
-              News File delivers verified field reporting
-            </span>
-
+            <span>News File delivers verified field reporting</span>
             <i>◆</i>
-
           </motion.div>
-
         </div>
       </div>
 
@@ -282,11 +240,9 @@ function Navbar() {
       ========================================= */}
 
       <AnimatePresence>
-
         {menuOpen && (
           <>
             {/* OVERLAY */}
-
             <motion.div
               className="menu-overlay"
               initial={{ opacity: 0 }}
@@ -295,8 +251,7 @@ function Navbar() {
               onClick={() => setMenuOpen(false)}
             />
 
-            {/* SIDE MENU */}
-
+            {/* SIDE MENU PANEL */}
             <motion.aside
               className="side-menu"
               initial={{ x: "-100%" }}
@@ -307,11 +262,7 @@ function Navbar() {
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-
               <div className="side-menu-header">
-
-                {/* SAME RECTANGULAR LOGO */}
-
                 <div className="side-logo">
                   <NewsFileLogo />
                 </div>
@@ -328,11 +279,9 @@ function Navbar() {
                 >
                   <X size={22} />
                 </motion.button>
-
               </div>
 
               <div className="side-menu-links">
-
                 {navItems.map((item, index) => (
                   <motion.button
                     type="button"
@@ -352,34 +301,27 @@ function Navbar() {
                     whileHover={{ x: 6 }}
                     onClick={() => handleMenuNavigation(item)}
                   >
-
                     <span className="side-link-num">
                       {String(index + 1).padStart(2, "0")}
                     </span>
 
-                    <span className="side-link-text">
-                      {item}
-                    </span>
+                    <span className="side-link-text">{item}</span>
 
                     <ChevronRight
                       size={18}
                       className="side-link-arrow"
                     />
-
                   </motion.button>
                 ))}
-
               </div>
 
               <div className="side-menu-footer">
                 <p>VERIFIED GROUND REPORTING.</p>
                 <p>UNBIASED DISPATCH.</p>
               </div>
-
             </motion.aside>
           </>
         )}
-
       </AnimatePresence>
     </>
   );

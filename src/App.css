@@ -4726,7 +4726,6 @@
 
   letter-spacing: -0.025em;
 }
-
 .business-story-content p {
   max-width: 620px;
 
@@ -4739,48 +4738,113 @@
   color: #666;
 }
 
-.business-story-content button {
-  display: flex;
-
-  align-items: center;
-
-  gap: 10px;
-
-  margin-top: 25px;
-
-  background: none;
-
-  border: none;
-
-  font-size: 9px;
-
-  font-weight: 900;
-
-  letter-spacing: 0.1em;
-
-  cursor: pointer;
-}
-
-.story-arrow {
+.business-story-arrow {
   align-self: center;
+  justify-self: end;
 
-  width: 55px;
-  height: 55px;
+  width: 45px;
+  height: 45px;
+
+  border: 1px solid #ddd;
+  border-radius: 50%;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border: 1px solid #ddd;
+  color: #111;
 
   transition:
     background 0.3s ease,
-    color 0.3s ease;
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
-.business-story:hover .story-arrow {
+.business-story:hover .business-story-arrow {
   background: #111;
   color: #fff;
+  border-color: #111;
+}
+
+/* ========================================
+   BUSINESS RESPONSIVE
+======================================== */
+
+@media (max-width: 1024px) {
+  .market-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .market-card {
+    border-bottom: 1px solid #d5d5d0;
+  }
+
+  .market-card:nth-child(2) {
+    border-right: none;
+  }
+
+  .business-lead-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .business-lead-visual {
+    min-height: 420px;
+  }
+}
+
+@media (max-width: 800px) {
+  .business-hero {
+    min-height: 600px;
+    padding: 90px 6vw;
+  }
+
+  .business-hero-index {
+    display: none;
+  }
+
+  .market-section,
+  .business-lead,
+  .business-stories {
+    padding: 80px 6vw;
+  }
+
+  .business-stories-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .business-story {
+    grid-template-columns: 40px 1fr;
+    gap: 15px;
+  }
+
+  .business-story-arrow {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .market-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .market-card {
+    border-right: none;
+  }
+
+  .business-hero h1 {
+    font-size: 58px;
+  }
+
+  .business-story {
+    grid-template-columns: 1fr;
+  }
+
+  .business-story-number {
+    display: none;
+  }
 }
 
 
@@ -14158,4 +14222,62 @@ a {
   .side-logo .news-file-logo {
     width: 105px;
   }
+}
+/* Hide hamburger icon on laptops and tablets (screens wider than 768px) */
+@media (min-width: 769px) {
+  .menu-button {
+    display: none !important;
+  }
+}
+
+/* Ensure hamburger icon is visible on mobile screens (768px and smaller) */
+@media (max-width: 768px) {
+  .menu-button {
+    display: flex !important;
+  }
+}
+.header-container {
+  display: flex;
+  align-items: center;
+  padding: 15px 30px;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 24px;
+  margin-left: auto; /* Automatically consumes left space, pushing nav right */
+}
+/* Container for the horizontal inline links */
+.inline-nav-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem; /* Adjust spacing between items as needed */
+}
+
+/* Individual navigation link styles */
+.inline-nav-link {
+  text-decoration: none;
+  color: inherit;
+  white-space: nowrap; /* Prevents text from wrapping onto a new line */
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.inline-nav-link:hover {
+  color: #d71920; /* Brand accent color on hover */
+}
+/* Target the navigation links in your header */
+.nav-links a, 
+header nav a {
+    color: #000000 !important; /* Forces text color to solid black */
+    font-weight: 500;            /* Optional: makes the text slightly bolder for better readability */
+    text-decoration: none;      /* Keeps links clean without underlines */
+}
+
+/* Optional: change color on hover so users know it's clickable */
+.nav-links a:hover, 
+header nav a:hover {
+    color: #d71920 !important; /* Brand accent color on hover */
 }
