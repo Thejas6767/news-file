@@ -14281,3 +14281,63 @@ header nav a {
 header nav a:hover {
     color: #d71920 !important; /* Brand accent color on hover */
 }
+/* Responsive adjustments for mobile devices */
+@media (max-width: 768px) {
+  /* Hide inline nav links on mobile */
+  .inline-nav-links {
+    display: none !important;
+  }
+
+  /* Make header flex layout push logo to center */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Ensure logo takes central alignment */
+  .navbar .logo-wrapper {
+    margin: 0 auto;
+  }
+}
+@media (max-width: 768px) {
+  /* Hide the English / Hindi / Kannada links on mobile */
+  .top-links {
+    display: none !important;
+  }
+
+  /* Center the top breaking news message when links are hidden */
+  .top-strip-inner {
+    justify-content: center !important;
+    text-align: center;
+  }
+
+  /* Hide horizontal inline menu links on mobile */
+  .inline-nav-links {
+    display: none !important;
+  }
+
+  /* Center the logo in mobile view */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar .logo-wrapper {
+    margin: 0 auto;
+  }
+}
+/* Ensure link text stays visible in all states */
+.inline-nav-link,
+.inline-nav-link:visited,
+.inline-nav-link:active,
+.inline-nav-link:focus {
+  text-decoration: none;
+}
+
+/* Force text visibility when item is active */
+nav.inline-nav-links a[style*="background-color: rgb(0, 0, 0)"],
+nav.inline-nav-links a[style*="background-color: #000000"] {
+  color: #ffffff !important;
+}

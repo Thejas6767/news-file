@@ -102,6 +102,7 @@ function Navbar() {
         {/* LOGO */}
         <Link
           to="/"
+          className="logo-wrapper"
           style={{
             textDecoration: "none",
             color: "inherit",
@@ -121,18 +122,8 @@ function Navbar() {
           </motion.div>
         </Link>
 
-        {/* INLINE HORIZONTAL BUTTON-LIKE NAVIGATION LINKS */}
-        <nav
-          className="inline-nav-links"
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            gap: "10px",
-            marginLeft: "auto",
-            marginRight: "20px",
-          }}
-        >
+        {/* INLINE HORIZONTAL BUTTON-LIKE NAVIGATION LINKS (Hidden on Mobile) */}
+        <nav className="inline-nav-links">
           {navItems.map((item, index) => {
             const isActive = location.pathname === routes[item];
 
@@ -151,14 +142,14 @@ function Navbar() {
                   style={{
                     display: "inline-block",
                     padding: "8px 16px",
-                    backgroundColor: isActive ? "#6c5f5f" : "#f1f3f5",
-                    color: isActive ? "#ffffff" : "#1a1818",
+                    backgroundColor: isActive ? "#000000" : "#f1f3f5",
+                    color: isActive ? "#d71920" : "#000000",
                     borderRadius: "6px",
-                    fontWeight: 600,
+                    fontWeight: 700,
                     fontSize: "14px",
                     textDecoration: "none",
                     whiteSpace: "nowrap",
-                    border: "1px solid #e0e0e0",
+                    border: isActive ? "1px solid #d71920" : "1px solid #e0e0e0",
                     transition: "all 0.2s ease",
                   }}
                 >
